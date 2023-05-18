@@ -22,12 +22,36 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="MainView" component={MainView} />
-        <Stack.Screen name="CafeDetailView" component={CafeDetailView} />
-        <Stack.Screen name="LoginView" component={LoginView} />
-        <Stack.Screen name="SignUpView" component={SignUpView} />
-        <Stack.Screen name="RoleSelectionView" component={RoleSelectionView} />
-        <Stack.Screen name="MyPageView" component={MyPageView} />
+        <Stack.Screen
+          name="MainView"
+          component={MainView}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="CafeDetailView"
+          component={CafeDetailView}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="LoginView"
+          component={LoginView}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="SignUpView"
+          component={SignUpView}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="RoleSelectionView"
+          component={RoleSelectionView}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="MyPageView"
+          component={MyPageView}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
