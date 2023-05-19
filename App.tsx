@@ -30,7 +30,7 @@ export default function App() {
         <Stack.Screen
           name="CafeDetailView"
           component={CafeDetailView}
-          // options={{ headerShown: false }}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="LoginView"
