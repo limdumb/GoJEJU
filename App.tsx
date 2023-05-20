@@ -35,12 +35,12 @@ export default function App() {
         <Stack.Screen
           name="LoginView"
           component={LoginView}
-          options={{ headerShown: false }}
+          // options={{ headerShown: false }}
         />
         <Stack.Screen
           name="SignUpView"
           component={SignUpView}
-          options={{ headerShown: false }}
+          // options={{ headerShown: false }}
         />
         <Stack.Screen
           name="RoleSelectionView"

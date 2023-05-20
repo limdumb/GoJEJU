@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   },
   logoSection: {
     width: "100%",
-    height: 330,
+    height: 310,
     backgroundColor: "pink",
     justifyContent: "center",
     alignItems: "center",
