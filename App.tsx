@@ -2,7 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Screen } from "react-native-screens";
 import { StatusBar } from "expo-status-bar";
-import CafeDetailView from "./pages/CafeDetailView";
+import CafeDetailView, { CafeDetailProps } from "./pages/CafeDetailView";
 import LoginView from "./pages/LoginView";
 import MainView from "./pages/MainView";
 import MyPageView from "./pages/MyPageView";
@@ -11,7 +11,7 @@ import SignUpView from "./pages/SignUpView";
 
 export type RootStackParamList = {
   MainView: undefined;
-  CafeDetailView: undefined;
+  CafeDetailView: {cafeName: string};
   LoginView: undefined;
   SignUpView: undefined;
   RoleSelectionView: undefined;
@@ -33,7 +33,7 @@ export default function App() {
         <Stack.Screen
           name="CafeDetailView"
           component={CafeDetailView}
-          options={{ headerShown: false }}
+          options={({ route }) => ({ title: route.params.cafeName })}
         />
         <Stack.Screen
           name="LoginView"
