@@ -1,10 +1,11 @@
 import { ScrollView, StyleSheet, View } from "react-native";
 
 export type CafeDetailProps = {
-  setCafeName: React.Dispatch<React.SetStateAction<string>>
-}
+  setCafeName: React.Dispatch<React.SetStateAction<string>>;
+};
 
 export default function CafeDetailView() {
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.cafePhoto}></View>

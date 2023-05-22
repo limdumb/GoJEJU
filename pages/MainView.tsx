@@ -1,13 +1,50 @@
+import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { useEffect, useState } from "react";
+import { Button } from "react-native";
 import { StyleSheet, Text, View } from "react-native";
+import { RootStackParamList } from "../App";
+
+type MainScreenNavigationProps = NavigationProp<RootStackParamList, "MainView">;
 
 export default function MainView() {
+  const [testData, setTestData] = useState({ cafeName: "" });
+  const testFunc = () => {
+    return new Promise(
+      async (resolve: (value: { cafeName: string }) => void, reject) => {
+        try {
+          const test = { cafeName: "덤덤카페 아닌데?" };
+          resolve(test);
+        } catch (error) {
+          reject(error);
+        }
+      }
+    );
+  };
+
+  useEffect(() => {
+    const realtest = async () => {
+      const result = await testFunc();
+      setTestData(result);
+    };
+    realtest();
+  }, []);
+
+  const navigate = useNavigation<MainScreenNavigationProps>();
+
   return (
     <View style={styles.container}>
       <View style={styles.header}></View>
       <View style={styles.map}></View>
       <View style={styles.cafeListContainer}>
         <Text style={styles.cafeListTitle}>카페리스트</Text>
-        <View style={styles.cafeList}></View>
+        <View style={styles.cafeList}>
+          <Button
+            title="버튼입니다"
+            onPress={() => {
+              navigate.navigate("CafeDetailView", testData);
+            }}
+          />
+        </View>
       </View>
     </View>
   );
