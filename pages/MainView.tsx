@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Button } from "react-native";
 import { StyleSheet, Text, View } from "react-native";
 import { RootStackParamList } from "../App";
+import Header from "../components/Header";
 
 type MainScreenNavigationProps = NavigationProp<RootStackParamList, "MainView">;
 
@@ -33,7 +34,7 @@ export default function MainView() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}></View>
+      <Header />
       <View style={styles.map}></View>
       <View style={styles.cafeListContainer}>
         <Text style={styles.cafeListTitle}>카페리스트</Text>

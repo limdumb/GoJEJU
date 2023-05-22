@@ -11,7 +11,7 @@ import SignUpView from "./pages/SignUpView";
 
 export type RootStackParamList = {
   MainView: undefined;
-  CafeDetailView: {cafeName: string};
+  CafeDetailView: { cafeName: string };
   LoginView: undefined;
   SignUpView: undefined;
   RoleSelectionView: undefined;
@@ -53,7 +53,7 @@ export default function App() {
         <Stack.Screen
           name="MyPageView"
           component={MyPageView}
-          options={{ headerShown: false }}
+          options={{ title: "마이 페이지" }}
         />
       </Stack.Navigator>
     </NavigationContainer>
