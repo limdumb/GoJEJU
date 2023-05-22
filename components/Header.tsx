@@ -5,6 +5,7 @@ const HeaderContainer = styled.View`
   height: 140px;
   width: 100%;
   background-color: white;
+  border-bottom: 1px solid 949494;
 `;
 
 export default function Header() {
