@@ -41,7 +41,9 @@ export default function CafeCard(props: CafeCardProps) {
           fontSize="13px"
         />
       </View>
-      <View></View>
+      <View style={styles.cafeStatusContainer}>
+        <CustomText  fontSize="13px" children={props.cafeStatus ? "영업중" : "영업종료"}/>
+      </View>
     </TouchableOpacity>
   );
 }
@@ -66,4 +68,9 @@ const styles = StyleSheet.create({
     height: "20%",
     alignItems: "center",
   },
+  cafeStatusContainer:{
+    height:"10%"
+    ,width:"100%",
+    alignItems:"flex-end"
+  }
 });
