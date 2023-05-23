@@ -1,25 +1,29 @@
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, Button } from "react-native";
 import styled from "styled-components/native";
+import CustomText from "./CustomText";
 
 const HeaderContainer = styled.View`
   height: 140px;
   width: 100%;
   background-color: white;
-  border-bottom: 1px solid 949494;
 `;
 
 export default function Header() {
+  const tabArray = [
+    { tabName: "지도" },
+    { tabName: "카페검색" },
+    { tabName: "추천카페" },
+  ];
   return (
-    // 5.22일 헤더 생성 => 5월 22일 오후중으로 탭 컴포넌트로 분할 예정및 로고및 아이콘 추가 예정
     <HeaderContainer>
       <View style={styles.headerTopContainer}>
-        <Text>로고입니다</Text>
-        <Text>아이콘입니다.</Text>
+        <Text>☁️Watching JEJU</Text>
+        <Text>👥</Text>
       </View>
       <View style={styles.tabContainer}>
-        <Text>탭입니다</Text>
-        <Text>탭입니다</Text>
-        <Text>탭입니다</Text>
+        {tabArray.map((el) => {
+          return <Button color={"black"} title={el.tabName} />;
+        })}
       </View>
     </HeaderContainer>
   );
@@ -32,7 +36,7 @@ const styles = StyleSheet.create({
     paddingTop: 48,
     paddingLeft: 10,
     paddingRight: 10,
-    backgroundColor: "pink",
+    backgroundColor: "white",
     height: "70%",
   },
   tabContainer: {

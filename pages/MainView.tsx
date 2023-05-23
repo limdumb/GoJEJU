@@ -56,13 +56,7 @@ export default function MainView() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "pink",
     alignItems: "center",
-  },
-  header: {
-    height: 140,
-    width: "100%",
-    backgroundColor: "white",
   },
   scrollViewContainer:{
     width:"100%"
@@ -70,7 +64,6 @@ const styles = StyleSheet.create({
   map: {
     height: 290,
     width: "100%",
-    backgroundColor: "black",
     marginBottom: 10,
   },
   cafeListTitle: {
@@ -79,9 +72,9 @@ const styles = StyleSheet.create({
   },
   cafeListContainer: {
     flex: 1,
-    backgroundColor: "blue",
     width: "100%",
     padding: 20,
+    backgroundColor: "white",
   },
   cafeList: {
     flexDirection: "row",
