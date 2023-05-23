@@ -2,7 +2,8 @@ import React from "react";
 import { Image, StyleSheet, Text } from "react-native";
 import { TouchableOpacity } from "react-native";
 import { View } from "react-native";
-import { CustomText, MainScreenNavigationProps } from "../pages/MainView";
+import { MainScreenNavigationProps } from "../pages/MainView";
+import CustomText from "./CustomText";
 
 export interface CafeCardType {
   cafeId: number;
@@ -28,10 +29,17 @@ export default function CafeCard(props: CafeCardProps) {
         <Image source={{ uri: props.cafeImageUrl }} style={styles.cafeImage} />
       </View>
       <View style={styles.cafeNameWrapper}>
-        <CustomText fontsize={14}>{props.cafeName}</CustomText>
+        <CustomText
+          children={props.cafeName}
+          fontSize="15px"
+          fontWeight="bold"
+        />
       </View>
       <View style={styles.cafePrefaceWrapper}>
-        <CustomText fontsize={12}>{props.cafePreface}</CustomText>
+        <CustomText
+          children={props.cafePreface}
+          fontSize="13px"
+        />
       </View>
       <View></View>
     </TouchableOpacity>

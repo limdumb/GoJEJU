@@ -1,7 +1,6 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import styled from "styled-components/native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { getCafeList } from "../API/getCafeList";
 import { RootStackParamList } from "../App";
 import CafeCard, { CafeCardType } from "../components/CafeCard";
@@ -11,10 +10,6 @@ export type MainScreenNavigationProps = NavigationProp<
   RootStackParamList,
   "MainView"
 >;
-
-export const CustomText = styled.Text`
-  font-size: ${(props: { fontsize: number }) => props.fontsize};
-`;
 
 export default function MainView() {
   const [cafeListData, setCafeListData] = useState<Array<CafeCardType>>([]);
@@ -33,24 +28,27 @@ export default function MainView() {
   return (
     <View style={styles.container}>
       <Header />
-      <View style={styles.map}></View>
-      <View style={styles.cafeListContainer}>
-        <Text style={styles.cafeListTitle}>카페리스트</Text>
-        <View style={styles.cafeList}>
-          {cafeListData.map((el) => {
-            return (
-              <CafeCard
-                cafeId={el.cafeId}
-                cafeImageUrl={el.cafeImageUrl}
-                cafeName={el.cafeName}
-                cafePreface={el.cafePreface}
-                cafeStatus={el.cafeStatus}
-                navigate={navigate}
-              />
-            );
-          })}
+      <ScrollView style={styles.scrollViewContainer}>
+        <View style={styles.map}></View>
+        <View style={styles.cafeListContainer}>
+          <Text style={styles.cafeListTitle}>카페리스트</Text>
+          <View style={styles.cafeList}>
+            {cafeListData.map((el) => {
+              return (
+                <CafeCard
+                  key={el.cafeId}
+                  cafeId={el.cafeId}
+                  cafeImageUrl={el.cafeImageUrl}
+                  cafeName={el.cafeName}
+                  cafePreface={el.cafePreface}
+                  cafeStatus={el.cafeStatus}
+                  navigate={navigate}
+                />
+              );
+            })}
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </View>
   );
 }
@@ -65,6 +63,9 @@ const styles = StyleSheet.create({
     height: 140,
     width: "100%",
     backgroundColor: "white",
+  },
+  scrollViewContainer:{
+    width:"100%"
   },
   map: {
     height: 290,
