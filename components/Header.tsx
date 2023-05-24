@@ -14,6 +14,7 @@ export default function Header() {
     { tabName: "카페검색" },
     { tabName: "추천카페" },
   ];
+  
   return (
     <HeaderContainer>
       <View style={styles.headerTopContainer}>
