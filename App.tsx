@@ -8,6 +8,8 @@ import MainView from "./pages/MainView";
 import MyPageView from "./pages/MyPageView";
 import RoleSelectionView from "./pages/RoleSelectionView";
 import SignUpView from "./pages/SignUpView";
+import CafeSuggestView from "./pages/CafeSuggestView";
+import CafeSearchView from "./pages/CafeSearchView";
 
 export type RootStackParamList = {
   MainView: undefined;
@@ -16,6 +18,8 @@ export type RootStackParamList = {
   SignUpView: undefined;
   RoleSelectionView: undefined;
   MyPageView: undefined;
+  CafeSuggestView: undefined;
+  CafeSearchView: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -54,6 +58,16 @@ export default function App() {
           name="MyPageView"
           component={MyPageView}
           options={{ title: "마이 페이지" }}
+        />
+        <Stack.Screen
+          name="CafeSuggestView"
+          component={CafeSuggestView}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="CafeSearchView"
+          component={CafeSearchView}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>
