@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components/native";
 
 type StyledTextProps = {
-  children:string
+  children: string;
   color?: string;
   fontSize?: string;
   fontWeight?: string;
@@ -11,9 +11,9 @@ type StyledTextProps = {
 const StyledText = styled.Text<StyledTextProps>`
   color: ${(color: StyledTextProps) => color.color || "black"};
   font-size: ${(fontSize: StyledTextProps) => fontSize.fontSize || "16px"};
-  font-weight: ${(fontWeight: StyledTextProps) => fontWeight.fontWeight || "normal"};
+  font-weight: ${(fontWeight: StyledTextProps) =>
+    fontWeight.fontWeight || "normal"};
 `;
-
 
 const CustomText: React.FC<StyledTextProps> = ({
   children,
@@ -22,11 +22,7 @@ const CustomText: React.FC<StyledTextProps> = ({
   fontWeight,
 }) => {
   return (
-    <StyledText
-      color={color}
-      fontSize={fontSize}
-      fontWeight={fontWeight}
-    >
+    <StyledText color={color} fontSize={fontSize} fontWeight={fontWeight}>
       {children}
     </StyledText>
   );
