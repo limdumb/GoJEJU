@@ -1,4 +1,8 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
+
+export type CafeDetailProps = {
+  setCafeName: React.Dispatch<React.SetStateAction<string>>;
+};
 
 export default function CafeDetailView() {
   return (
