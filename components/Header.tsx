@@ -1,6 +1,7 @@
+import { useNavigation } from "@react-navigation/native";
 import { Text, View, StyleSheet, Button } from "react-native";
 import styled from "styled-components/native";
-import CustomText from "./CustomText";
+import { MainScreenNavigationProps } from "../pages/MainView";
 
 const HeaderContainer = styled.View`
   height: 140px;
@@ -8,13 +9,20 @@ const HeaderContainer = styled.View`
   background-color: white;
 `;
 
+interface TabType {
+  tabName: string;
+  navScreen: "MainView" | "CafeSearchView" | "CafeSuggestView";
+}
+
 export default function Header() {
-  const tabArray = [
-    { tabName: "지도" },
-    { tabName: "카페검색" },
-    { tabName: "추천카페" },
+  const navigate = useNavigation<MainScreenNavigationProps>();
+
+  const tabArray: TabType[] = [
+    { tabName: "지도", navScreen: "MainView" },
+    { tabName: "카페검색", navScreen: "CafeSearchView" },
+    { tabName: "추천카페", navScreen: "CafeSuggestView" },
   ];
-  
+
   return (
     <HeaderContainer>
       <View style={styles.headerTopContainer}>
@@ -23,7 +31,16 @@ export default function Header() {
       </View>
       <View style={styles.tabContainer}>
         {tabArray.map((el) => {
-          return <Button color={"black"} title={el.tabName} />;
+          return (
+            <Button
+              key={el.tabName}
+              color={"black"}
+              title={el.tabName}
+              onPress={() => {
+                navigate.navigate(el.navScreen);
+              }}
+            />
+          );
         })}
       </View>
     </HeaderContainer>
