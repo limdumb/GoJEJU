@@ -1,0 +1,31 @@
+import React from "react";
+import styled from "styled-components/native";
+
+type StyledTextProps = {
+  children: string;
+  color?: string;
+  fontSize?: string;
+  fontWeight?: string;
+};
+
+const StyledText = styled.Text<StyledTextProps>`
+  color: ${(color: StyledTextProps) => color.color || "black"};
+  font-size: ${(fontSize: StyledTextProps) => fontSize.fontSize || "16px"};
+  font-weight: ${(fontWeight: StyledTextProps) =>
+    fontWeight.fontWeight || "normal"};
+`;
+
+const CustomText: React.FC<StyledTextProps> = ({
+  children,
+  color,
+  fontSize,
+  fontWeight,
+}) => {
+  return (
+    <StyledText color={color} fontSize={fontSize} fontWeight={fontWeight}>
+      {children}
+    </StyledText>
+  );
+};
+
+export default CustomText;

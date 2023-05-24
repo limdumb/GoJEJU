@@ -5,7 +5,6 @@ export type CafeDetailProps = {
 };
 
 export default function CafeDetailView() {
-
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.cafePhoto}></View>

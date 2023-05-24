@@ -1,33 +1,26 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
-import { Button } from "react-native";
-import { StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { getCafeList } from "../API/getCafeList";
 import { RootStackParamList } from "../App";
+import CafeCard, { CafeCardType } from "../components/CafeCard";
 import Header from "../components/Header";
 
-type MainScreenNavigationProps = NavigationProp<RootStackParamList, "MainView">;
+export type MainScreenNavigationProps = NavigationProp<
+  RootStackParamList,
+  "MainView"
+>;
 
 export default function MainView() {
-  const [testData, setTestData] = useState({ cafeName: "" });
-  const testFunc = () => {
-    return new Promise(
-      async (resolve: (value: { cafeName: string }) => void, reject) => {
-        try {
-          const test = { cafeName: "덤덤카페 아닌데?" };
-          resolve(test);
-        } catch (error) {
-          reject(error);
-        }
-      }
-    );
-  };
+  const [cafeListData, setCafeListData] = useState<Array<CafeCardType>>([]);
 
   useEffect(() => {
-    const realtest = async () => {
-      const result = await testFunc();
-      setTestData(result);
+    const cafeListResponse = async () => {
+      const response = await getCafeList();
+      setCafeListData(response);
     };
-    realtest();
+
+    cafeListResponse();
   }, []);
 
   const navigate = useNavigation<MainScreenNavigationProps>();
@@ -35,18 +28,27 @@ export default function MainView() {
   return (
     <View style={styles.container}>
       <Header />
-      <View style={styles.map}></View>
-      <View style={styles.cafeListContainer}>
-        <Text style={styles.cafeListTitle}>카페리스트</Text>
-        <View style={styles.cafeList}>
-          <Button
-            title="버튼입니다"
-            onPress={() => {
-              navigate.navigate("CafeDetailView", testData);
-            }}
-          />
+      <ScrollView style={styles.scrollViewContainer}>
+        <View style={styles.map}></View>
+        <View style={styles.cafeListContainer}>
+          <Text style={styles.cafeListTitle}>카페리스트</Text>
+          <View style={styles.cafeList}>
+            {cafeListData.map((el) => {
+              return (
+                <CafeCard
+                  key={el.cafeId}
+                  cafeId={el.cafeId}
+                  cafeImageUrl={el.cafeImageUrl}
+                  cafeName={el.cafeName}
+                  cafePreface={el.cafePreface}
+                  cafeStatus={el.cafeStatus}
+                  navigate={navigate}
+                />
+              );
+            })}
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </View>
   );
 }
@@ -54,18 +56,14 @@ export default function MainView() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "pink",
     alignItems: "center",
   },
-  header: {
-    height: 140,
-    width: "100%",
-    backgroundColor: "white",
+  scrollViewContainer:{
+    width:"100%"
   },
   map: {
     height: 290,
     width: "100%",
-    backgroundColor: "black",
     marginBottom: 10,
   },
   cafeListTitle: {
@@ -74,14 +72,16 @@ const styles = StyleSheet.create({
   },
   cafeListContainer: {
     flex: 1,
-    backgroundColor: "blue",
     width: "100%",
     padding: 20,
+    backgroundColor: "white",
   },
   cafeList: {
+    flexDirection: "row",
+    flexWrap: "wrap",
     backgroundColor: "white",
+    justifyContent: "space-between",
     width: "100%",
-    height: "100%",
     marginTop: 20,
   },
 });
