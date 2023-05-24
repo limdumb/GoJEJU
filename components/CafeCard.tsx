@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, StyleSheet, Text } from "react-native";
+import { Image, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native";
 import { View } from "react-native";
 import { MainScreenNavigationProps } from "../pages/MainView";
