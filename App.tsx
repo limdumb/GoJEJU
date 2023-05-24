@@ -8,7 +8,6 @@ import MainView from "./pages/MainView";
 import MyPageView from "./pages/MyPageView";
 import RoleSelectionView from "./pages/RoleSelectionView";
 import SignUpView from "./pages/SignUpView";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import CafeSuggestView from "./pages/CafeSuggestView";
 import CafeSearchView from "./pages/CafeSearchView";
 
@@ -24,7 +23,6 @@ export type RootStackParamList = {
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
-const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
