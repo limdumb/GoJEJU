@@ -1,5 +1,5 @@
 import { RouteProp } from "@react-navigation/native";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { Image, ScrollView, StyleSheet, View } from "react-native";
 import { RootStackParamList } from "../App";
 
 export type CafeDetailProps = {
@@ -11,10 +11,14 @@ type CafeNavigateDataType = {
 };
 
 export default function CafeDetailView({ route }: CafeNavigateDataType) {
-
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.cafePhoto}></View>
+      <View style={styles.cafePhotoContainer}>
+        <Image
+          style={styles.cafePhoto}
+          source={{ uri: route.params.cafeImage }}
+        />
+      </View>
       <View style={styles.confirmatContainer}></View>
       <View style={styles.cafeInfoTitleContainer}></View>
       <View style={styles.tabContainer}></View>
@@ -27,11 +31,11 @@ export default function CafeDetailView({ route }: CafeNavigateDataType) {
 
 const styles = StyleSheet.create({
   container: { flex: 1, alignItems: "center" },
-  cafePhoto: {
+  cafePhotoContainer: {
     height: 240,
     width: "100%",
-    backgroundColor: "blue",
   },
+  cafePhoto: { width: "100%", height: "100%" },
   confirmatContainer: {
     height: 75,
     width: "100%",
