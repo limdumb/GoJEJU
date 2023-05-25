@@ -2,8 +2,6 @@ import styled from "styled-components/native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import CustomText from "./CustomText";
 import { StyleSheet, View } from "react-native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../App";
 import { MainScreenNavigationProps } from "../pages/MainView";
 
 const CustomRolePicker = styled.TouchableOpacity`
@@ -21,16 +19,19 @@ export interface RolePickerProps {
 }
 
 export default function RolePicker(props: RolePickerProps) {
-  const Stack = createNativeStackNavigator<RootStackParamList>();
-
   const onRolePicked = () => {
     const navigateAdress =
+      // 5월 25일 해당 View는 5월 26일까지 생성 예정
       props.role === "일반 사용자" ? "UserLoginView" : "CEOLoginView";
     props.navigate.navigate(navigateAdress);
   };
 
   return (
-    <CustomRolePicker onPress={() => {}}>
+    <CustomRolePicker
+      onPress={() => {
+        onRolePicked();
+      }}
+    >
       <Icon name="coffee" color={"#80BFA0"} size={60} />
       <View style={styles.textContainer}>
         <CustomText
