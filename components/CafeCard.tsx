@@ -22,7 +22,11 @@ export default function CafeCard(props: CafeCardProps) {
     <TouchableOpacity
       style={styles.cardContainer}
       onPress={() => {
-        props.navigate.navigate("CafeDetailView", { cafeName: props.cafeName });
+        props.navigate.navigate("CafeDetailView", {
+          cafeName: props.cafeName,
+          cafeImage: props.cafeImageUrl,
+          cafeStatus: props.cafeStatus,
+        });
       }}
     >
       <View style={styles.cafeImageWrapper}>
@@ -36,13 +40,13 @@ export default function CafeCard(props: CafeCardProps) {
         />
       </View>
       <View style={styles.cafePrefaceWrapper}>
-        <CustomText
-          children={props.cafePreface}
-          fontSize="13px"
-        />
+        <CustomText children={props.cafePreface} fontSize="13px" />
       </View>
       <View style={styles.cafeStatusContainer}>
-        <CustomText  fontSize="13px" children={props.cafeStatus ? "영업중" : "영업종료"}/>
+        <CustomText
+          fontSize="13px"
+          children={props.cafeStatus ? "영업중" : "영업종료"}
+        />
       </View>
     </TouchableOpacity>
   );
@@ -68,9 +72,9 @@ const styles = StyleSheet.create({
     height: "20%",
     alignItems: "center",
   },
-  cafeStatusContainer:{
-    height:"10%"
-    ,width:"100%",
-    alignItems:"flex-end"
-  }
+  cafeStatusContainer: {
+    height: "10%",
+    width: "100%",
+    alignItems: "flex-end",
+  },
 });

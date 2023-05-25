@@ -12,7 +12,7 @@ import CafeSearchView from "./pages/CafeSearchView";
 
 export type RootStackParamList = {
   MainView: undefined;
-  CafeDetailView: { cafeName: string };
+  CafeDetailView: { cafeName: string; cafeImage: string; cafeStatus: boolean };
   LoginView: undefined;
   SignUpView: undefined;
   RoleSelectionView: undefined;

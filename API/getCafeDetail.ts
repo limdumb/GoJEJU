@@ -1,10 +1,6 @@
 import { CafeCardType } from "../components/CafeCard";
 
-interface CafeDetailType{
-  
-}
-
-export const getCafeList = (): Promise<Array<CafeCardType>> => {
+export const getCafeDetail = (): Promise<Array<CafeCardType>> => {
   return new Promise((resolve, reject) => {
     const test: CafeCardType[] = [];
     try {

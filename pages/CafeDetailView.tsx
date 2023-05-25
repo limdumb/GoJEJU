@@ -1,10 +1,17 @@
+import { RouteProp } from "@react-navigation/native";
 import { ScrollView, StyleSheet, View } from "react-native";
+import { RootStackParamList } from "../App";
 
 export type CafeDetailProps = {
   setCafeName: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export default function CafeDetailView() {
+type CafeNavigateDataType = {
+  route: RouteProp<RootStackParamList, "CafeDetailView">;
+};
+
+export default function CafeDetailView({ route }: CafeNavigateDataType) {
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.cafePhoto}></View>
