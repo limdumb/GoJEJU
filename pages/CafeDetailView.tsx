@@ -1,5 +1,6 @@
 import { RouteProp } from "@react-navigation/native";
 import { Image, ScrollView, StyleSheet, View } from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome";
 import { RootStackParamList } from "../App";
 
 export type CafeDetailProps = {
