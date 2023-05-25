@@ -2,6 +2,8 @@ import { RouteProp } from "@react-navigation/native";
 import { Image, ScrollView, StyleSheet, View } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { RootStackParamList } from "../App";
+import CustomText from "../components/CustomText";
+import StatusToggle from "../components/StatusToggle";
 
 export type CafeDetailProps = {
   setCafeName: React.Dispatch<React.SetStateAction<string>>;
@@ -20,7 +22,13 @@ export default function CafeDetailView({ route }: CafeNavigateDataType) {
           source={{ uri: route.params.cafeImage }}
         />
       </View>
-      <View style={styles.confirmatContainer}></View>
+      <View style={styles.confirmatContainer}>
+        <StatusToggle
+          cafeStatus={route.params.cafeStatus}
+          screen={"CafeDetailView"}
+        />
+        <CustomText children="" />
+      </View>
       <View style={styles.cafeInfoTitleContainer}></View>
       <View style={styles.tabContainer}></View>
       <View style={styles.adressInformation}></View>
@@ -41,6 +49,7 @@ const styles = StyleSheet.create({
     height: 75,
     width: "100%",
     alignItems: "center",
+    justifyContent: "center",
     backgroundColor: "white",
     borderBottomWidth: 1,
     borderBottomColor: "#C3C3C3",

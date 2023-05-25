@@ -1,26 +1,30 @@
 import { StyleSheet, Text } from "react-native";
 import { View } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import CustomText from "./CustomText";
 
 interface Props {
   cafeStatus: boolean;
+  screen: "CafeDetailView" | "MainView";
 }
 
 export default function StatusToggle(props: Props) {
+  console.log(props.cafeStatus);
   return (
     <View style={styles.container}>
       <Icon
         name={
           props.cafeStatus
-            ? "toggle-switch-outline"
-            : "toggle-switch-off-outline"
+            ? "toggle-switch"
+            : "toggle-switch-off"
         }
+        color={props.cafeStatus ? "#00B828" : "gray"}
         size={50}
+        style={styles.onOffIcon}
       />
       <CustomText
-        fontSize="16px"
-        fontWeight="bold"
+        fontSize={props.screen === "MainView" ? "12" : "18"}
+        fontWeight={props.screen === "MainView" ? "600" : "bold"}
         children={props.cafeStatus ? "현재 영업중" : "영업 종료"}
       />
     </View>
@@ -28,5 +32,10 @@ export default function StatusToggle(props: Props) {
 }
 
 const styles = StyleSheet.create({
-  container: { flexDirection: "row" },
+  container: {
+    flexDirection: "row",
+    height: "100%",
+    alignItems: "center",
+  },
+  onOffIcon: { marginRight: 10},
 });
