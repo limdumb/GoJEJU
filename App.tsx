@@ -1,6 +1,5 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Screen } from "react-native-screens";
 import { StatusBar } from "expo-status-bar";
 import CafeDetailView from "./pages/CafeDetailView";
 import LoginView from "./pages/LoginView";
