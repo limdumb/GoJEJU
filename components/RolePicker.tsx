@@ -4,6 +4,7 @@ import CustomText from "./CustomText";
 import { StyleSheet, View } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../App";
+import { MainScreenNavigationProps } from "../pages/MainView";
 
 const CustomRolePicker = styled.TouchableOpacity`
   align-items: center;
@@ -16,11 +17,17 @@ const CustomRolePicker = styled.TouchableOpacity`
 
 export interface RolePickerProps {
   role: "일반 사용자" | "점주 사용자";
-  navigate: string;
+  navigate: MainScreenNavigationProps;
 }
 
 export default function RolePicker(props: RolePickerProps) {
   const Stack = createNativeStackNavigator<RootStackParamList>();
+
+  const onRolePicked = () => {
+    const navigateAdress =
+      props.role === "일반 사용자" ? "UserLoginView" : "CEOLoginView";
+    props.navigate.navigate(navigateAdress);
+  };
 
   return (
     <CustomRolePicker onPress={() => {}}>

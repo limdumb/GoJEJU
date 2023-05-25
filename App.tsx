@@ -20,6 +20,8 @@ export type RootStackParamList = {
   MyPageView: undefined;
   CafeSuggestView: undefined;
   CafeSearchView: undefined;
+  UserLoginView: undefined;
+  CEOLoginView: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
