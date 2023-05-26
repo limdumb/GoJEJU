@@ -24,8 +24,6 @@ export default function CafeCard(props: CafeCardProps) {
       onPress={() => {
         props.navigate.navigate("CafeDetailView", {
           cafeName: props.cafeName,
-          cafeImage: props.cafeImageUrl,
-          cafeStatus: props.cafeStatus,
         });
       }}
     >

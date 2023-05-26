@@ -9,18 +9,13 @@ interface Props {
 }
 
 export default function StatusToggle(props: Props) {
-  console.log(props.cafeStatus);
   return (
     <View style={styles.container}>
       <Icon
-        name={
-          props.cafeStatus
-            ? "toggle-switch"
-            : "toggle-switch-off"
-        }
+        name={props.cafeStatus ? "toggle-switch" : "toggle-switch-off"}
         color={props.cafeStatus ? "#00B828" : "gray"}
-        size={50}
         style={styles.onOffIcon}
+        size={50}
       />
       <CustomText
         fontSize={props.screen === "MainView" ? "12" : "18"}
@@ -37,5 +32,7 @@ const styles = StyleSheet.create({
     height: "100%",
     alignItems: "center",
   },
-  onOffIcon: { marginRight: 10},
+  onOffIcon: {
+    marginRight: 10,
+  },
 });
