@@ -10,7 +10,7 @@ import { cautionText } from "../function/cautionText";
 export default function CafeDetailView() {
   const [cafeDetails, setCafeDetails] = useState<CafeDetailDataType>({
     cafeId: 0,
-    cafeImageUrl: "",
+    cafeImageUrl: "ㅇ",
     cafeName: "",
     cafePreface: "",
     cafeStatus: false,
@@ -19,6 +19,7 @@ export default function CafeDetailView() {
     instargramId: "",
     openingHours: [],
   });
+
   useEffect(() => {
     const fetchCafeDetail = async () => {
       const response = await getCafeDetail({ cafeId: cafeDetails.cafeId });
@@ -67,7 +68,17 @@ export default function CafeDetailView() {
           <CustomText children="즐겨찾기" />
         </View>
       </View>
-      <View style={styles.openTime}></View>
+      <View style={styles.openTime}>
+        <View style={styles.openTitle}>
+          <Icon
+            name="clock"
+            color={"#80BFA0"}
+            size={20}
+            style={styles.clockIcon}
+          />
+          <CustomText children="카페 영업시간" fontWeight="600" fontSize="16" />
+        </View>
+      </View>
       <View style={styles.phoneNumber}></View>
     </ScrollView>
   );
@@ -134,8 +145,15 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderBottomWidth: 1,
     borderBottomColor: "#C3C3C3",
-    minHeight: 100,
+    minHeight: 170,
+    paddingLeft: 15,
+    paddingTop: 12,
   },
+  openTitle: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  clockIcon: { marginRight: 8 },
   phoneNumber: {
     width: "100%",
     backgroundColor: "white",
