@@ -4,6 +4,7 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 import { StoreDetailType, getCafeDetail } from "../API/getCafeDetail";
 import CustomText from "../components/CustomText";
 import StatusToggle from "../components/StatusToggle";
+import StoreSchedule from "../components/StoreSchedule";
 import TabSwitcher from "../components/TabSwitcher";
 import { cautionText } from "../function/cautionText";
 
@@ -87,6 +88,9 @@ export default function CafeDetailView() {
             style={styles.clockIcon}
           />
           <CustomText children="카페 영업시간" fontWeight="600" fontSize="16" />
+          <View>
+            <StoreSchedule storeSchedules={cafeDetails.storeSchedules} />
+          </View>
         </View>
       </View>
       <View style={styles.phoneNumber}></View>

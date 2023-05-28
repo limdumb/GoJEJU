@@ -1,4 +1,4 @@
-interface StoreSchedulesType {
+export interface StoreSchedulesType {
   day:
     | "MONDAY"
     | "TUESDAY"
