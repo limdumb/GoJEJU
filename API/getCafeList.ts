@@ -6,15 +6,7 @@ export interface StoreListDataType {
 export const getCafeList = (): Promise<StoreListDataType> => {
   return new Promise((resolve, reject) => {
     const test: StoreListDataType = {
-      stores: [
-        {
-          storeDescription: "",
-          id: 0,
-          imageUrl: "",
-          name: "",
-          storeStatus: "",
-        },
-      ],
+      stores: [],
     };
     try {
       for (let i = 1; i < 10; i++) {

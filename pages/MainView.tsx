@@ -41,7 +41,7 @@ export default function MainView() {
                   navigate={navigate}
                   id={el.id}
                   imageUrl={el.imageUrl}
-                  name={el.imageUrl}
+                  name={el.name}
                   storeDescription={el.storeDescription}
                   storeStatus={el.storeStatus}
                 />

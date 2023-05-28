@@ -1,28 +1,37 @@
 import { useEffect, useState } from "react";
 import { Image, ScrollView, StyleSheet, View } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import { CafeDetailDataType, getCafeDetail } from "../API/getCafeDetail";
+import { StoreDetailType, getCafeDetail } from "../API/getCafeDetail";
 import CustomText from "../components/CustomText";
 import StatusToggle from "../components/StatusToggle";
 import TabSwitcher from "../components/TabSwitcher";
 import { cautionText } from "../function/cautionText";
 
 export default function CafeDetailView() {
-  const [cafeDetails, setCafeDetails] = useState<CafeDetailDataType>({
-    cafeId: 0,
-    cafeImageUrl: "ㅇ",
-    cafeName: "",
-    cafePreface: "",
-    cafeStatus: false,
-    cafeLocation: "",
-    cafeNumber: "",
-    instargramId: "",
-    openingHours: [],
+  const [cafeDetails, setCafeDetails] = useState<StoreDetailType>({
+    id: 1,
+    images: [],
+    name: "",
+    storeStatus: "OPEN",
+    storeDescription: "",
+    jubunAddress: "",
+    roadAddress: "",
+    storeSchedules: [
+      {
+        day: "MONDAY",
+        start: "",
+        end: "",
+        lastOrder: "",
+        type: "OPEN",
+      },
+    ],
+    storePhoneNumber: "010-7702-9884",
+    sns: [{ type: "INSTARGRAM", url: "" }],
   });
 
   useEffect(() => {
     const fetchCafeDetail = async () => {
-      const response = await getCafeDetail({ cafeId: cafeDetails.cafeId });
+      const response = await getCafeDetail({ id: cafeDetails.id });
       setCafeDetails(response);
     };
 
@@ -32,15 +41,16 @@ export default function CafeDetailView() {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.cafePhotoContainer}>
-        <Image
-          style={styles.cafePhoto}
-          source={{ uri: cafeDetails.cafeImageUrl }}
-        />
+        {cafeDetails.images.map((el) => {
+          return (
+            <Image key={el} style={styles.cafePhoto} source={{ uri: el }} />
+          );
+        })}
       </View>
       <View style={styles.confirmatContainer}>
         <View style={styles.onOffStatusContainer}>
           <StatusToggle
-            cafeStatus={cafeDetails.cafeStatus}
+            storeStatus={cafeDetails.storeStatus}
             screen={"CafeDetailView"}
           />
         </View>
@@ -52,7 +62,7 @@ export default function CafeDetailView() {
         <CustomText
           fontWeight="bold"
           fontSize="16"
-          children={cafeDetails.cafePreface}
+          children={cafeDetails.storeDescription}
         />
       </View>
       <View style={styles.tabContainer}>
@@ -61,7 +71,7 @@ export default function CafeDetailView() {
       <View style={styles.adressInformationContainer}>
         <View style={styles.adressInfomation}>
           <Icon name="map-marker-alt" size={25} style={styles.adressIcon} />
-          <CustomText fontSize="15" children={cafeDetails.cafeLocation} />
+          <CustomText fontSize="15" children={cafeDetails.jubunAddress} />
         </View>
         <View style={styles.favoritContainer}>
           <Icon name="star" size={20} style={styles.adressIcon} />
