@@ -1,9 +1,9 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
-import { getCafeList } from "../API/getCafeList";
+import { getCafeList, StoreListDataType } from "../API/getCafeList";
 import { RootStackParamList } from "../App";
-import CafeCard, { CafeCardType } from "../components/CafeCard";
+import CafeCard from "../components/CafeCard";
 import Header from "../components/Header";
 
 export type MainScreenNavigationProps = NavigationProp<
@@ -12,12 +12,14 @@ export type MainScreenNavigationProps = NavigationProp<
 >;
 
 export default function MainView() {
-  const [cafeListData, setCafeListData] = useState<Array<CafeCardType>>([]);
+  const [storeList, setStoreList] = useState<StoreListDataType>({
+    stores: [],
+  });
 
   useEffect(() => {
     const cafeListResponse = async () => {
       const response = await getCafeList();
-      setCafeListData(response);
+      setStoreList(response);
     };
 
     cafeListResponse();
@@ -33,16 +35,15 @@ export default function MainView() {
         <View style={styles.cafeListContainer}>
           <Text style={styles.cafeListTitle}>카페리스트</Text>
           <View style={styles.cafeList}>
-            {cafeListData.map((el) => {
+            {storeList.stores.map((el) => {
               return (
                 <CafeCard
-                  key={el.cafeId}
-                  cafeId={el.cafeId}
-                  cafeImageUrl={el.cafeImageUrl}
-                  cafeName={el.cafeName}
-                  cafePreface={el.cafePreface}
-                  cafeStatus={el.cafeStatus}
                   navigate={navigate}
+                  id={el.id}
+                  imageUrl={el.imageUrl}
+                  name={el.imageUrl}
+                  storeDescription={el.storeDescription}
+                  storeStatus={el.storeStatus}
                 />
               );
             })}
@@ -58,8 +59,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
   },
-  scrollViewContainer:{
-    width:"100%"
+  scrollViewContainer: {
+    width: "100%",
   },
   map: {
     height: 290,
