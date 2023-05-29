@@ -5,15 +5,15 @@ import { View } from "react-native";
 import { MainScreenNavigationProps } from "../pages/MainView";
 import CustomText from "./CustomText";
 
-export interface CafeCardType {
-  cafeId: number;
-  cafeImageUrl: string;
-  cafeName: string;
-  cafePreface: string;
-  cafeStatus: boolean;
+export interface StoreCardType {
+  id: number;
+  imageUrl: string;
+  name: string;
+  storeDescription: string;
+  storeStatus: string;
 }
 
-interface CafeCardProps extends CafeCardType {
+interface CafeCardProps extends StoreCardType {
   navigate: MainScreenNavigationProps;
 }
 
@@ -22,27 +22,25 @@ export default function CafeCard(props: CafeCardProps) {
     <TouchableOpacity
       style={styles.cardContainer}
       onPress={() => {
-        props.navigate.navigate("CafeDetailView", { cafeName: props.cafeName });
+        props.navigate.navigate("CafeDetailView", {
+          name: props.name,
+        });
       }}
     >
       <View style={styles.cafeImageWrapper}>
-        <Image source={{ uri: props.cafeImageUrl }} style={styles.cafeImage} />
+        <Image source={{ uri: props.imageUrl }} style={styles.cafeImage} />
       </View>
       <View style={styles.cafeNameWrapper}>
-        <CustomText
-          children={props.cafeName}
-          fontSize="15px"
-          fontWeight="bold"
-        />
+        <CustomText children={props.name} fontSize="15px" fontWeight="bold" />
       </View>
       <View style={styles.cafePrefaceWrapper}>
-        <CustomText
-          children={props.cafePreface}
-          fontSize="13px"
-        />
+        <CustomText children={props.storeDescription} fontSize="13px" />
       </View>
       <View style={styles.cafeStatusContainer}>
-        <CustomText  fontSize="13px" children={props.cafeStatus ? "영업중" : "영업종료"}/>
+        <CustomText
+          fontSize="13px"
+          children={props.storeStatus ? "영업중" : "영업종료"}
+        />
       </View>
     </TouchableOpacity>
   );
@@ -68,9 +66,9 @@ const styles = StyleSheet.create({
     height: "20%",
     alignItems: "center",
   },
-  cafeStatusContainer:{
-    height:"10%"
-    ,width:"100%",
-    alignItems:"flex-end"
-  }
+  cafeStatusContainer: {
+    height: "10%",
+    width: "100%",
+    alignItems: "flex-end",
+  },
 });
