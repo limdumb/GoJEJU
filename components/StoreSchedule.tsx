@@ -1,4 +1,4 @@
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet } from "react-native";
 import { View } from "react-native";
 import { StoreSchedulesType } from "../API/getCafeDetail";
 import { dayOfTheWeek } from "../function/dayOfTheWeek";
@@ -38,6 +38,7 @@ export default function StoreSchedule(props: Props) {
               <CustomText
                 color={schedule.type === "OPEN" ? "black" : "red"}
                 fontSize="15px"
+                marginRgt="20px"
                 children={scheduleTime(
                   schedule.type,
                   schedule.start,
@@ -51,7 +52,6 @@ export default function StoreSchedule(props: Props) {
           );
         })}
       </View>
-      <View></View>
     </View>
   );
 }
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     width: 20,
   },
   schedulesContainer: {
-    width: 150,
+    width: 310,
     flexDirection: "row",
     alignItems: "center",
     height: 23.2,

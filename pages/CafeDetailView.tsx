@@ -56,13 +56,13 @@ export default function CafeDetailView() {
           />
         </View>
         <View style={styles.cautionTextContainer}>
-          <CustomText color="#9E9E9E" fontSize="13" children={cautionText()} />
+          <CustomText color="#9E9E9E" fontSize="13px" children={cautionText()} />
         </View>
       </View>
       <View style={styles.cafeInfoTitleContainer}>
         <CustomText
           fontWeight="bold"
-          fontSize="16"
+          fontSize="16px"
           children={cafeDetails.storeDescription}
         />
       </View>
@@ -72,7 +72,7 @@ export default function CafeDetailView() {
       <View style={styles.adressInformationContainer}>
         <View style={styles.adressInfomation}>
           <Icon name="map-marker-alt" size={25} style={styles.adressIcon} />
-          <CustomText fontSize="15" children={cafeDetails.jubunAddress} />
+          <CustomText fontSize="15px" children={cafeDetails.jubunAddress} />
         </View>
         <View style={styles.favoritContainer}>
           <Icon name="star" size={20} style={styles.adressIcon} />
@@ -87,7 +87,7 @@ export default function CafeDetailView() {
             size={20}
             style={styles.clockIcon}
           />
-          <CustomText children="카페 영업시간" fontWeight="600" fontSize="16" />
+          <CustomText children="카페 영업시간" fontWeight="600" fontSize="16px" />
         </View>
         <View style={styles.openSchedule}>
           <StoreSchedule storeSchedules={cafeDetails.storeSchedules} />
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderBottomWidth: 1,
     borderBottomColor: "#C3C3C3",
-    height:200,
+    height: 210,
     paddingLeft: 15,
     paddingTop: 12,
   },

@@ -18,10 +18,10 @@ const StyledText = styled.Text<StyledTextProps>`
   font-size: ${(fontSize: StyledTextProps) => fontSize.fontSize || "16px"};
   font-weight: ${(fontWeight: StyledTextProps) =>
     fontWeight.fontWeight || "normal"};
-  margin-top: ${(marginTop: StyledTextProps) => marginTop.marginTop};
-  margin-bottom: ${(marginBtm: StyledTextProps) => marginBtm.marginBtm};
-  margin-left: ${(marginLft: StyledTextProps) => marginLft.marginLft};
-  margin-right: ${(marginRgt: StyledTextProps) => marginRgt.marginRgt};
+  margin-top: ${(marginTop: StyledTextProps) => marginTop.marginTop || "0"};
+  margin-bottom: ${(marginBtm: StyledTextProps) => marginBtm.marginBtm || "0"};
+  margin-left: ${(marginLft: StyledTextProps) => marginLft.marginLft || "0"};
+  margin-right: ${(marginRgt: StyledTextProps) => marginRgt.marginRgt || "0"};
 `;
 
 const CustomText: React.FC<StyledTextProps> = ({

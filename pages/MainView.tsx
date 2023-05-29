@@ -38,6 +38,7 @@ export default function MainView() {
             {storeList.stores.map((el) => {
               return (
                 <CafeCard
+                  key={el.id}
                   navigate={navigate}
                   id={el.id}
                   imageUrl={el.imageUrl}

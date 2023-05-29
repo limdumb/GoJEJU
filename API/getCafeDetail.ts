@@ -94,7 +94,7 @@ export const getCafeDetail = (
         },
       ],
       storePhoneNumber: "010-7702-9884",
-      sns: [{ type: "INSTARGRAM", url: "" }],
+      sns: [{ type: "INSTARGRAM", url: "ss" }],
     };
     resolve(test);
   });
