@@ -17,9 +17,9 @@ export default function StoreSchedule(props: Props) {
     return type === "OPEN" ? `${start} ~ ${end}분 까지` : "휴무입니다.";
   };
 
-  const lastOrderTime = () => {
-
-  }
+  const lastOrderTime = (type: "OPEN" | "CLOSED", lastOrder: string) => {
+    return type === "OPEN" ? `라스트오더: ${lastOrder}` : "";
+  };
   return (
     <View style={styles.container}>
       <View>
@@ -43,6 +43,9 @@ export default function StoreSchedule(props: Props) {
                   schedule.start,
                   schedule.end
                 )}
+              />
+              <CustomText
+                children={`${lastOrderTime(schedule.type, schedule.lastOrder)}`}
               />
             </View>
           );
