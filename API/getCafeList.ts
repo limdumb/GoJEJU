@@ -1,27 +1,32 @@
-import { CafeCardType } from "../components/CafeCard";
+import { StoreCardType } from "../components/CafeCard";
+export interface StoreListDataType {
+  stores: StoreCardType[];
+}
 
-export const getCafeList = (): Promise<Array<CafeCardType>> => {
+export const getCafeList = (): Promise<StoreListDataType> => {
   return new Promise((resolve, reject) => {
-    const test: CafeCardType[] = [];
+    const test: StoreListDataType = {
+      stores: [],
+    };
     try {
       for (let i = 1; i < 10; i++) {
         if (i !== 4) {
-          test.push({
-            cafeId: i,
-            cafeImageUrl:
+          test.stores.push({
+            id: i,
+            storeDescription: "안녕하세요 덤덤카페 입니다",
+            imageUrl:
               "https://newsimg.sedaily.com/2021/12/12/22V9KRDG8B_9.jpeg",
-            cafeName: "ㅎㅇ",
-            cafePreface: "ㅎㅇㅎㅇ",
-            cafeStatus: false,
+            name: "덤덤카페",
+            storeStatus: "OPEN",
           });
         } else {
-          test.push({
-            cafeId: i,
-            cafeImageUrl:
+          test.stores.push({
+            id: i,
+            storeDescription: "안녕하세요 쥬쥬카페입니다",
+            imageUrl:
               "https://newsimg.sedaily.com/2021/12/12/22V9KRDG8B_9.jpeg",
-            cafeName: "ㅂㅇ",
-            cafePreface: "ㅂㅇㅂㅇ",
-            cafeStatus: true,
+            name: "주주카페",
+            storeStatus: "CLOSED",
           });
         }
       }

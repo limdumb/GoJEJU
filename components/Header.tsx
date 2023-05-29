@@ -2,9 +2,10 @@ import { useNavigation } from "@react-navigation/native";
 import { Text, View, StyleSheet, Button } from "react-native";
 import styled from "styled-components/native";
 import { MainScreenNavigationProps } from "../pages/MainView";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const HeaderContainer = styled.View`
-  height: 140px;
+  height: 160px;
   width: 100%;
   background-color: white;
 `;
@@ -26,8 +27,10 @@ export default function Header() {
   return (
     <HeaderContainer>
       <View style={styles.headerTopContainer}>
-        <Text>☁️Watching JEJU</Text>
-        <Text>👥</Text>
+        <View style={styles.headerTop}>
+          <Text>☁️Watching JEJU</Text>
+          <Icon name="user-circle-o" size={30} />
+        </View>
       </View>
       <View style={styles.tabContainer}>
         {tabArray.map((el) => {
@@ -62,5 +65,13 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     alignItems: "center",
     height: "30%",
+  },
+  headerTop: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingRight: 20,
+    paddingLeft: 5,
+    width: "100%",
   },
 });
