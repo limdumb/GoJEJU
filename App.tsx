@@ -12,7 +12,9 @@ import CafeSearchView from "./pages/CafeSearchView";
 
 export type RootStackParamList = {
   MainView: undefined;
-  CafeDetailView: { cafeName: string };
+  CafeDetailView: {
+    name: string;
+  };
   LoginView: undefined;
   SignUpView: undefined;
   RoleSelectionView: undefined;
@@ -38,7 +40,7 @@ export default function App() {
         <Stack.Screen
           name="CafeDetailView"
           component={CafeDetailView}
-          options={({ route }) => ({ title: route.params.cafeName })}
+          options={({ route }) => ({ title: route.params.name })}
         />
         <Stack.Screen
           name="LoginView"
