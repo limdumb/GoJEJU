@@ -18,15 +18,15 @@ export default function StoreSchedule(props: Props) {
   };
 
   const lastOrderTime = (type: "OPEN" | "CLOSED", lastOrder: string) => {
-    return type === "OPEN" ? `라스트오더: ${lastOrder}` : "";
+    return type === "OPEN" ? `라스트오더: ${lastOrder}분` : "";
   };
   return (
     <View style={styles.container}>
       <View>
-        {dayArr.map((el) => {
+        {dayArr.map((day) => {
           return (
             <View style={styles.dayContainer}>
-              <CustomText children={`${el}:`} fontSize={"14px"} />
+              <CustomText children={`${day}:`} fontSize={"14px"} />
             </View>
           );
         })}
@@ -46,7 +46,10 @@ export default function StoreSchedule(props: Props) {
                 )}
               />
               <CustomText
-                children={`${lastOrderTime(schedule.type, schedule.lastOrder)}`}
+                children={`${lastOrderTime(
+                  schedule.type,
+                  schedule.lastOrder
+                )}`}
               />
             </View>
           );

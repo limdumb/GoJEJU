@@ -23,7 +23,7 @@ export interface StoreDetailType {
   roadAddress: string;
   storeSchedules: StoreSchedulesType[];
   storePhoneNumber: string;
-  sns: { type: string; url: string }[];
+  sns: { type: string; url: string,nickName:string }[];
 }
 
 interface CafeDetailProps {
@@ -94,7 +94,7 @@ export const getCafeDetail = (
         },
       ],
       storePhoneNumber: "010-7702-9884",
-      sns: [{ type: "INSTARGRAM", url: "ss" }],
+      sns: [{ type: "INSTARGRAM", url: "ss" ,nickName:"dumb_Lim"}],
     };
     resolve(test);
   });
