@@ -88,9 +88,9 @@ export default function CafeDetailView() {
             style={styles.clockIcon}
           />
           <CustomText children="카페 영업시간" fontWeight="600" fontSize="16" />
-          <View>
-            <StoreSchedule storeSchedules={cafeDetails.storeSchedules} />
-          </View>
+        </View>
+        <View style={styles.openSchedule}>
+          <StoreSchedule storeSchedules={cafeDetails.storeSchedules} />
         </View>
       </View>
       <View style={styles.phoneNumber}></View>
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderBottomWidth: 1,
     borderBottomColor: "#C3C3C3",
-    minHeight: 170,
+    height:200,
     paddingLeft: 15,
     paddingTop: 12,
   },
@@ -168,6 +168,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   clockIcon: { marginRight: 8 },
+  openSchedule: {
+    marginTop: 6,
+  },
   phoneNumber: {
     width: "100%",
     backgroundColor: "white",
