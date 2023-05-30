@@ -9,6 +9,7 @@ import StatusToggle from "../components/StatusToggle";
 import StoreSchedule from "../components/StoreSchedule";
 import TabSwitcher from "../components/TabSwitcher";
 import { cautionText } from "../function/cautionText";
+
 export default function StoreDetailView() {
   const [storeDetails, setStoreDetails] = useState<StoreDetailType>({
     id: 1,
