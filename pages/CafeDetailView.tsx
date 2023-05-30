@@ -3,7 +3,7 @@ import { Image, ScrollView, StyleSheet, View } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import InstagramIcon from "react-native-vector-icons/FontAwesome";
 import CallIcon from "react-native-vector-icons/MaterialIcons";
-import { StoreDetailType, getCafeDetail } from "../API/getCafeDetail";
+import { StoreDetailType, getCafeDetail } from "../API/getStoreDetail";
 import CustomText from "../components/CustomText";
 import StatusToggle from "../components/StatusToggle";
 import StoreSchedule from "../components/StoreSchedule";

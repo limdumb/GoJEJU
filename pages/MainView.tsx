@@ -1,7 +1,7 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
-import { getCafeList, StoreListDataType } from "../API/getCafeList";
+import { getCafeList, StoreListDataType } from "../API/getStoreList";
 import { RootStackParamList } from "../App";
 import CafeCard from "../components/CafeCard";
 import Header from "../components/Header";

@@ -3,7 +3,7 @@ export interface StoreListDataType {
   stores: StoreCardType[];
 }
 
-export const getCafeList = (): Promise<StoreListDataType> => {
+export const getStoreList = (): Promise<StoreListDataType> => {
   return new Promise((resolve, reject) => {
     const test: StoreListDataType = {
       stores: [],
