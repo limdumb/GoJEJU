@@ -3,14 +3,14 @@ import { Image, ScrollView, StyleSheet, View } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import InstagramIcon from "react-native-vector-icons/FontAwesome";
 import CallIcon from "react-native-vector-icons/MaterialIcons";
-import { StoreDetailType, getCafeDetail } from "../API/getStoreDetail";
+import { StoreDetailType, getStoreDetail } from "../API/getStoreDetail";
 import CustomText from "../components/CustomText";
 import StatusToggle from "../components/StatusToggle";
 import StoreSchedule from "../components/StoreSchedule";
 import TabSwitcher from "../components/TabSwitcher";
 import { cautionText } from "../function/cautionText";
-export default function CafeDetailView() {
-  const [cafeDetails, setCafeDetails] = useState<StoreDetailType>({
+export default function StoreDetailView() {
+  const [storeDetails, setStoreDetails] = useState<StoreDetailType>({
     id: 1,
     images: [],
     name: "",
@@ -32,29 +32,29 @@ export default function CafeDetailView() {
   });
 
   useEffect(() => {
-    const fetchCafeDetail = async () => {
-      const response = await getCafeDetail({ id: cafeDetails.id });
-      setCafeDetails(response);
+    const fetchStoreDetail = async () => {
+      const response = await getStoreDetail({ id: storeDetails.id });
+      setStoreDetails(response);
     };
 
-    fetchCafeDetail();
+    fetchStoreDetail();
   }, []);
 
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollView}>
-        <View style={styles.cafePhotoContainer}>
-          {cafeDetails.images.map((el) => {
+        <View style={styles.storePhotoContainer}>
+          {storeDetails.images.map((el) => {
             return (
-              <Image key={el} style={styles.cafePhoto} source={{ uri: el }} />
+              <Image key={el} style={styles.storePhoto} source={{ uri: el }} />
             );
           })}
         </View>
         <View style={styles.confirmatContainer}>
           <View style={styles.onOffStatusContainer}>
             <StatusToggle
-              storeStatus={cafeDetails.storeStatus}
-              screen={"CafeDetailView"}
+              storeStatus={storeDetails.storeStatus}
+              screen={"StoreDetailView"}
             />
           </View>
           <View style={styles.cautionTextContainer}>
@@ -65,11 +65,11 @@ export default function CafeDetailView() {
             />
           </View>
         </View>
-        <View style={styles.cafeInfoTitleContainer}>
+        <View style={styles.storeInfoTitleContainer}>
           <CustomText
             fontWeight="bold"
             fontSize="16px"
-            children={cafeDetails.storeDescription}
+            children={storeDetails.storeDescription}
           />
         </View>
         <View style={styles.tabContainer}>
@@ -78,7 +78,7 @@ export default function CafeDetailView() {
         <View style={styles.adressInformationContainer}>
           <View style={styles.adressInfomation}>
             <Icon name="map-marker-alt" size={25} style={styles.adressIcon} />
-            <CustomText fontSize="15px" children={cafeDetails.jubunAddress} />
+            <CustomText fontSize="15px" children={storeDetails.jubunAddress} />
           </View>
           <View style={styles.favoritContainer}>
             <Icon name="star" size={20} style={styles.adressIcon} />
@@ -100,14 +100,14 @@ export default function CafeDetailView() {
             />
           </View>
           <View style={styles.openSchedule}>
-            <StoreSchedule storeSchedules={cafeDetails.storeSchedules} />
+            <StoreSchedule storeSchedules={storeDetails.storeSchedules} />
           </View>
         </View>
         <View style={styles.contactContainer}>
           <View style={styles.contactContents}>
             <CallIcon name="call-end" size={30} color={"#4ECB71"} />
             <CustomText
-              children={`전화번호 ${cafeDetails.storePhoneNumber}`}
+              children={`전화번호 ${storeDetails.storePhoneNumber}`}
               fontWeight={"bold"}
               marginLft={"8px"}
               fontSize={"15px"}
@@ -115,7 +115,7 @@ export default function CafeDetailView() {
           </View>
           <View style={styles.contactContents}>
             <InstagramIcon name="instagram" size={30} color={`#E4405F`} />
-            {cafeDetails.sns.map((sns) => {
+            {storeDetails.sns.map((sns) => {
               return (
                 <CustomText
                   children={sns.nickName}
@@ -140,11 +140,11 @@ const styles = StyleSheet.create({
   scrollView: {
     width: "100%",
   },
-  cafePhotoContainer: {
+  storePhotoContainer: {
     height: 240,
     width: "100%",
   },
-  cafePhoto: { width: "100%", height: "100%" },
+  storePhoto: { width: "100%", height: "100%" },
   confirmatContainer: {
     height: 79,
     width: "100%",
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
     height: "60%",
     alignItems: "center",
   },
-  cafeInfoTitleContainer: {
+  storeInfoTitleContainer: {
     width: "100%",
     height: 65,
     padding: 10,
@@ -224,6 +224,6 @@ const styles = StyleSheet.create({
   },
   contactContents: {
     flexDirection: "row",
-    alignItems:"center"
+    alignItems: "center",
   },
 });

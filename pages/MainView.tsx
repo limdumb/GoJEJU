@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { getCafeList, StoreListDataType } from "../API/getStoreList";
 import { RootStackParamList } from "../App";
-import CafeCard from "../components/CafeCard";
+import CafeCard from "../components/StoreCard";
 import Header from "../components/Header";
 
 export type MainScreenNavigationProps = NavigationProp<

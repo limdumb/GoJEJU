@@ -5,7 +5,7 @@ import CustomText from "./CustomText";
 
 interface Props {
   storeStatus: string;
-  screen: "CafeDetailView" | "MainView";
+  screen: "StoreDetailView" | "MainView";
 }
 
 export default function StatusToggle(props: Props) {

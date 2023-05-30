@@ -13,30 +13,30 @@ export interface StoreCardType {
   storeStatus: string;
 }
 
-interface CafeCardProps extends StoreCardType {
+interface StoreCardProps extends StoreCardType {
   navigate: MainScreenNavigationProps;
 }
 
-export default function CafeCard(props: CafeCardProps) {
+export default function StoreCard(props: StoreCardProps) {
   return (
     <TouchableOpacity
       style={styles.cardContainer}
       onPress={() => {
-        props.navigate.navigate("CafeDetailView", {
+        props.navigate.navigate("StoreDetailView", {
           name: props.name,
         });
       }}
     >
-      <View style={styles.cafeImageWrapper}>
-        <Image source={{ uri: props.imageUrl }} style={styles.cafeImage} />
+      <View style={styles.storeImageWrapper}>
+        <Image source={{ uri: props.imageUrl }} style={styles.storeImage} />
       </View>
-      <View style={styles.cafeNameWrapper}>
+      <View style={styles.storeNameWrapper}>
         <CustomText children={props.name} fontSize="15px" fontWeight="bold" />
       </View>
-      <View style={styles.cafePrefaceWrapper}>
+      <View style={styles.storePrefaceWrapper}>
         <CustomText children={props.storeDescription} fontSize="13px" />
       </View>
-      <View style={styles.cafeStatusContainer}>
+      <View style={styles.storeStatusContainer}>
         <CustomText
           fontSize="13px"
           children={props.storeStatus ? "영업중" : "영업종료"}
@@ -52,21 +52,21 @@ const styles = StyleSheet.create({
     height: 190,
     marginBottom: 40,
   },
-  cafeImage: { width: "100%", height: "100%" },
-  cafeImageWrapper: { width: "100%", height: "60%" },
-  cafeNameWrapper: {
+  storeImage: { width: "100%", height: "100%" },
+  storeImageWrapper: { width: "100%", height: "60%" },
+  storeNameWrapper: {
     width: "100%",
     height: "10%",
     justifyContent: "center",
     alignItems: "center",
     marginTop: 4,
   },
-  cafePrefaceWrapper: {
+  storePrefaceWrapper: {
     width: "100%",
     height: "20%",
     alignItems: "center",
   },
-  cafeStatusContainer: {
+  storeStatusContainer: {
     height: "10%",
     width: "100%",
     alignItems: "flex-end",

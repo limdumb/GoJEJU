@@ -1,7 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
-import CafeDetailView from "./pages/CafeDetailView";
+import CafeDetailView from "./pages/StoreDetailView";
 import LoginView from "./pages/LoginView";
 import MainView from "./pages/MainView";
 import MyPageView from "./pages/MyPageView";
@@ -12,7 +12,7 @@ import CafeSearchView from "./pages/CafeSearchView";
 
 export type RootStackParamList = {
   MainView: undefined;
-  CafeDetailView: {
+  StoreDetailView: {
     name: string;
   };
   LoginView: undefined;
@@ -38,7 +38,7 @@ export default function App() {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="CafeDetailView"
+          name="StoreDetailView"
           component={CafeDetailView}
           options={({ route }) => ({ title: route.params.name })}
         />
