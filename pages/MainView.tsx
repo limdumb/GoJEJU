@@ -1,9 +1,9 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
-import { getCafeList, StoreListDataType } from "../API/getStoreList";
+import { getStoreList, StoreListDataType } from "../API/getStoreList";
 import { RootStackParamList } from "../App";
-import CafeCard from "../components/StoreCard";
+import StoreCard from "../components/StoreCard";
 import Header from "../components/Header";
 
 export type MainScreenNavigationProps = NavigationProp<
@@ -17,12 +17,12 @@ export default function MainView() {
   });
 
   useEffect(() => {
-    const cafeListResponse = async () => {
-      const response = await getCafeList();
+    const storeListResponse = async () => {
+      const response = await getStoreList();
       setStoreList(response);
     };
 
-    cafeListResponse();
+    storeListResponse();
   }, []);
 
   const navigate = useNavigation<MainScreenNavigationProps>();
@@ -32,12 +32,12 @@ export default function MainView() {
       <Header />
       <ScrollView style={styles.scrollViewContainer}>
         <View style={styles.map}></View>
-        <View style={styles.cafeListContainer}>
-          <Text style={styles.cafeListTitle}>카페리스트</Text>
-          <View style={styles.cafeList}>
+        <View style={styles.storeListContainer}>
+          <Text style={styles.storeListTitle}>카페리스트</Text>
+          <View style={styles.storeList}>
             {storeList.stores.map((el) => {
               return (
-                <CafeCard
+                <StoreCard
                   key={el.id}
                   navigate={navigate}
                   id={el.id}
@@ -68,17 +68,17 @@ const styles = StyleSheet.create({
     width: "100%",
     marginBottom: 10,
   },
-  cafeListTitle: {
+  storeListTitle: {
     fontSize: 20,
     fontWeight: "bold",
   },
-  cafeListContainer: {
+  storeListContainer: {
     flex: 1,
     width: "100%",
     padding: 20,
     backgroundColor: "white",
   },
-  cafeList: {
+  storeList: {
     flexDirection: "row",
     flexWrap: "wrap",
     backgroundColor: "white",

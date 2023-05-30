@@ -1,14 +1,14 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
-import CafeDetailView from "./pages/StoreDetailView";
+import StoreDetailView from "./pages/StoreDetailView";
 import LoginView from "./pages/LoginView";
 import MainView from "./pages/MainView";
 import MyPageView from "./pages/MyPageView";
 import RoleSelectionView from "./pages/RoleSelectionView";
 import SignUpView from "./pages/SignUpView";
-import CafeSuggestView from "./pages/CafeSuggestView";
-import CafeSearchView from "./pages/CafeSearchView";
+import StoreSuggestView from "./pages/StoreSuggestView";
+import StoreSearchView from "./pages/StoreSearchView";
 
 export type RootStackParamList = {
   MainView: undefined;
@@ -19,8 +19,8 @@ export type RootStackParamList = {
   SignUpView: undefined;
   RoleSelectionView: undefined;
   MyPageView: undefined;
-  CafeSuggestView: undefined;
-  CafeSearchView: undefined;
+  StoreSuggestView: undefined;
+  StoreSearchView: undefined;
   UserLoginView: undefined;
   CEOLoginView: undefined;
 };
@@ -39,7 +39,7 @@ export default function App() {
         />
         <Stack.Screen
           name="StoreDetailView"
-          component={CafeDetailView}
+          component={StoreDetailView}
           options={({ route }) => ({ title: route.params.name })}
         />
         <Stack.Screen
@@ -63,13 +63,13 @@ export default function App() {
           options={{ title: "마이 페이지" }}
         />
         <Stack.Screen
-          name="CafeSuggestView"
-          component={CafeSuggestView}
+          name="StoreSuggestView"
+          component={StoreSuggestView}
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="CafeSearchView"
-          component={CafeSearchView}
+          name="StoreSearchView"
+          component={StoreSearchView}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
