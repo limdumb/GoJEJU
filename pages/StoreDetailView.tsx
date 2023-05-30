@@ -118,6 +118,7 @@ export default function StoreDetailView() {
             {storeDetails.sns.map((sns) => {
               return (
                 <CustomText
+                  key={sns.nickName}
                   children={sns.nickName}
                   marginLft={"5px"}
                   fontWeight={"bold"}
