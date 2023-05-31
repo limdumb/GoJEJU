@@ -1,4 +1,4 @@
-import { Image, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import styled from "styled-components/native";
 import UserIcon from "react-native-vector-icons/FontAwesome";
 import CustomText from "./CustomText";
@@ -20,6 +20,7 @@ export default function ReviewBox(props: ReviewPropsType) {
   return (
     <View style={styles.reviewBoxContainer}>
       <View style={styles.userInfoContainer}>
+        {/* 5월 31일 2시 8분 User Icon 추후 데이터값 인입시 Image로 변경 예정 */}
         <UserIcon name="user-circle-o" size={40} />
         <CustomText
           children="유저이름입니다"
@@ -30,11 +31,18 @@ export default function ReviewBox(props: ReviewPropsType) {
         />
       </View>
       <View style={styles.reviewImageContainer}>
-        <ReviewImage
-          source={{
-            uri: "https://dimg.donga.com/wps/NEWS/IMAGE/2022/01/07/111139016.3.jpg",
-          }}
-        />
+        {props.reviewImage.map((image) => {
+          return (
+            <ReviewImage
+              source={{
+                uri: image,
+              }}
+            />
+          );
+        })}
+      </View>
+      <View>
+        <CustomText children={`${props.reviewMainText}`} />
       </View>
     </View>
   );
