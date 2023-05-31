@@ -9,6 +9,7 @@ import StatusToggle from "../components/StatusToggle";
 import StoreSchedule from "../components/StoreSchedule";
 import TabSwitcher from "../components/TabSwitcher";
 import { cautionText } from "../function/cautionText";
+import ReviewBox from "../components/ReviewBox";
 
 export default function StoreDetailView() {
   const [storeDetails, setStoreDetails] = useState<StoreDetailType>({
@@ -127,6 +128,14 @@ export default function StoreDetailView() {
               );
             })}
           </View>
+        </View>
+        <View>
+          <ReviewBox
+            userName={""}
+            userImage={""}
+            reviewImage={[]}
+            reviewMainText={""}
+          />
         </View>
       </ScrollView>
     </View>
