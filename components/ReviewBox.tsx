@@ -2,12 +2,8 @@ import { StyleSheet, View } from "react-native";
 import styled from "styled-components/native";
 import UserIcon from "react-native-vector-icons/FontAwesome";
 import CustomText from "./CustomText";
-
-const ReviewImage = styled.Image`
-  width: 260px;
-  height: 210px;
-  border-radius: 5px;
-`;
+import Carousel from "./Carousel";
+import { Dimensions } from "react-native";
 
 interface ReviewPropsType {
   userName: string;
@@ -17,6 +13,7 @@ interface ReviewPropsType {
 }
 
 export default function ReviewBox(props: ReviewPropsType) {
+  const screenWidth = Math.round(Dimensions.get("window").width);
   return (
     <View style={styles.reviewBoxContainer}>
       <View style={styles.userInfoContainer}>
@@ -31,15 +28,12 @@ export default function ReviewBox(props: ReviewPropsType) {
         />
       </View>
       <View style={styles.reviewImageContainer}>
-        {props.reviewImage.map((image) => {
-          return (
-            <ReviewImage
-              source={{
-                uri: image,
-              }}
-            />
-          );
-        })}
+        <Carousel
+          images={props.reviewImage}
+          gap={15}
+          offset={36}
+          pageWidth={screenWidth - (15 + 36) * 2}
+        />
       </View>
       <View>
         <CustomText children={`${props.reviewMainText}`} />
