@@ -135,6 +135,7 @@ export default function StoreDetailView() {
             userImage={"유저이미지"}
             reviewImage={[
               "https://dimg.donga.com/wps/NEWS/IMAGE/2022/01/07/111139016.3.jpg",
+              "https://dimg.donga.com/wps/NEWS/IMAGE/2022/01/07/111139016.3.jpg",
             ]}
             reviewMainText={
               "이카페 맛있긴한데 역시 스타벅스 원두는 제 취향이 아니네요 진짜 별로인거 같기두 하면서도 괜찮고 애매하기도 하고 어쩌구저쩌고"
