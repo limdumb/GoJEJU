@@ -10,6 +10,7 @@ import StoreSchedule from "../components/StoreSchedule";
 import TabSwitcher from "../components/TabSwitcher";
 import { cautionText } from "../function/cautionText";
 import ReviewBox from "../components/ReviewBox";
+import AuthBox from "../components/AuthBox";
 
 export default function StoreDetailView() {
   const [storeDetails, setStoreDetails] = useState<StoreDetailType>({
@@ -128,6 +129,9 @@ export default function StoreDetailView() {
               );
             })}
           </View>
+        </View>
+        <View>
+          <AuthBox platform="kakao" />
         </View>
       </ScrollView>
     </View>
