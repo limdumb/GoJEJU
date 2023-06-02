@@ -9,7 +9,6 @@ import StatusToggle from "../components/StatusToggle";
 import StoreSchedule from "../components/StoreSchedule";
 import TabSwitcher from "../components/TabSwitcher";
 import { cautionText } from "../function/cautionText";
-import ReviewBox from "../components/ReviewBox";
 import AuthBox from "../components/AuthBox";
 
 export default function StoreDetailView() {

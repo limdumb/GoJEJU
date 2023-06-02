@@ -5,7 +5,7 @@ export default function TabSwitcher() {
   return (
     <View style={styles.tabContainer}>
       {tabsArray.map((tab) => {
-        return <Button title={tab.tabName} color={"black"} />;
+        return <Button key={tab.tabName} title={tab.tabName} color={"black"} />;
       })}
     </View>
   );
