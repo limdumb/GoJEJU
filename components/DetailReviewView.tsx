@@ -3,7 +3,7 @@ import { ReviewResponseType } from "../API/getReviewList";
 import ReviewBox from "./ReviewBox";
 
 interface Props extends ReviewResponseType {
-  // pages: number
+// 추후 들어와야하는 Props가 생기면 추가예정
 }
 
 export default function DetailReviewView(props: Props) {

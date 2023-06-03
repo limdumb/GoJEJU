@@ -73,53 +73,6 @@ export default function DetailHomeView(props: DetailHomeViewProps) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    backgroundColor: "white",
-  },
-  scrollView: {
-    width: "100%",
-  },
-  storePhotoContainer: {
-    height: 240,
-    width: "100%",
-  },
-  storePhoto: { width: "100%", height: "100%" },
-  confirmatContainer: {
-    height: 79,
-    width: "100%",
-    alignItems: "center",
-    backgroundColor: "white",
-    borderBottomWidth: 1,
-    borderBottomColor: "#C3C3C3",
-  },
-  cautionTextContainer: {
-    height: "40%",
-    justifyContent: "center",
-    paddingBottom: 10,
-  },
-  onOffStatusContainer: {
-    width: "100%",
-    height: "60%",
-    alignItems: "center",
-  },
-  storeInfoTitleContainer: {
-    width: "100%",
-    height: 65,
-    padding: 10,
-    alignItems: "center",
-    backgroundColor: "white",
-    borderBottomWidth: 1,
-    borderBottomColor: "#C3C3C3",
-  },
-  tabContainer: {
-    height: 41,
-    width: "100%",
-    borderBottomWidth: 1,
-    borderBottomColor: "#C3C3C3",
-    backgroundColor: "white",
-  },
   adressInformationContainer: {
     height: 59,
     width: "100%",
