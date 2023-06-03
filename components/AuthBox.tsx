@@ -14,13 +14,21 @@ const AuthBoxContainer = styled.View<AuthBoxProps>`
   justify-content: center;
   align-items: center;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 6px;
 `;
 
 export default function AuthBox(props: AuthBoxProps) {
+  const AuthTitle = () => {
+    if(props.platform === "kakao"){
+      return "KaKao Login"
+    } else {
+      return "Google Login"
+    }
+  }
   return (
     <AuthBoxContainer platform={props.platform}>
-      <CustomText children="KaKao Login" fontSize="18px" fontWeight="600"/>
+      {/* 6월 3일 추후 로고 추가예정 */}
+      <CustomText children={AuthTitle()} fontSize="18px" fontWeight="600" />
     </AuthBoxContainer>
   );
 }
