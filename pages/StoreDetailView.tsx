@@ -129,9 +129,6 @@ export default function StoreDetailView() {
             })}
           </View>
         </View>
-        <View>
-          <AuthBox platform="kakao" />
-        </View>
       </ScrollView>
     </View>
   );
