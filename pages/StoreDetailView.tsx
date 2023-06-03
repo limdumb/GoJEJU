@@ -1,17 +1,22 @@
 import { useEffect, useState } from "react";
 import { Image, ScrollView, StyleSheet, View } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome5";
-import InstagramIcon from "react-native-vector-icons/FontAwesome";
-import CallIcon from "react-native-vector-icons/MaterialIcons";
 import { StoreDetailType, getStoreDetail } from "../API/getStoreDetail";
 import CustomText from "../components/CustomText";
 import StatusToggle from "../components/StatusToggle";
-import StoreSchedule from "../components/StoreSchedule";
 import TabSwitcher from "../components/TabSwitcher";
 import { cautionText } from "../function/cautionText";
-import ReviewBox from "../components/ReviewBox";
+import DetailHomeView from "../components/DetailHomeView";
+import DetailReviewView from "../components/DetailReviewView";
+import { getReviewList, ReviewResponseType } from "../API/getReviewList";
 
 export default function StoreDetailView() {
+  const [isTabType, setIsTabType] = useState<"홈" | "리뷰">("홈");
+  const [page, setPage] = useState(0);
+  const [reviewData, setReviewData] = useState<ReviewResponseType>({
+    hasNext: false,
+    total: 0,
+    reviews: [],
+  });
   const [storeDetails, setStoreDetails] = useState<StoreDetailType>({
     id: 1,
     images: [],
@@ -41,6 +46,18 @@ export default function StoreDetailView() {
 
     fetchStoreDetail();
   }, []);
+
+  useEffect(() => {
+    const fetchReviewData = async () => {
+      const response = await getReviewList({
+        storeId: storeDetails.id,
+        page: 0,
+      });
+      setReviewData(response);
+    };
+
+    fetchReviewData();
+  }, [page]);
 
   return (
     <View style={styles.container}>
@@ -75,73 +92,17 @@ export default function StoreDetailView() {
           />
         </View>
         <View style={styles.tabContainer}>
-          <TabSwitcher />
+          <TabSwitcher setIsTabType={setIsTabType} />
         </View>
-        <View style={styles.adressInformationContainer}>
-          <View style={styles.adressInfomation}>
-            <Icon name="map-marker-alt" size={25} style={styles.adressIcon} />
-            <CustomText fontSize="15px" children={storeDetails.jubunAddress} />
-          </View>
-          <View style={styles.favoritContainer}>
-            <Icon name="star" size={20} style={styles.adressIcon} />
-            <CustomText children="즐겨찾기" />
-          </View>
-        </View>
-        <View style={styles.openTime}>
-          <View style={styles.openTitle}>
-            <Icon
-              name="clock"
-              color={"#80BFA0"}
-              size={20}
-              style={styles.clockIcon}
-            />
-            <CustomText
-              children="카페 영업시간"
-              fontWeight="600"
-              fontSize="16px"
-            />
-          </View>
-          <View style={styles.openSchedule}>
-            <StoreSchedule storeSchedules={storeDetails.storeSchedules} />
-          </View>
-        </View>
-        <View style={styles.contactContainer}>
-          <View style={styles.contactContents}>
-            <CallIcon name="call-end" size={30} color={"#4ECB71"} />
-            <CustomText
-              children={`전화번호 ${storeDetails.storePhoneNumber}`}
-              fontWeight={"bold"}
-              marginLft={"8px"}
-              fontSize={"15px"}
-            />
-          </View>
-          <View style={styles.contactContents}>
-            <InstagramIcon name="instagram" size={30} color={`#E4405F`} />
-            {storeDetails.sns.map((sns) => {
-              return (
-                <CustomText
-                  key={sns.nickName}
-                  children={sns.nickName}
-                  marginLft={"5px"}
-                  fontWeight={"bold"}
-                />
-              );
-            })}
-          </View>
-        </View>
-        <View>
-          <ReviewBox
-            userName={"유저이름입니다"}
-            userImage={"유저이미지"}
-            reviewImage={[
-              "https://dimg.donga.com/wps/NEWS/IMAGE/2022/01/07/111139016.3.jpg",
-              "https://dimg.donga.com/wps/NEWS/IMAGE/2022/01/07/111139016.3.jpg",
-            ]}
-            reviewMainText={
-              "이카페 맛있긴한데 역시 스타벅스 원두는 제 취향이 아니네요 진짜 별로인거 같기두 하면서도 괜찮고 애매하기도 하고 어쩌구저쩌고"
-            }
+        {isTabType === "홈" ? (
+          <DetailHomeView storeDetails={storeDetails} />
+        ) : (
+          <DetailReviewView
+            hasNext={reviewData.hasNext}
+            total={reviewData.total}
+            reviews={reviewData.reviews}
           />
-        </View>
+        )}
       </ScrollView>
     </View>
   );
