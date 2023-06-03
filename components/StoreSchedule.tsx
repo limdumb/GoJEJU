@@ -25,7 +25,7 @@ export default function StoreSchedule(props: Props) {
       <View>
         {dayArr.map((day) => {
           return (
-            <View style={styles.dayContainer}>
+            <View style={styles.dayContainer} key={day}>
               <CustomText children={`${day}:`} fontSize={"14px"} />
             </View>
           );
@@ -46,10 +46,7 @@ export default function StoreSchedule(props: Props) {
                 )}
               />
               <CustomText
-                children={`${lastOrderTime(
-                  schedule.type,
-                  schedule.lastOrder
-                )}`}
+                children={`${lastOrderTime(schedule.type, schedule.lastOrder)}`}
               />
             </View>
           );
