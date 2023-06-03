@@ -12,7 +12,7 @@ const HeaderContainer = styled.View`
 
 interface TabType {
   tabName: string;
-  navScreen: "MainView" | "CafeSearchView" | "CafeSuggestView";
+  navScreen: "MainView" | "StoreSearchView" | "StoreSuggestView";
 }
 
 export default function Header() {
@@ -20,8 +20,8 @@ export default function Header() {
 
   const tabArray: TabType[] = [
     { tabName: "지도", navScreen: "MainView" },
-    { tabName: "카페검색", navScreen: "CafeSearchView" },
-    { tabName: "추천카페", navScreen: "CafeSuggestView" },
+    { tabName: "카페검색", navScreen: "StoreSearchView" },
+    { tabName: "추천카페", navScreen: "StoreSuggestView" },
   ];
 
   return (

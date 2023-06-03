@@ -1,4 +1,4 @@
-import { StoreSchedulesType } from "../API/getCafeDetail";
+import { StoreSchedulesType } from "../API/getStoreDetail";
 
 interface Props {
   storeSchedules: StoreSchedulesType[];

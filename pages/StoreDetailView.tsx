@@ -1,16 +1,23 @@
 import { useEffect, useState } from "react";
 import { Image, ScrollView, StyleSheet, View } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome5";
-import InstagramIcon from "react-native-vector-icons/FontAwesome";
-import CallIcon from "react-native-vector-icons/MaterialIcons";
-import { StoreDetailType, getCafeDetail } from "../API/getCafeDetail";
+import { StoreDetailType, getStoreDetail } from "../API/getStoreDetail";
 import CustomText from "../components/CustomText";
 import StatusToggle from "../components/StatusToggle";
-import StoreSchedule from "../components/StoreSchedule";
 import TabSwitcher from "../components/TabSwitcher";
 import { cautionText } from "../function/cautionText";
-export default function CafeDetailView() {
-  const [cafeDetails, setCafeDetails] = useState<StoreDetailType>({
+import DetailHomeView from "../components/DetailHomeView";
+import DetailReviewView from "../components/DetailReviewView";
+import { getReviewList, ReviewResponseType } from "../API/getReviewList";
+
+export default function StoreDetailView() {
+  const [isTabType, setIsTabType] = useState<"홈" | "리뷰">("홈");
+  const [page, setPage] = useState(0);
+  const [reviewData, setReviewData] = useState<ReviewResponseType>({
+    hasNext: false,
+    total: 0,
+    reviews: [],
+  });
+  const [storeDetails, setStoreDetails] = useState<StoreDetailType>({
     id: 1,
     images: [],
     name: "",
@@ -32,29 +39,41 @@ export default function CafeDetailView() {
   });
 
   useEffect(() => {
-    const fetchCafeDetail = async () => {
-      const response = await getCafeDetail({ id: cafeDetails.id });
-      setCafeDetails(response);
+    const fetchStoreDetail = async () => {
+      const response = await getStoreDetail({ id: storeDetails.id });
+      setStoreDetails(response);
     };
 
-    fetchCafeDetail();
+    fetchStoreDetail();
   }, []);
+
+  useEffect(() => {
+    const fetchReviewData = async () => {
+      const response = await getReviewList({
+        storeId: storeDetails.id,
+        page: 0,
+      });
+      setReviewData(response);
+    };
+
+    fetchReviewData();
+  }, [page]);
 
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollView}>
-        <View style={styles.cafePhotoContainer}>
-          {cafeDetails.images.map((el) => {
+        <View style={styles.storePhotoContainer}>
+          {storeDetails.images.map((el) => {
             return (
-              <Image key={el} style={styles.cafePhoto} source={{ uri: el }} />
+              <Image key={el} style={styles.storePhoto} source={{ uri: el }} />
             );
           })}
         </View>
         <View style={styles.confirmatContainer}>
           <View style={styles.onOffStatusContainer}>
             <StatusToggle
-              storeStatus={cafeDetails.storeStatus}
-              screen={"CafeDetailView"}
+              storeStatus={storeDetails.storeStatus}
+              screen={"StoreDetailView"}
             />
           </View>
           <View style={styles.cautionTextContainer}>
@@ -65,67 +84,25 @@ export default function CafeDetailView() {
             />
           </View>
         </View>
-        <View style={styles.cafeInfoTitleContainer}>
+        <View style={styles.storeInfoTitleContainer}>
           <CustomText
             fontWeight="bold"
             fontSize="16px"
-            children={cafeDetails.storeDescription}
+            children={storeDetails.storeDescription}
           />
         </View>
         <View style={styles.tabContainer}>
-          <TabSwitcher />
+          <TabSwitcher setIsTabType={setIsTabType} />
         </View>
-        <View style={styles.adressInformationContainer}>
-          <View style={styles.adressInfomation}>
-            <Icon name="map-marker-alt" size={25} style={styles.adressIcon} />
-            <CustomText fontSize="15px" children={cafeDetails.jubunAddress} />
-          </View>
-          <View style={styles.favoritContainer}>
-            <Icon name="star" size={20} style={styles.adressIcon} />
-            <CustomText children="즐겨찾기" />
-          </View>
-        </View>
-        <View style={styles.openTime}>
-          <View style={styles.openTitle}>
-            <Icon
-              name="clock"
-              color={"#80BFA0"}
-              size={20}
-              style={styles.clockIcon}
-            />
-            <CustomText
-              children="카페 영업시간"
-              fontWeight="600"
-              fontSize="16px"
-            />
-          </View>
-          <View style={styles.openSchedule}>
-            <StoreSchedule storeSchedules={cafeDetails.storeSchedules} />
-          </View>
-        </View>
-        <View style={styles.contactContainer}>
-          <View style={styles.contactContents}>
-            <CallIcon name="call-end" size={30} color={"#4ECB71"} />
-            <CustomText
-              children={`전화번호 ${cafeDetails.storePhoneNumber}`}
-              fontWeight={"bold"}
-              marginLft={"8px"}
-              fontSize={"15px"}
-            />
-          </View>
-          <View style={styles.contactContents}>
-            <InstagramIcon name="instagram" size={30} color={`#E4405F`} />
-            {cafeDetails.sns.map((sns) => {
-              return (
-                <CustomText
-                  children={sns.nickName}
-                  marginLft={"5px"}
-                  fontWeight={"bold"}
-                />
-              );
-            })}
-          </View>
-        </View>
+        {isTabType === "홈" ? (
+          <DetailHomeView storeDetails={storeDetails} />
+        ) : (
+          <DetailReviewView
+            hasNext={reviewData.hasNext}
+            total={reviewData.total}
+            reviews={reviewData.reviews}
+          />
+        )}
       </ScrollView>
     </View>
   );
@@ -140,11 +117,11 @@ const styles = StyleSheet.create({
   scrollView: {
     width: "100%",
   },
-  cafePhotoContainer: {
+  storePhotoContainer: {
     height: 240,
     width: "100%",
   },
-  cafePhoto: { width: "100%", height: "100%" },
+  storePhoto: { width: "100%", height: "100%" },
   confirmatContainer: {
     height: 79,
     width: "100%",
@@ -163,7 +140,7 @@ const styles = StyleSheet.create({
     height: "60%",
     alignItems: "center",
   },
-  cafeInfoTitleContainer: {
+  storeInfoTitleContainer: {
     width: "100%",
     height: 65,
     padding: 10,
@@ -224,6 +201,6 @@ const styles = StyleSheet.create({
   },
   contactContents: {
     flexDirection: "row",
-    alignItems:"center"
+    alignItems: "center",
   },
 });

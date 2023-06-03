@@ -26,12 +26,12 @@ export interface StoreDetailType {
   sns: { type: string; url: string,nickName:string }[];
 }
 
-interface CafeDetailProps {
+interface StoreDetailProps {
   id: number;
 }
 
-export const getCafeDetail = (
-  props: CafeDetailProps
+export const getStoreDetail = (
+  props: StoreDetailProps
 ): Promise<StoreDetailType> => {
   return new Promise((resolve, reject) => {
     const test: StoreDetailType = {

@@ -1,7 +1,7 @@
 import { StyleSheet, View } from "react-native";
 import Header from "../components/Header";
 
-export default function CafeSuggestView() {
+export default function StoreSuggestView() {
   return (
     <View style={styles.container}>
       <Header />
