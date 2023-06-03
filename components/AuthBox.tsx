@@ -2,7 +2,7 @@ import styled from "styled-components/native";
 import CustomText from "./CustomText";
 
 interface AuthBoxProps {
-  platform: "kakao" | "google";
+  platform: "kakao" | "google" | "normer";
 }
 
 const AuthBoxContainer = styled.View<AuthBoxProps>`
@@ -19,12 +19,14 @@ const AuthBoxContainer = styled.View<AuthBoxProps>`
 
 export default function AuthBox(props: AuthBoxProps) {
   const AuthTitle = () => {
-    if(props.platform === "kakao"){
-      return "KaKao Login"
+    if (props.platform === "kakao") {
+      return "KaKao Login";
+    } else if (props.platform === "google") {
+      return "Google Login";
     } else {
-      return "Google Login"
+      return "일반계정 Login";
     }
-  }
+  };
   return (
     <AuthBoxContainer platform={props.platform}>
       {/* 6월 3일 추후 로고 추가예정 */}
