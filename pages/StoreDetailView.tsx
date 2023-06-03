@@ -10,9 +10,17 @@ import StoreSchedule from "../components/StoreSchedule";
 import TabSwitcher from "../components/TabSwitcher";
 import { cautionText } from "../function/cautionText";
 import DetailHomeView from "../components/DetailHomeView";
+import DetailReviewView from "../components/DetailReviewView";
+import { getReviewList, ReviewResponseType } from "../API/getReviewList";
 
 export default function StoreDetailView() {
   const [isTabType, setIsTabType] = useState<"홈" | "리뷰">("홈");
+  const [page, setPage] = useState(0);
+  const [reviewData, setReviewData] = useState<ReviewResponseType>({
+    hasNext: false,
+    total: 0,
+    reviews: [],
+  });
   const [storeDetails, setStoreDetails] = useState<StoreDetailType>({
     id: 1,
     images: [],
@@ -42,6 +50,18 @@ export default function StoreDetailView() {
 
     fetchStoreDetail();
   }, []);
+
+  useEffect(() => {
+    const fetchReviewData = async () => {
+      const response = await getReviewList({
+        storeId: storeDetails.id,
+        page: 0,
+      });
+      setReviewData(response);
+    };
+
+    fetchReviewData();
+  }, [page]);
 
   return (
     <View style={styles.container}>
@@ -76,9 +96,17 @@ export default function StoreDetailView() {
           />
         </View>
         <View style={styles.tabContainer}>
-          <TabSwitcher />
+          <TabSwitcher setIsTabType={setIsTabType} />
         </View>
-        <DetailHomeView storeDetails={storeDetails} />
+        {isTabType === "홈" ? (
+          <DetailHomeView storeDetails={storeDetails} />
+        ) : (
+          <DetailReviewView
+            hasNext={reviewData.hasNext}
+            total={reviewData.total}
+            reviews={reviewData.reviews}
+          />
+        )}
       </ScrollView>
     </View>
   );
