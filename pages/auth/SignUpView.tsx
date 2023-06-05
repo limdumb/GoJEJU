@@ -1,22 +1,14 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { RootStackParamList } from "../App";
-import CustomText from "../components/CustomText";
-import RolePicker from "../components/RolePicker";
-
-// interface SignupType{
-//   type:"kakao"|"google"|"normer"
-// }
+import { RootStackParamList } from "../../App";
+import CustomText from "../../components/CustomText";
+import RolePicker from "../../components/RolePicker";
 
 export type SignUpScreenNavigationProps = NavigationProp<RootStackParamList>;
 
 export default function SignUpView() {
   const navigate = useNavigation<SignUpScreenNavigationProps>();
-  // const signupType:SignupType[] = [
-  //   { type: "kakao" },
-  //   { type: "google" },
-  //   { type: "normer" },
-  // ];
   return (
     <View style={styles.container}>
       <View style={styles.logoSection}>
@@ -24,8 +16,16 @@ export default function SignUpView() {
         <Text style={styles.logo}>☁️ JeJu</Text>
       </View>
       <View style={styles.rolePickerContainer}>
-        <RolePicker type="회원가입" role={"일반 사용자"} navigate={navigate} />
-        <RolePicker type="회원가입" role={"점주 사용자"} navigate={navigate} />
+        <RolePicker
+          type="회원가입"
+          role={"일반 사용자"}
+          navigate={navigate}
+        />
+        <RolePicker
+          type="회원가입"
+          role={"점주 사용자"}
+          navigate={navigate}
+        />
       </View>
       <View style={styles.idCheckTextContainer}>
         <CustomText children="이미 계정이 있으신가요?" marginRgt="3px" />
@@ -33,11 +33,6 @@ export default function SignUpView() {
           <CustomText children="여기를 클릭하세요!" />
         </TouchableOpacity>
       </View>
-      {/* <View style={styles.loginSelectSection}>
-        {signupType.map((el)=>{
-          return(<AuthBox  key={el.type} platform={el.type}/>)
-        })}
-      </View> */}
     </View>
   );
 }
@@ -63,11 +58,4 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   idCheckTextContainer: { flexDirection: "row" },
-  loginSelectSection: {
-    height: 280,
-    width: "86%",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: 10,
-  },
 });

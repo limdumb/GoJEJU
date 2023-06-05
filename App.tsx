@@ -2,15 +2,14 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
 import StoreDetailView from "./pages/StoreDetailView";
-import LoginView from "./pages/LoginView";
+import LoginView from "./pages/auth/LoginView";
 import MainView from "./pages/MainView";
 import MyPageView from "./pages/MyPageView";
-import RoleSelectionView from "./pages/RoleSelectionView";
-import SignUpView from "./pages/SignUpView";
+import SignUpView from "./pages/auth/SignUpView";
 import StoreSuggestView from "./pages/StoreSuggestView";
 import StoreSearchView from "./pages/StoreSearchView";
-import UserSignUpView from "./pages/UserSignUpView";
-import OwnerSignUpView from "./pages/OwnerSignUpView";
+import UserSignUpView from "./pages/auth/UserSignUpView";
+import OwnerSignUpView from "./pages/auth/OwnerSignUpView";
 
 export type RootStackParamList = {
   MainView: undefined;
@@ -24,7 +23,7 @@ export type RootStackParamList = {
   StoreSuggestView: undefined;
   StoreSearchView: undefined;
   UserSignUpView: undefined;
-  OwnerSignUpView: undefined;
+  OwnerSignUpView: undefined
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -52,11 +51,6 @@ export default function App() {
         <Stack.Screen
           name="SignUpView"
           component={SignUpView}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="RoleSelectionView"
-          component={RoleSelectionView}
           options={{ headerShown: false }}
         />
         <Stack.Screen
