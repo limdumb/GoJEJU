@@ -8,7 +8,7 @@ interface AuthBoxProps {
 const AuthBoxContainer = styled.View<AuthBoxProps>`
   background-color: ${(props) =>
     props.platform === "kakao" ? "#FEE500" : "#FBFBFB"};
-  width: 80%;
+  width: 90%;
   height: 54px;
   flex-direction: row;
   justify-content: center;

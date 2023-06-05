@@ -12,6 +12,7 @@ export default function DetailReviewView(props: Props) {
       {props.reviews.map((el) => {
         return (
           <ReviewBox
+            key={el.id}
             id={el.id}
             userName={el.userName}
             userProfileImage={el.userProfileImage}
