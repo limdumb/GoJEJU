@@ -10,6 +10,8 @@ import StoreSuggestView from "./pages/StoreSuggestView";
 import StoreSearchView from "./pages/StoreSearchView";
 import UserSignUpView from "./pages/auth/UserSignUpView";
 import OwnerSignUpView from "./pages/auth/OwnerSignUpView";
+import OwnerNormerSignUpView from "./pages/auth/OwnerNormerSignUpView";
+import UserNormalSignUpView from "./pages/auth/UserNormalSignUpView";
 
 export type RootStackParamList = {
   MainView: undefined;
@@ -23,7 +25,9 @@ export type RootStackParamList = {
   StoreSuggestView: undefined;
   StoreSearchView: undefined;
   UserSignUpView: undefined;
-  OwnerSignUpView: undefined
+  OwnerSignUpView: undefined;
+  OwnerNormalSignUpView: undefined;
+  UserNormalSIgnUpView: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -76,6 +80,16 @@ export default function App() {
         <Stack.Screen
           name="OwnerSignUpView"
           component={OwnerSignUpView}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="OwnerNormalSignUpView"
+          component={OwnerNormerSignUpView}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="UserNormalSIgnUpView"
+          component={UserNormalSignUpView}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

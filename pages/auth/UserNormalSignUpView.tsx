@@ -1,4 +1,4 @@
-export default function UserNormalSIgnUpView(){
+export default function UserNormalSignUpView(){
 
   return(<></>)
 }

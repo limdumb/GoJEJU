@@ -1,7 +1,7 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { RootStackParamList } from "../../App";
+import AuthLogo from "../../components/AuthLogo";
 import CustomText from "../../components/CustomText";
 import RolePicker from "../../components/RolePicker";
 
@@ -11,10 +11,7 @@ export default function SignUpView() {
   const navigate = useNavigation<SignUpScreenNavigationProps>();
   return (
     <View style={styles.container}>
-      <View style={styles.logoSection}>
-        <Text style={styles.logo}>Watching</Text>
-        <Text style={styles.logo}>☁️ JeJu</Text>
-      </View>
+      <AuthLogo/>
       <View style={styles.rolePickerContainer}>
         <RolePicker
           type="회원가입"
@@ -41,13 +38,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-  },
-  logo: { fontSize: 60, color: "#0F4C81" },
-  logoSection: {
-    width: "100%",
-    height: 360,
-    justifyContent: "center",
     alignItems: "center",
   },
   rolePickerContainer: {
