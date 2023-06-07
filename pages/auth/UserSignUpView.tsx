@@ -1,5 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { RootStackParamList } from "../../App";
 import AuthBox from "../../components/AuthBox";
 import AuthLogo from "../../components/AuthLogo";
 import CustomText from "../../components/CustomText";
@@ -15,14 +17,16 @@ interface SignupType {
 // 점주 사용자이고 Oauth 로그인을 한 경우 회원가입 후 사업자 등록 해야함
 // 점주 사용자이고 일반 회원가입을 한 경우 동일하게 임에리 비밀번호 사업자 등록번호 순
 // 일반 사용자는 기존 Navigate
+type RouteType = NativeStackScreenProps<RootStackParamList, "UserSignUpView">
 
-export default function UserSignUpView({ route }: any) {
+export default function UserSignUpView({ route }: RouteType) {
   const navigate = useNavigation<SignUpScreenNavigationProps>();
+  const navigateAdress = roleNavigateAdress(route.params.role);
   const signupType: SignupType[] = [
     // Oauth Navigate Url은 추후 추가 예정
-    { type: "kakao", navigate: roleNavigateAdress(route.params.role) },
-    { type: "google", navigate: roleNavigateAdress(route.params.role) },
-    { type: "normer", navigate: roleNavigateAdress(route.params.role) },
+    { type: "kakao", navigate: navigateAdress },
+    { type: "google", navigate: navigateAdress },
+    { type: "normer", navigate: navigateAdress },
   ];
 
   return (
@@ -32,6 +36,7 @@ export default function UserSignUpView({ route }: any) {
         {signupType.map((el) => {
           return (
             <TouchableOpacity
+              key={el.type}
               style={styles.authContainer}
               onPress={() => {
                 navigate.navigate(el.navigate, { role: route.params.role });
