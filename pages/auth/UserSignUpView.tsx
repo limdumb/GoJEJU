@@ -7,14 +7,15 @@ import { SignUpScreenNavigationProps } from "./SignUpView";
 
 interface SignupType {
   type: "kakao" | "google" | "normer";
+  navigate: string
 }
 
 export default function UserSignUpView({ route }: any) {
   const navigate = useNavigation<SignUpScreenNavigationProps>();
   const signupType: SignupType[] = [
-    { type: "kakao" },
-    { type: "google" },
-    { type: "normer" },
+    { type: "kakao" , navigate: ""},
+    { type: "google" , navigate:""},
+    { type: "normer" , navigate: ""},
   ];
   return (
     <View style={styles.container}>
@@ -22,13 +23,14 @@ export default function UserSignUpView({ route }: any) {
       <View style={styles.loginSelectSection}>
         {signupType.map((el) => {
           return (
-            <AuthBox
-              type={"회원가입"}
-              key={el.type}
-              platform={el.type}
-              role={"일반 사용자"}
-              navigate={navigate}
-            />
+            <TouchableOpacity>
+              <AuthBox
+                type={"회원가입"}
+                key={el.type}
+                platform={el.type}
+                role={"일반 사용자"}
+              />
+            </TouchableOpacity>
           );
         })}
       </View>

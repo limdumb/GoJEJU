@@ -24,10 +24,10 @@ export type RootStackParamList = {
   MyPageView: undefined;
   StoreSuggestView: undefined;
   StoreSearchView: undefined;
-  UserSignUpView: undefined;
-  OwnerSignUpView: undefined;
+  UserSignUpView: { role: "일반 사용자" | "점주 사용자" };
+  OwnerSignUpView: { role: "일반 사용자" | "점주 사용자" };
   OwnerNormalSignUpView: undefined;
-  UserNormalSIgnUpView: undefined;
+  UserNormalSignUpView: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -88,7 +88,7 @@ export default function App() {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="UserNormalSIgnUpView"
+          name="UserNormalSignUpView"
           component={UserNormalSignUpView}
           options={{ headerShown: false }}
         />

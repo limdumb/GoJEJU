@@ -30,7 +30,7 @@ export default function RolePicker(props: RolePickerProps) {
     if (props.type === "회원가입") {
       const navigateAdress =
         props.role === "일반 사용자" ? "UserSignUpView" : "OwnerSignUpView";
-      props.navigate.navigate(navigateAdress);
+      props.navigate.navigate(navigateAdress, { role: props.role });
     }
   };
 

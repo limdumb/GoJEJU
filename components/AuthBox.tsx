@@ -1,16 +1,14 @@
-import { NavigationProp } from "@react-navigation/native";
 import styled from "styled-components/native";
-import { RootStackParamList } from "../App";
 import CustomText from "./CustomText";
 
 interface AuthBoxProps {
   role: "일반 사용자" | "점주 사용자"
   platform: "kakao" | "google" | "normer";
   type: "로그인" | "회원가입";
-  navigate: NavigationProp<RootStackParamList>
+  // navigate: NavigationProp<RootStackParamList>
 }
 
-const AuthBoxContainer = styled.TouchableOpacity<AuthBoxProps>`
+const AuthBoxContainer = styled.View<AuthBoxProps>`
   background-color: ${(props) =>
     props.platform === "kakao" ? "#FEE500" : "#FBFBFB"};
   width: 90%;
@@ -43,14 +41,8 @@ export default function AuthBox(props: AuthBoxProps) {
     }
   };
 
-  const authNavigate =() =>{
-    if(props.platform === "normer" && props.type === "회원가입" && props.role === "일반 사용자"){
-      props.navigate.navigate("UserNormalSIgnUpView")
-    }
-  }
-
   return (
-    <AuthBoxContainer onPress={()=>} type={props.type} platform={props.platform}>
+    <AuthBoxContainer role={props.role} type={props.type} platform={props.platform}>
       {/* 6월 3일 추후 로고 추가예정 */}
       <CustomText
         children={

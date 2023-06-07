@@ -9,6 +9,7 @@ export type SignUpScreenNavigationProps = NavigationProp<RootStackParamList>;
 
 export default function SignUpView() {
   const navigate = useNavigation<SignUpScreenNavigationProps>();
+  
   return (
     <View style={styles.container}>
       <AuthLogo/>
