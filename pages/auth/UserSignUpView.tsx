@@ -13,11 +13,7 @@ interface SignupType {
   navigate: "UserNormalSignUpView" | "OwnerNormalSignUpView";
 }
 
-// 사용자인지 점주사용자인지 구분
-// 점주 사용자이고 Oauth 로그인을 한 경우 회원가입 후 사업자 등록 해야함
-// 점주 사용자이고 일반 회원가입을 한 경우 동일하게 임에리 비밀번호 사업자 등록번호 순
-// 일반 사용자는 기존 Navigate
-type RouteType = NativeStackScreenProps<RootStackParamList, "UserSignUpView">
+type RouteType = NativeStackScreenProps<RootStackParamList, "UserSignUpView">;
 
 export default function UserSignUpView({ route }: RouteType) {
   const navigate = useNavigation<SignUpScreenNavigationProps>();
