@@ -36,6 +36,7 @@ export default function UserNormalSignUpView() {
             type={"password"}
           />
         </View>
+        {/* 6월 7일 회원가입 완료 버튼은 컴포넌트 생성후 추가 예정 */}
       </View>
     </View>
   );
