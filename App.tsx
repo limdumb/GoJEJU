@@ -26,8 +26,8 @@ export type RootStackParamList = {
   StoreSearchView: undefined;
   UserSignUpView: { role: "일반 사용자" | "점주 사용자" };
   OwnerSignUpView: { role: "일반 사용자" | "점주 사용자" };
-  OwnerNormalSignUpView: undefined;
-  UserNormalSignUpView: undefined;
+  OwnerNormalSignUpView: { role: "일반 사용자" | "점주 사용자" };
+  UserNormalSignUpView: { role: "일반 사용자" | "점주 사용자" };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
