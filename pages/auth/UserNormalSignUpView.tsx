@@ -16,7 +16,7 @@ export default function UserNormalSignUpView() {
         <View>
           <CommonInput
             width={"100%"}
-            height={"44px"}
+            height={"54px"}
             value={emailId}
             backgroundColor={"#EEEEEE"}
             placeholder={"이메일을 입력해 주세요"}
@@ -28,7 +28,7 @@ export default function UserNormalSignUpView() {
         <View style={styles.passwordContainer}>
           <CommonInput
             width={"100%"}
-            height={"44px"}
+            height={"54px"}
             value={passwordValue}
             backgroundColor={"#EEEEEE"}
             placeholder={"비밀번호를 입력해 주세요"}
@@ -38,7 +38,7 @@ export default function UserNormalSignUpView() {
           />
         </View>
         <View>
-          <AuthButton children="회원가입 완료" />
+          <AuthButton children="회원가입 완료" pressFunction={() => {}} />
         </View>
       </View>
     </View>
@@ -57,5 +57,6 @@ const styles = StyleSheet.create({
   },
   passwordContainer: {
     marginTop: 20,
+    marginBottom: 40,
   },
 });

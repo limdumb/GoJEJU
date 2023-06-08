@@ -3,11 +3,12 @@ import CustomText from "./CustomText";
 
 interface AuthButtonProps {
   children: string;
+  pressFunction: Function
 }
 
 export default function AuthButton(props: AuthButtonProps) {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={()=>props.pressFunction}>
       <CustomText children={props.children} color={"#569576"} />
     </TouchableOpacity>
   );
