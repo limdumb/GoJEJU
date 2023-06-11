@@ -38,7 +38,6 @@ export default function UserNormalSignUpView() {
           />
         </View>
         <View>
-          {/* 추후 API에 맞춰서 추가 예정 */}
           <AuthButton children="회원가입 완료" pressFunction={() => {}} />
         </View>
       </View>
