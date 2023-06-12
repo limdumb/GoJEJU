@@ -2,13 +2,15 @@ import styled from "styled-components/native";
 import CustomText from "./CustomText";
 
 interface AuthBoxProps {
+  role: "일반 사용자" | "점주 사용자"
   platform: "kakao" | "google" | "normer";
+  type: "로그인" | "회원가입";
+  // navigate: NavigationProp<RootStackParamList>
 }
 
 const AuthBoxContainer = styled.View<AuthBoxProps>`
   background-color: ${(props) =>
     props.platform === "kakao" ? "#FEE500" : "#FBFBFB"};
-  width: 80%;
   height: 54px;
   flex-direction: row;
   justify-content: center;
@@ -18,7 +20,17 @@ const AuthBoxContainer = styled.View<AuthBoxProps>`
 `;
 
 export default function AuthBox(props: AuthBoxProps) {
-  const AuthTitle = () => {
+  const signUpTitleValue = () => {
+    if (props.platform === "kakao") {
+      return "KaKao SignUp";
+    } else if (props.platform === "google") {
+      return "Google SignUp";
+    } else {
+      return "일반계정 SignUp";
+    }
+  };
+
+  const loginTitleValue = () => {
     if (props.platform === "kakao") {
       return "KaKao Login";
     } else if (props.platform === "google") {
@@ -27,10 +39,17 @@ export default function AuthBox(props: AuthBoxProps) {
       return "일반계정 Login";
     }
   };
+
   return (
-    <AuthBoxContainer platform={props.platform}>
+    <AuthBoxContainer role={props.role} type={props.type} platform={props.platform}>
       {/* 6월 3일 추후 로고 추가예정 */}
-      <CustomText children={AuthTitle()} fontSize="18px" fontWeight="600" />
+      <CustomText
+        children={
+          props.type === "회원가입" ? signUpTitleValue() : loginTitleValue()
+        }
+        fontSize="18px"
+        fontWeight="600"
+      />
     </AuthBoxContainer>
   );
 }
