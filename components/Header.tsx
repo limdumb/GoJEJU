@@ -1,8 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
-import { Text, View, StyleSheet, Button } from "react-native";
+import { Text, View, StyleSheet, Button, TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
 import { MainScreenNavigationProps } from "../pages/MainView";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { userId } from "../function/userId";
 
 const HeaderContainer = styled.View`
   height: 160px;
@@ -17,6 +18,7 @@ interface TabType {
 
 export default function Header() {
   const navigate = useNavigation<MainScreenNavigationProps>();
+  const id = null;
 
   const tabArray: TabType[] = [
     { tabName: "지도", navScreen: "MainView" },
@@ -29,7 +31,19 @@ export default function Header() {
       <View style={styles.headerTopContainer}>
         <View style={styles.headerTop}>
           <Text>☁️Watching JEJU</Text>
-          <Icon name="user-circle-o" size={30} />
+          {id ? (
+            <Icon name="user-circle-o" size={30} />
+          ) : (
+            <View style={styles.authButtonContainer}>
+              <TouchableOpacity onPress={() => navigate.navigate("LoginView")}>
+                <Text>로그인</Text>
+              </TouchableOpacity>
+              <Text>/</Text>
+              <TouchableOpacity onPress={() => navigate.navigate("SignUpView")}>
+                <Text>회원가입</Text>
+              </TouchableOpacity>
+            </View>
+          )}
         </View>
       </View>
       <View style={styles.tabContainer}>
@@ -73,5 +87,13 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     paddingLeft: 5,
     width: "100%",
+  },
+  authButtonContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  ç: {
+    color: "black",
+    fontSize: 16,
   },
 });

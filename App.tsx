@@ -2,13 +2,16 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
 import StoreDetailView from "./pages/StoreDetailView";
-import LoginView from "./pages/LoginView";
+import LoginView from "./pages/auth/LoginView";
 import MainView from "./pages/MainView";
 import MyPageView from "./pages/MyPageView";
-import RoleSelectionView from "./pages/RoleSelectionView";
-import SignUpView from "./pages/SignUpView";
+import SignUpView from "./pages/auth/SignUpView";
 import StoreSuggestView from "./pages/StoreSuggestView";
 import StoreSearchView from "./pages/StoreSearchView";
+import UserSignUpView from "./pages/auth/UserSignUpView";
+import OwnerSignUpView from "./pages/auth/OwnerSignUpView";
+import OwnerNormerSignUpView from "./pages/auth/OwnerNormerSignUpView";
+import UserNormalSignUpView from "./pages/auth/UserNormalSignUpView";
 
 export type RootStackParamList = {
   MainView: undefined;
@@ -21,8 +24,10 @@ export type RootStackParamList = {
   MyPageView: undefined;
   StoreSuggestView: undefined;
   StoreSearchView: undefined;
-  UserLoginView: undefined;
-  CEOLoginView: undefined;
+  UserSignUpView: { role: "일반 사용자" | "점주 사용자" };
+  OwnerSignUpView: { role: "일반 사용자" | "점주 사용자" };
+  OwnerNormalSignUpView: { role: "일반 사용자" | "점주 사용자" };
+  UserNormalSignUpView: { role: "일반 사용자" | "점주 사용자" };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -53,11 +58,6 @@ export default function App() {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="RoleSelectionView"
-          component={RoleSelectionView}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
           name="MyPageView"
           component={MyPageView}
           options={{ title: "마이 페이지" }}
@@ -70,6 +70,26 @@ export default function App() {
         <Stack.Screen
           name="StoreSearchView"
           component={StoreSearchView}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="UserSignUpView"
+          component={UserSignUpView}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="OwnerSignUpView"
+          component={OwnerSignUpView}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="OwnerNormalSignUpView"
+          component={OwnerNormerSignUpView}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="UserNormalSignUpView"
+          component={UserNormalSignUpView}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

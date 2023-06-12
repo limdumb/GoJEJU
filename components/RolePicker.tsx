@@ -1,8 +1,9 @@
 import styled from "styled-components/native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import PeopleIcon from "react-native-vector-icons/MaterialIcons";
 import CustomText from "./CustomText";
 import { StyleSheet, View } from "react-native";
-import { MainScreenNavigationProps } from "../pages/MainView";
+import { SignUpScreenNavigationProps } from "../pages/auth/SignUpView";
 
 const CustomRolePicker = styled.TouchableOpacity`
   align-items: center;
@@ -14,16 +15,23 @@ const CustomRolePicker = styled.TouchableOpacity`
 `;
 
 export interface RolePickerProps {
+  type: "로그인" | "회원가입";
   role: "일반 사용자" | "점주 사용자";
-  navigate: MainScreenNavigationProps;
+  navigate: SignUpScreenNavigationProps;
 }
 
 export default function RolePicker(props: RolePickerProps) {
   const onRolePicked = () => {
-    const navigateAdress =
-      // 5월 25일 해당 View는 5월 26일까지 생성 예정
-      props.role === "일반 사용자" ? "UserLoginView" : "CEOLoginView";
-    props.navigate.navigate(navigateAdress);
+    if (props.type === "로그인") {
+      const navigateAdress = "LoginView";
+      props.navigate.navigate(navigateAdress);
+    }
+
+    if (props.type === "회원가입") {
+      const navigateAdress =
+        props.role === "일반 사용자" ? "UserSignUpView" : "OwnerSignUpView";
+      props.navigate.navigate(navigateAdress, { role: props.role });
+    }
   };
 
   return (
@@ -32,7 +40,11 @@ export default function RolePicker(props: RolePickerProps) {
         onRolePicked();
       }}
     >
-      <Icon name="coffee" color={"#80BFA0"} size={60} />
+      {props.role !== "일반 사용자" ? (
+        <Icon name="coffee" color={"#80BFA0"} size={60} />
+      ) : (
+        <PeopleIcon name="emoji-people" color={"#80BFA0"} size={60} />
+      )}
       <View style={styles.textContainer}>
         <CustomText
           children={props.role}

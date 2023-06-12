@@ -1,5 +1,6 @@
-import { TextInput, View } from "react-native";
+import { View } from "react-native";
 import styled from "styled-components/native";
+import CustomText from "./CustomText";
 
 interface InputProps {
   width: string;
@@ -7,7 +8,12 @@ interface InputProps {
   value: string;
   backgroundColor: string;
   placeholder: string;
+}
+
+interface CommonInputProps extends InputProps {
   changeFunc: React.Dispatch<React.SetStateAction<string>>;
+  label?: string;
+  type: "text" | "password";
 }
 
 const CustomInput = styled.TextInput<InputProps>`
@@ -18,9 +24,17 @@ const CustomInput = styled.TextInput<InputProps>`
   padding-right: 10px;
 `;
 
-export default function CommonInput(props: InputProps) {
+export default function CommonInput(props: CommonInputProps) {
   return (
     <View>
+      {props.label?.length !== undefined ? (
+        <CustomText
+          children={props.label}
+          marginBtm={"8px"}
+          marginLft={"3px"}
+          fontWeight={"600"}
+        />
+      ) : null}
       <CustomInput
         width={props.width}
         height={props.height}
@@ -30,6 +44,7 @@ export default function CommonInput(props: InputProps) {
         }}
         backgroundColor={props.backgroundColor}
         placeholder={props.placeholder}
+        secureTextEntry={props.type === "password" ? true : false}
       />
     </View>
   );
