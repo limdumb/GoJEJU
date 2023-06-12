@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { View } from "react-native";
 import { StyleSheet } from "react-native";
+import AuthButton from "../../components/AuthButton";
 import AuthLogo from "../../components/AuthLogo";
 import CommonInput from "../../components/CommonInput";
 
 export default function UserNormalSignUpView() {
   const [emailId, setEmailId] = useState("");
-  const [passwordValue, setPasswordValue] = useState("")
+  const [passwordValue, setPasswordValue] = useState("");
 
   return (
     <View style={styles.container}>
@@ -15,7 +16,7 @@ export default function UserNormalSignUpView() {
         <View>
           <CommonInput
             width={"100%"}
-            height={"44px"}
+            height={"54px"}
             value={emailId}
             backgroundColor={"#EEEEEE"}
             placeholder={"이메일을 입력해 주세요"}
@@ -27,7 +28,7 @@ export default function UserNormalSignUpView() {
         <View style={styles.passwordContainer}>
           <CommonInput
             width={"100%"}
-            height={"44px"}
+            height={"54px"}
             value={passwordValue}
             backgroundColor={"#EEEEEE"}
             placeholder={"비밀번호를 입력해 주세요"}
@@ -36,7 +37,9 @@ export default function UserNormalSignUpView() {
             type={"password"}
           />
         </View>
-        {/* 6월 7일 회원가입 완료 버튼은 컴포넌트 생성후 추가 예정 */}
+        <View>
+          <AuthButton children="회원가입 완료" pressFunction={() => {}} />
+        </View>
       </View>
     </View>
   );
@@ -54,5 +57,6 @@ const styles = StyleSheet.create({
   },
   passwordContainer: {
     marginTop: 20,
+    marginBottom: 40,
   },
 });
