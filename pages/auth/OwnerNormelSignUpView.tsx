@@ -1,13 +1,13 @@
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
-import { TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { StyleSheet } from "react-native";
 import AuthButton from "../../components/AuthButton";
 import AuthLogo from "../../components/AuthLogo";
 import CommonInput from "../../components/CommonInput";
 import { SignUpScreenNavigationProps } from "./SignUpView";
 
-export default function OwnerNormerSignUpView() {
+export default function OwnerNormalSignUpView() {
   const navigate = useNavigation<SignUpScreenNavigationProps>();
   const [emailId, setEmailId] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
@@ -48,7 +48,10 @@ export default function OwnerNormerSignUpView() {
             type={"password"}
           />
         </View>
-          <AuthButton children="다음 단계로" pressFunction={() => {}} />
+        <AuthButton
+          children="다음 단계로"
+          pressFunction={() => nextNavigat()}
+        />
       </View>
     </View>
   );

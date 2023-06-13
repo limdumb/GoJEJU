@@ -10,7 +10,7 @@ import StoreSuggestView from "./pages/StoreSuggestView";
 import StoreSearchView from "./pages/StoreSearchView";
 import UserSignUpView from "./pages/auth/UserSignUpView";
 import OwnerSignUpView from "./pages/auth/OwnerSignUpView";
-import OwnerNormerSignUpView from "./pages/auth/OwnerNormerSignUpView";
+import OwnerNormerSignUpView from "./pages/auth/OwnerNormelSignUpView";
 import UserNormalSignUpView from "./pages/auth/UserNormalSignUpView";
 import LEICodeView from "./pages/auth/LEICodeView";
 
