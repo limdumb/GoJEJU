@@ -11,7 +11,7 @@ interface InputProps {
 }
 
 interface CommonInputProps extends InputProps {
-  changeFunc: React.Dispatch<React.SetStateAction<string>>;
+  changeFunc: Function
   label?: string;
   type: "text" | "password";
 }

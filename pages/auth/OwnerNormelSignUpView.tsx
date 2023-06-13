@@ -13,7 +13,6 @@ export default function OwnerNormalSignUpView() {
   const [passwordValue, setPasswordValue] = useState("");
 
   const nextNavigat = () => {
-    console.log("찍혀?");
     navigate.navigate("LEICodeView", {
       email: emailId,
       password: passwordValue,
