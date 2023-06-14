@@ -23,7 +23,6 @@ export default function LEICodeView({ route }: RouteType) {
     });
     if(response){
       Alert.alert("회원가입이 완료 되었습니다!")
-      // 즉각 로그인로직 실행 예정
     }
   };
   return (
