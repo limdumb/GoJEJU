@@ -10,6 +10,8 @@ export const useUserId = () => {
         const response = await AsyncStorage.getItem("userId");
         if (response !== null) {
           setUserIdValue(Number(response));
+        } else {
+          setUserIdValue(null);
         }
       } catch (err) {
         console.error(err);
