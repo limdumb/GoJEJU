@@ -1,7 +1,6 @@
 import { Button, TouchableOpacity } from "react-native";
 import { StyleSheet } from "react-native";
 import { View } from "react-native";
-import AuthButton from "../components/AuthButton";
 import MenuBox from "../components/MenuBox";
 import UserProfile from "../components/UserProfile";
 
