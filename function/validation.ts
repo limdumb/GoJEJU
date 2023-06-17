@@ -10,3 +10,8 @@ export const passwordValidation = (password: string): boolean => {
 
   return passwordRegex.test(password);
 };
+
+export const LEICodeValidation = (LEICode: string) => {
+  const LEICodeRegex = /^[0-9]+$/;
+  return LEICodeRegex.test(LEICode);
+};
