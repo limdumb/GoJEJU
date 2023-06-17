@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { StyleSheet } from "react-native";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import AuthButton from "../../components/AuthButton";
 import AuthLogo from "../../components/AuthLogo";
 import CommonInput from "../../components/CommonInput";
@@ -38,7 +38,7 @@ export default function LoginView() {
         </View>
       </View>
       <View style={styles.signupCheck}>
-        <AuthButton children={"로그인"} pressFunction={()=>{}}/>
+        <AuthButton children={"로그인"} pressFunction={() => {}} />
       </View>
     </View>
   );
