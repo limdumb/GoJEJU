@@ -1,19 +1,44 @@
+import { useState } from "react";
 import { StyleSheet } from "react-native";
 import { Text, View } from "react-native";
+import AuthButton from "../../components/AuthButton";
+import AuthLogo from "../../components/AuthLogo";
+import CommonInput from "../../components/CommonInput";
 
 export default function LoginView() {
+  const [emailValue, setEmailValue] = useState("");
+  const [password, setPassword] = useState("");
   return (
     <View style={styles.container}>
-      <View style={styles.logoSection}>
-        <Text>로그인이에요</Text>
-      </View>
-      <View style={styles.loginSelectSection}>
-        <Text>Gdgd</Text>
-        <Text>Gdgd</Text>
-        <Text>Gdgd</Text>
+      <AuthLogo />
+      <View style={styles.authContainer}>
+        <View style={styles.emailContainer}>
+          <CommonInput
+            width="100%"
+            height="54px"
+            changeFunc={setEmailValue}
+            type="text"
+            value={emailValue}
+            backgroundColor={"#EEEEEE"}
+            placeholder={"이메일을 입력해주세요"}
+            label={"이메일"}
+          />
+        </View>
+        <View style={styles.passwordContainer}>
+          <CommonInput
+            width={"100%"}
+            height={"54px"}
+            value={password}
+            backgroundColor={"#EEEEEE"}
+            placeholder={"비밀번호를 입력해 주세요"}
+            changeFunc={setPassword}
+            label={"비밀번호"}
+            type={"password"}
+          />
+        </View>
       </View>
       <View style={styles.signupCheck}>
-        <Text>로그인해줘</Text>
+        <AuthButton children={"로그인"} pressFunction={()=>{}}/>
       </View>
     </View>
   );
@@ -25,26 +50,23 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
   },
-  logoSection: {
-    width: "100%",
-    height: 310,
-    backgroundColor: "pink",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  loginSelectSection: {
-    height: 280,
-    width: "86%",
-    backgroundColor: "blue",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: 10,
-  },
   signupCheck: {
-    width: "100%",
+    width: "90%",
     height: 90,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "red",
+  },
+  emailContainer: {
+    width: "90%",
+    height: 80,
+  },
+  passwordContainer: { width: "90%", height: 80 },
+  authContainer: {
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "space-around",
+    height: "26%",
+    padding: 10,
+    marginBottom: 10,
   },
 });
