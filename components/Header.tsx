@@ -1,10 +1,10 @@
-import { useNavigation } from "@react-navigation/native";
-import { Text, View, StyleSheet, Button, TouchableOpacity } from "react-native";
-import styled from "styled-components/native";
-import { MainScreenNavigationProps } from "../pages/MainView";
-import Icon from "react-native-vector-icons/FontAwesome";
-import { userIdValue } from "../function/userIdValue";
 import { useEffect, useState } from "react";
+import styled from "styled-components/native";
+import { userIdValue } from "../function/userIdValue";
+import { useNavigation } from "@react-navigation/native";
+import Icon from "react-native-vector-icons/FontAwesome";
+import { MainScreenNavigationProps } from "../pages/MainView";
+import { Text, View, StyleSheet, Button, TouchableOpacity } from "react-native";
 
 const HeaderContainer = styled.View`
   height: 160px;
