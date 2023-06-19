@@ -11,7 +11,7 @@ export interface StoreCardType {
   imageUrl: string;
   name: string;
   storeDescription: string;
-  storeStatus: "OPEN" | "CLOSED";
+  storeStatus: "OPEN" | "CLOSED" | "CLOSURE";
 }
 
 interface StoreCardProps extends StoreCardType {

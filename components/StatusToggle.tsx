@@ -4,7 +4,7 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import CustomText from "./CustomText";
 
 interface Props {
-  storeStatus: "OPEN" | "CLOSED"
+  storeStatus: "OPEN" | "CLOSED" | "CLOSURE"
   screen: "StoreDetailView" | "MainView";
 }
 
