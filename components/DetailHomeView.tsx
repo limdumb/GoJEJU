@@ -23,7 +23,7 @@ export default function DetailHomeView(props: DetailHomeViewProps) {
           />
         </TouchableOpacity>
         <View style={styles.favoritContainer}>
-          {/* 추후 백엔드와 즐겨찾기 여부 확인데이터 논의 예정 */}
+          {/* 6.19일 : 추후 백엔드와 즐겨찾기 여부 확인데이터 논의 예정 */}
           <StarIcon name="staro" size={20} style={styles.starIcon}/>
           <CustomText children="즐겨찾기" />
         </View>
