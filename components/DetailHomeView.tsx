@@ -1,6 +1,7 @@
 import { StyleSheet, View } from "react-native";
 import CustomText from "./CustomText";
 import Icon from "react-native-vector-icons/FontAwesome5";
+import StarIcon from "react-native-vector-icons/AntDesign"
 import StoreSchedule from "./StoreSchedule";
 import CallIcon from "react-native-vector-icons/MaterialIcons";
 import InstagramIcon from "react-native-vector-icons/FontAwesome";
@@ -22,7 +23,8 @@ export default function DetailHomeView(props: DetailHomeViewProps) {
           />
         </View>
         <View style={styles.favoritContainer}>
-          <Icon name="star" size={20} style={styles.adressIcon} />
+          {/* 추후 백엔드와 즐겨찾기 여부 확인데이터 논의 예정 */}
+          <StarIcon name="staro" size={20} style={styles.starIcon}/>
           <CustomText children="즐겨찾기" />
         </View>
       </View>
@@ -88,6 +90,7 @@ const styles = StyleSheet.create({
   adressInfomation: { flexDirection: "row", alignItems: "center" },
   favoritContainer: { flexDirection: "row", alignItems: "center" },
   adressIcon: { marginRight: 8 },
+  starIcon:{marginRight: 8},
   openTime: {
     width: "100%",
     backgroundColor: "white",
