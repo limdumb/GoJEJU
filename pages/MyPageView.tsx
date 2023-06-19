@@ -27,7 +27,7 @@ export default function MyPageView() {
       <View style={styles.menuList}>
         {menuArr.map((el) => {
           return (
-            <TouchableOpacity>
+            <TouchableOpacity key={el.menuType}>
               <MenuBox usage={el.menuType} />
             </TouchableOpacity>
           );
