@@ -1,11 +1,11 @@
-import { StyleSheet, View } from "react-native";
 import CustomText from "./CustomText";
-import Icon from "react-native-vector-icons/FontAwesome5";
-import StarIcon from "react-native-vector-icons/AntDesign"
 import StoreSchedule from "./StoreSchedule";
+import { StyleSheet, View } from "react-native";
+import { StoreDetailType } from "../API/getStoreDetail";
+import Icon from "react-native-vector-icons/FontAwesome5";
+import StarIcon from "react-native-vector-icons/AntDesign";
 import CallIcon from "react-native-vector-icons/MaterialIcons";
 import InstagramIcon from "react-native-vector-icons/FontAwesome";
-import { StoreDetailType } from "../API/getStoreDetail";
 
 interface DetailHomeViewProps {
   storeDetails: StoreDetailType;
