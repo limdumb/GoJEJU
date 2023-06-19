@@ -4,13 +4,14 @@ import { TouchableOpacity } from "react-native";
 import { View } from "react-native";
 import { MainScreenNavigationProps } from "../pages/MainView";
 import CustomText from "./CustomText";
+import StatusToggle from "./StatusToggle";
 
 export interface StoreCardType {
   id: number;
   imageUrl: string;
   name: string;
   storeDescription: string;
-  storeStatus: string;
+  storeStatus: "OPEN" | "CLOSED";
 }
 
 interface StoreCardProps extends StoreCardType {
@@ -37,10 +38,7 @@ export default function StoreCard(props: StoreCardProps) {
         <CustomText children={props.storeDescription} fontSize="13px" />
       </View>
       <View style={styles.storeStatusContainer}>
-        <CustomText
-          fontSize="13px"
-          children={props.storeStatus ? "영업중" : "영업종료"}
-        />
+        <StatusToggle storeStatus={props.storeStatus} screen={"MainView"} />
       </View>
     </TouchableOpacity>
   );
@@ -53,7 +51,7 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   storeImage: { width: "100%", height: "100%" },
-  storeImageWrapper: { width: "100%", height: "60%" },
+  storeImageWrapper: { width: "100%", height: "50%" },
   storeNameWrapper: {
     width: "100%",
     height: "10%",
@@ -67,7 +65,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   storeStatusContainer: {
-    height: "10%",
+    height: "15%",
     width: "100%",
     alignItems: "flex-end",
   },
