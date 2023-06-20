@@ -22,7 +22,7 @@ export default async function userSignup(
     userType: "user",
   };
   try {
-    await AsyncStorage.setItem("userId", `${response.userId}`);
+    // 추후 회원가입 Post 로직 추가 예정
   } catch (err) {
     console.error(err);
   }
