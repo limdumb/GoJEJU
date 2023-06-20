@@ -13,7 +13,7 @@ interface OwnerSignupResponseType {
   userType: "user" | "owner";
 }
 
-export default async function userSignup(
+export default async function ownerSignup(
   props: OwnerSignupProps
 ): Promise<OwnerSignupResponseType> {
   const response: OwnerSignupResponseType = {
