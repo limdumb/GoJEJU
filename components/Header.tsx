@@ -1,9 +1,10 @@
-import { useNavigation } from "@react-navigation/native";
-import { Text, View, StyleSheet, Button, TouchableOpacity } from "react-native";
+import { useEffect, useState } from "react";
 import styled from "styled-components/native";
-import { MainScreenNavigationProps } from "../pages/MainView";
+import { userIdValue } from "../function/userIdValue";
+import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { userId } from "../function/userId";
+import { MainScreenNavigationProps } from "../pages/MainView";
+import { Text, View, StyleSheet, Button, TouchableOpacity } from "react-native";
 
 const HeaderContainer = styled.View`
   height: 160px;
@@ -18,7 +19,16 @@ interface TabType {
 
 export default function Header() {
   const navigate = useNavigation<MainScreenNavigationProps>();
-  const id = null;
+  const [userId, setUserId] = useState<number | null>(null);
+
+  useEffect(() => {
+    const getUserId = async () => {
+      const response = await userIdValue();
+      setUserId(response);
+    };
+
+    getUserId();
+  }, []);
 
   const tabArray: TabType[] = [
     { tabName: "지도", navScreen: "MainView" },
@@ -31,8 +41,14 @@ export default function Header() {
       <View style={styles.headerTopContainer}>
         <View style={styles.headerTop}>
           <Text>☁️Watching JEJU</Text>
-          {id ? (
-            <Icon name="user-circle-o" size={30} />
+          {userId ? (
+            <Icon
+              name="user-circle-o"
+              size={30}
+              onPress={() => {
+                navigate.navigate("MyPageView");
+              }}
+            />
           ) : (
             <View style={styles.authButtonContainer}>
               <TouchableOpacity onPress={() => navigate.navigate("LoginView")}>
