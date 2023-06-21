@@ -1,7 +1,7 @@
-import CustomText from "./CustomText";
+import CustomText from "../CustomText";
 import StoreSchedule from "./StoreSchedule";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
-import { StoreDetailType } from "../API/getStoreDetail";
+import { StoreDetailType } from "../../API/getStoreDetail";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import StarIcon from "react-native-vector-icons/AntDesign";
 import CallIcon from "react-native-vector-icons/MaterialIcons";

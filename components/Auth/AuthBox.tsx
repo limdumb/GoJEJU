@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import CustomText from "./CustomText";
+import CustomText from "../CustomText";
 
 interface AuthBoxProps {
   role: "일반 사용자" | "점주 사용자"

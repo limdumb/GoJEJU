@@ -1,8 +1,8 @@
 import { StyleSheet } from "react-native";
 import { View } from "react-native";
-import { StoreSchedulesType } from "../API/getStoreDetail";
-import { dayOfTheWeek } from "../function/dayOfTheWeek";
-import CustomText from "./CustomText";
+import { StoreSchedulesType } from "../../API/getStoreDetail";
+import { dayOfTheWeek } from "../../function/dayOfTheWeek";
+import CustomText from "../CustomText";
 interface Props {
   storeSchedules: StoreSchedulesType[];
 }

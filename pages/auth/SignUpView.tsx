@@ -1,9 +1,9 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { RootStackParamList } from "../../App";
-import AuthLogo from "../../components/AuthLogo";
+import AuthLogo from "../../components/Auth/AuthLogo";
 import CustomText from "../../components/CustomText";
-import RolePicker from "../../components/RolePicker";
+import RolePicker from "../../components/Auth/RolePicker";
 
 export type SignUpScreenNavigationProps = NavigationProp<RootStackParamList>;
 

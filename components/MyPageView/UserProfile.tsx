@@ -1,6 +1,6 @@
 import { Image, Platform, View } from "react-native";
 import { StyleSheet } from "react-native";
-import CustomText from "./CustomText";
+import CustomText from "../CustomText";
 
 interface Props {
   image: string;

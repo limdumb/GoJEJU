@@ -1,9 +1,9 @@
 import styled from "styled-components/native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import PeopleIcon from "react-native-vector-icons/MaterialIcons";
-import CustomText from "./CustomText";
+import CustomText from "../CustomText";
 import { StyleSheet, View } from "react-native";
-import { SignUpScreenNavigationProps } from "../pages/auth/SignUpView";
+import { SignUpScreenNavigationProps } from "../../pages/auth/SignUpView";
 
 const CustomRolePicker = styled.TouchableOpacity`
   align-items: center;

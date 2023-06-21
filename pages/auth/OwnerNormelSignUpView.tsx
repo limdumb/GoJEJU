@@ -2,8 +2,8 @@ import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { StyleSheet } from "react-native";
-import AuthButton from "../../components/AuthButton";
-import AuthLogo from "../../components/AuthLogo";
+import AuthButton from "../../components/Auth/AuthButton";
+import AuthLogo from "../../components/Auth/AuthLogo";
 import CommonInput from "../../components/CommonInput";
 import { SignUpScreenNavigationProps } from "./SignUpView";
 
