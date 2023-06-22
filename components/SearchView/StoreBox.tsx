@@ -1,5 +1,6 @@
 import { Image, Platform } from "react-native";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
+import truncateString from "../../function/truncateString";
 import CustomText from "../CustomText";
 
 interface StoreBoxPropsType {
@@ -8,8 +9,12 @@ interface StoreBoxPropsType {
   storeDescription: string;
   rating: number;
 }
-// 나머지 만들기 싲가해 Props까지 설정했음 Text View 잡아
+
 export default function StoreBox(props: StoreBoxPropsType) {
+  const transformDescription = truncateString({
+    str: props.storeDescription,
+    maxLength: 18,
+  });
   return (
     <TouchableOpacity style={styles.container}>
       <View style={styles.storeImageContainer}>
@@ -23,8 +28,18 @@ export default function StoreBox(props: StoreBoxPropsType) {
         </View>
       </View>
       <View style={styles.storeInfoContainer}>
-        <CustomText children={props.name} fontSize={"20px"} fontWeight={"bold"} marginBtm={"10px"}/>
-        <CustomText children={props.storeDescription} fontSize={"15px"} color={"#929292"}/>
+        <CustomText
+          children={props.name}
+          fontSize={"20px"}
+          fontWeight={"bold"}
+          marginBtm={"10px"}
+        />
+        <CustomText
+          children={transformDescription}
+          fontSize={"15px"}
+          color={"#929292"}
+          marginBtm={"3px"}
+        />
       </View>
     </TouchableOpacity>
   );
