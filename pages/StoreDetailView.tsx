@@ -5,8 +5,8 @@ import CustomText from "../components/CustomText";
 import StatusToggle from "../components/StatusToggle";
 import TabSwitcher from "../components/TabSwitcher";
 import { cautionText } from "../function/cautionText";
-import DetailHomeView from "../components/DetailHomeView";
-import DetailReviewView from "../components/DetailReviewView";
+import DetailHomeView from "../components/StoreDetailView/DetailHomeView";
+import DetailReviewView from "../components/StoreDetailView/DetailReviewView";
 import { getReviewList, ReviewResponseType } from "../API/getReviewList";
 
 export default function StoreDetailView() {

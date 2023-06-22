@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { getStoreList, StoreListDataType } from "../API/getStoreList";
 import { RootStackParamList } from "../App";
-import StoreCard from "../components/StoreCard";
+import StoreCard from "../components/MainView/StoreCard";
 import Header from "../components/Header";
 
 export type MainScreenNavigationProps = NavigationProp<

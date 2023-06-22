@@ -4,8 +4,8 @@ import { Alert, StyleSheet } from "react-native";
 import { View } from "react-native";
 import ownerSignup from "../../API/auth/ownerSignup";
 import { RootStackParamList } from "../../App";
-import AuthButton from "../../components/AuthButton";
-import AuthLogo from "../../components/AuthLogo";
+import AuthButton from "../../components/Auth/AuthButton";
+import AuthLogo from "../../components/Auth/AuthLogo";
 import CommonInput from "../../components/CommonInput";
 import CustomText from "../../components/CustomText";
 

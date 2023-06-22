@@ -1,9 +1,9 @@
 import { StyleSheet, View } from "react-native";
 import UserIcon from "react-native-vector-icons/FontAwesome";
-import CustomText from "./CustomText";
+import CustomText from "../CustomText";
 import Carousel from "./Carousel";
 import { Dimensions } from "react-native";
-import { ReviewType } from "../API/getReviewList";
+import { ReviewType } from "../../API/getReviewList";
 
 
 export default function ReviewBox(props: ReviewType) {

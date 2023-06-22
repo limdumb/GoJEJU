@@ -1,8 +1,8 @@
 import { Button, TouchableOpacity } from "react-native";
 import { StyleSheet } from "react-native";
 import { View } from "react-native";
-import MenuBox from "../components/MenuBox";
-import UserProfile from "../components/UserProfile";
+import MenuBox from "../components/MyPageView/MenuBox";
+import UserProfile from "../components/MyPageView/UserProfile";
 
 type MenuType = {
   menuType: "review" | "favorit";

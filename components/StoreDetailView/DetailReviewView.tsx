@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import { ReviewResponseType } from "../API/getReviewList";
+import { ReviewResponseType } from "../../API/getReviewList";
 import ReviewBox from "./ReviewBox";
 
 interface Props extends ReviewResponseType {

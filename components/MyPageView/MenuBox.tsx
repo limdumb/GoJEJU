@@ -2,7 +2,7 @@ import { StyleSheet, View } from "react-native";
 import ReviewIcon from "react-native-vector-icons/SimpleLineIcons";
 import CafeIcon from "react-native-vector-icons/Feather";
 
-import CustomText from "./CustomText";
+import CustomText from "../CustomText";
 interface MenuProps {
   usage: "review" | "favorit";
 }
