@@ -1,5 +1,5 @@
-import { TextInput } from "react-native";
 import { View } from "react-native";
+import { TextInput } from "react-native";
 import { StyleSheet } from "react-native";
 import SearchIcon from "react-native-vector-icons/Fontisto";
 
@@ -16,6 +16,7 @@ export default function SearchInput(props: SearchProps) {
         style={styles.searchInput}
         value={props.searchValue}
         onChangeText={props.setSearchValue}
+        placeholder={"검색어를 입력하세요"}
       />
     </View>
   );
@@ -31,5 +32,5 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingLeft: 12,
   },
-  searchInput: { width: "85%", height: "100%",marginLeft:15, fontSize:16 },
+  searchInput: { width: "85%", height: "100%", marginLeft: 15, fontSize: 16 },
 });

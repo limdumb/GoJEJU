@@ -1,9 +1,9 @@
 import { useState } from "react";
 import Header from "../components/Header";
+import CustomText from "../components/CustomText";
+import StoreBox from "../components/SearchView/StoreBox";
 import { ScrollView, StyleSheet, View } from "react-native";
 import SearchInput from "../components/SearchView/SearchInput";
-import StoreBox from "../components/SearchView/StoreBox";
-import CustomText from "../components/CustomText";
 
 export default function StoreSearchView() {
   const [searchValue, setSearchValue] = useState("");
@@ -23,10 +23,10 @@ export default function StoreSearchView() {
         </View>
         <View style={styles.searchResultContainer}>
           <StoreBox
-            imageUrl={""}
+            imageUrl={"https://thumb.mtstarnews.com/06/2023/05/2023051815100436917_1.jpg/dims/optimize"}
             name={"덤덤카페"}
-            storeDescription={"좋은 뷰와 착한 가격이 함꼐 있습니다 :)"}
-            rating={0}
+            storeDescription={"좋은 뷰와 착한 가격이 함께 있습니다 :)"}
+            rating={5}
           />
         </View>
       </ScrollView>
@@ -56,7 +56,6 @@ const styles = StyleSheet.create({
   },
   searchResultContainer: {
     width: "100%",
-    height: "100%",
-    backgroundColor: "pink",
+    height: "100%"
   },
 });

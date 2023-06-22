@@ -1,8 +1,8 @@
+import CustomText from "../CustomText";
+import RatingCount from "./RatingCount";
 import { Image, Platform } from "react-native";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import truncateString from "../../function/truncateString";
-import CustomText from "../CustomText";
-import RatingCount from "./RatingCount";
 
 interface StoreBoxPropsType {
   imageUrl: string;
@@ -22,7 +22,7 @@ export default function StoreBox(props: StoreBoxPropsType) {
         <View style={styles.shadowView}>
           <Image
             source={{
-              uri: "https://thumb.mtstarnews.com/06/2023/05/2023051815100436917_1.jpg/dims/optimize",
+              uri: props.imageUrl,
             }}
             style={styles.storeImage}
           />
@@ -42,7 +42,7 @@ export default function StoreBox(props: StoreBoxPropsType) {
           marginBtm={"5px"}
         />
         <View>
-          <RatingCount count={props.rating} reviewCount={10}  />
+          <RatingCount count={props.rating} reviewCount={10} />
         </View>
       </View>
     </TouchableOpacity>
