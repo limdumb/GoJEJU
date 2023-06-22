@@ -23,7 +23,9 @@ export default function StoreSearchView() {
         </View>
         <View style={styles.searchResultContainer}>
           <StoreBox
-            imageUrl={"https://thumb.mtstarnews.com/06/2023/05/2023051815100436917_1.jpg/dims/optimize"}
+            imageUrl={
+              "https://thumb.mtstarnews.com/06/2023/05/2023051815100436917_1.jpg/dims/optimize"
+            }
             name={"덤덤카페"}
             storeDescription={"좋은 뷰와 착한 가격이 함께 있습니다 :)"}
             rating={5}
@@ -38,21 +40,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
-    alignItems: "center",
+    alignItems: "center"
   },
   scrollViewContainer: { height: "100%" },
   searchInputSection: {
     width: "100%",
     height: 90,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   searchConuntContainer: {
     width: "100%",
     height: 34,
     backgroundColor: "#E8E8E8",
     justifyContent: "center",
-    paddingLeft: 10,
+    paddingLeft: 10
   },
   searchResultContainer: {
     width: "100%",
