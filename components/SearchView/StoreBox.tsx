@@ -2,6 +2,7 @@ import { Image, Platform } from "react-native";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import truncateString from "../../function/truncateString";
 import CustomText from "../CustomText";
+import RatingCount from "./RatingCount";
 
 interface StoreBoxPropsType {
   imageUrl: string;
@@ -30,16 +31,19 @@ export default function StoreBox(props: StoreBoxPropsType) {
       <View style={styles.storeInfoContainer}>
         <CustomText
           children={props.name}
-          fontSize={"20px"}
+          fontSize={"22px"}
           fontWeight={"bold"}
           marginBtm={"10px"}
         />
         <CustomText
           children={transformDescription}
-          fontSize={"15px"}
+          fontSize={"16px"}
           color={"#929292"}
-          marginBtm={"3px"}
+          marginBtm={"5px"}
         />
+        <View>
+          <RatingCount count={props.rating} reviewCount={10}  />
+        </View>
       </View>
     </TouchableOpacity>
   );
