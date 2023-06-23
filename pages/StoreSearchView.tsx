@@ -5,6 +5,7 @@ import StoreBox from "../components/SearchView/StoreBox";
 import { Image, ScrollView, StyleSheet, TextInput, View } from "react-native";
 import SearchInput from "../components/SearchView/SearchInput";
 import getSearch, { SearchDataType } from "../API/getSearch";
+import Spinner from "../components/Spinner";
 
 export default function StoreSearchView() {
   const [searchValue, setSearchValue] = useState("");
@@ -28,38 +29,44 @@ export default function StoreSearchView() {
     <View style={styles.container}>
       <ScrollView style={styles.scrollViewContainer}>
         <Header />
-        {!isSearchCompleted&&!isLoading ? (
-          <>
-            <View style={styles.searchCompletedSection}>
-              <SearchInput
-                submitFunction={fetchSearchResults}
-                searchValue={searchValue}
-                setSearchValue={setSearchValue}
-                searchState={isSearchCompleted}
-              />
+        {!isSearchCompleted ? (
+          isLoading ? (
+            <View style={styles.spinnerContainer}>
+              <Spinner />
             </View>
-            <View style={styles.searchConuntContainer}>
-              <CustomText
-                children={`${searchResults.length}개의 카페 검색결과`}
-                fontSize={"18px"}
-              />
-            </View>
-            {searchResults.length !== 0 ? (
-              <View style={styles.searchResultContainer}>
-                {searchResults.map((el) => {
-                  return (
-                    <StoreBox
-                      key={el.id}
-                      imageUrl={el.imageUrl}
-                      name={el.name}
-                      storeDescription={el.storeDescription}
-                      rating={el.rating}
-                    />
-                  );
-                })}
+          ) : (
+            <>
+              <View style={styles.searchCompletedSection}>
+                <SearchInput
+                  submitFunction={fetchSearchResults}
+                  searchValue={searchValue}
+                  setSearchValue={setSearchValue}
+                  searchState={isSearchCompleted}
+                />
               </View>
-            ) : null}
-          </>
+              <View style={styles.searchConuntContainer}>
+                <CustomText
+                  children={`${searchResults.length}개의 카페 검색결과`}
+                  fontSize={"18px"}
+                />
+              </View>
+              {searchResults.length !== 0 ? (
+                <View style={styles.searchResultContainer}>
+                  {searchResults.map((el) => {
+                    return (
+                      <StoreBox
+                        key={el.id}
+                        imageUrl={el.imageUrl}
+                        name={el.name}
+                        storeDescription={el.storeDescription}
+                        rating={el.rating}
+                      />
+                    );
+                  })}
+                </View>
+              ) : null}
+            </>
+          )
         ) : (
           <>
             <View style={styles.searchInputSection}>
@@ -117,4 +124,9 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   jejuImageContainer: { width: "100%", height: "208%" },
+  spinnerContainer: {
+    height:600,
+    alignItems: "center",
+    justifyContent: "center",
+  },
 });
