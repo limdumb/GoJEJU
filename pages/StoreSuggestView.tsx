@@ -1,12 +1,20 @@
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { getSuggestList, SuggestDataType } from "../API/getSuggestList";
+import { RootStackParamList } from "../App";
 import CustomText from "../components/CustomText";
 import Header from "../components/Header";
 import StoreBox from "../components/SearchView/StoreBox";
 import Spinner from "../components/Spinner";
 
+export type StoreSuggestNavigationProps = NavigationProp<
+  RootStackParamList,
+  "StoreSuggestView"
+>;
+
 export default function StoreSuggestView() {
+  const navigate = useNavigation<StoreSuggestNavigationProps>();
   const [suggestData, setSuggestData] = useState<Array<SuggestDataType>>([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -44,6 +52,8 @@ export default function StoreSuggestView() {
               {suggestData.map((el) => {
                 return (
                   <StoreBox
+                    key={el.id}
+                    navigate={navigate}
                     imageUrl={el.imageUrl}
                     name={el.name}
                     storeDescription={el.storeDescription}

@@ -1,10 +1,11 @@
+import { NavigationProp } from "@react-navigation/native";
 import React from "react";
 import { Image, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native";
 import { View } from "react-native";
-import { MainScreenNavigationProps } from "../../pages/MainView";
+import { RootStackParamList } from "../../App";
 import CustomText from "../CustomText";
-import StatusToggle from "../StatusToggle";
+import StatusToggle from "../StatusToggle"
 
 export interface StoreCardType {
   id: number;
@@ -15,7 +16,7 @@ export interface StoreCardType {
 }
 
 interface StoreCardProps extends StoreCardType {
-  navigate: MainScreenNavigationProps;
+  navigate: NavigationProp<RootStackParamList>;
 }
 
 export default function StoreCard(props: StoreCardProps) {

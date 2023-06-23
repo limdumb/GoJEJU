@@ -1,4 +1,4 @@
-import { StoreCardType } from "../components/MainView/StoreCard";
+import { StoreCardType } from "../components/StoreCard";
 export interface StoreListDataType {
   stores: StoreCardType[];
 }
