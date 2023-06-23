@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Header from "../components/Header";
 import CustomText from "../components/CustomText";
 import StoreBox from "../components/SearchView/StoreBox";
