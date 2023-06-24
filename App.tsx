@@ -4,7 +4,7 @@ import { StatusBar } from "expo-status-bar";
 import StoreDetailView from "./pages/StoreDetailView";
 import LoginView from "./pages/auth/LoginView";
 import MainView from "./pages/MainView";
-import MyPageView from "./pages/MyPageView";
+import MyPageView from "./pages/mypage/MyPageView";
 import SignUpView from "./pages/auth/SignUpView";
 import StoreSuggestView from "./pages/StoreSuggestView";
 import StoreSearchView from "./pages/StoreSearchView";
@@ -13,6 +13,7 @@ import OwnerSignUpView from "./pages/auth/OwnerSignUpView";
 import OwnerNormerSignUpView from "./pages/auth/OwnerNormelSignUpView";
 import UserNormalSignUpView from "./pages/auth/UserNormalSignUpView";
 import LEICodeView from "./pages/auth/LEICodeView";
+import MyReview from "./pages/mypage/MyReview";
 
 export type RootStackParamList = {
   MainView: undefined;
@@ -30,6 +31,7 @@ export type RootStackParamList = {
   OwnerNormalSignUpView: { role: "일반 사용자" | "점주 사용자" };
   UserNormalSignUpView: { role: "일반 사용자" | "점주 사용자" };
   LEICodeView: { email: string; password: string };
+  MyReview: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -98,6 +100,11 @@ export default function App() {
           name="LEICodeView"
           component={LEICodeView}
           options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="MyReview"
+          component={MyReview}
+          options={{ title: "내가 작성한 리뷰" }}
         />
       </Stack.Navigator>
     </NavigationContainer>
