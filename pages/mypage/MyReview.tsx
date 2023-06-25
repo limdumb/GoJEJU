@@ -10,7 +10,3 @@ export default function MyReview(){
 const styles=StyleSheet.create({
 
 })
-
-//1. 데드 라인
-//2. 코드 질문
-//3. 서버 통합

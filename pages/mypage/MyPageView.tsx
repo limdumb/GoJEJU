@@ -1,18 +1,27 @@
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { Button, TouchableOpacity } from "react-native";
 import { StyleSheet } from "react-native";
 import { View } from "react-native";
+import { RootStackParamList } from "../../App";
 import MenuBox from "../../components/MyPageView/MenuBox";
 import UserProfile from "../../components/MyPageView/UserProfile";
 
 type MenuType = {
   menuType: "review" | "favorit";
-  navigate: string;
+  navigate: "MyReview";
 };
 
+type MyPageScreenNavigationProps = NavigationProp<
+  RootStackParamList,
+  "MyPageView"
+>;
+
 export default function MyPageView() {
+  const navigate = useNavigation<MyPageScreenNavigationProps>()
   const menuArr: MenuType[] = [
-    { menuType: "review", navigate: "" },
-    { menuType: "favorit", navigate: "" },
+    { menuType: "review", navigate: "MyReview" },
+    // 추후 favorit navigate 변경예정
+    { menuType: "favorit", navigate: "MyReview" },
   ];
   return (
     <View style={styles.container}>
@@ -27,7 +36,7 @@ export default function MyPageView() {
       <View style={styles.menuList}>
         {menuArr.map((el) => {
           return (
-            <TouchableOpacity key={el.menuType}>
+            <TouchableOpacity key={el.menuType} onPress={()=>{navigate.navigate(el.navigate)}}>
               <MenuBox usage={el.menuType} />
             </TouchableOpacity>
           );
