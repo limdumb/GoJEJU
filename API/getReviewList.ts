@@ -13,7 +13,8 @@ export interface ReviewResponseType {
 }
 
 interface Props {
-  storeId: number;
+  storeId?: number;
+  userId?: number;
   page: number;
 }
 
