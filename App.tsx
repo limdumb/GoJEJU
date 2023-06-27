@@ -15,6 +15,7 @@ import UserNormalSignUpView from "./pages/auth/UserNormalSignUpView";
 import LEICodeView from "./pages/auth/LEICodeView";
 import FavoritView from "./pages/mypage/FavoritView";
 import MyReview from "./pages/mypage/MyReview";
+import OwnerSettingView from "./pages/mypage/OwnerSettingView";
 
 export type RootStackParamList = {
   MainView: undefined;
@@ -34,6 +35,7 @@ export type RootStackParamList = {
   LEICodeView: { email: string; password: string };
   FavoritView: undefined;
   MyReview: undefined;
+  OwnerSettingView: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -112,6 +114,11 @@ export default function App() {
           name="MyReview"
           component={MyReview}
           options={{ title: "내가 작성한 리뷰" }}
+        />
+        <Stack.Screen
+          name="OwnerSettingView"
+          component={OwnerSettingView}
+          options={{ title: "사장님 수정 페이지" }}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -7,20 +7,18 @@ import MenuBox from "../../components/MyPageView/MenuBox";
 import UserProfile from "../../components/MyPageView/UserProfile";
 
 type MenuType = {
-  menuType: "review" | "favorit";
-  navigate: "MyReview" | "FavoritView";
+  menuType: "review" | "favorit" | "ownerSetting";
+  navigate: "MyReview" | "FavoritView" | "OwnerSettingView";
 };
 
-type MyPageScreenNavigationProps = NavigationProp<
-  RootStackParamList,
-  "MyPageView"
->;
+type MyPageScreenNavigationProps = NavigationProp<RootStackParamList>;
 
 export default function MyPageView() {
   const navigate = useNavigation<MyPageScreenNavigationProps>();
   const menuArr: MenuType[] = [
     { menuType: "review", navigate: "MyReview" },
     { menuType: "favorit", navigate: "FavoritView" },
+    { menuType: "ownerSetting", navigate: "OwnerSettingView" },
   ];
   return (
     <View style={styles.container}>
@@ -35,6 +33,7 @@ export default function MyPageView() {
       <View style={styles.menuList}>
         {menuArr.map((el) => {
           return (
+            // 추후 login에 따른 사장님 환경설정 예외처리 진행예정
             <TouchableOpacity
               key={el.menuType}
               onPress={() => {
