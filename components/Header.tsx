@@ -10,6 +10,8 @@ const HeaderContainer = styled.View`
   height: 160px;
   width: 100%;
   background-color: white;
+  border-bottom-width: 0.5px;
+  border-bottom-color: "#949494";
 `;
 
 interface TabType {

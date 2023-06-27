@@ -2,12 +2,20 @@ import { useState } from "react";
 import Header from "../components/Header";
 import CustomText from "../components/CustomText";
 import StoreBox from "../components/SearchView/StoreBox";
-import { Image, ScrollView, StyleSheet, TextInput, View } from "react-native";
+import { Image, ScrollView, StyleSheet, View } from "react-native";
 import SearchInput from "../components/SearchView/SearchInput";
 import getSearch, { SearchDataType } from "../API/getSearch";
 import Spinner from "../components/Spinner";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { RootStackParamList } from "../App";
+
+type StoreSearchNavigate = NavigationProp<
+  RootStackParamList,
+  "StoreSearchView"
+>;
 
 export default function StoreSearchView() {
+  const navigate = useNavigation<StoreSearchNavigate>();
   const [searchValue, setSearchValue] = useState("");
   const [isSearchCompleted, setIsSearchCompleted] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -55,6 +63,7 @@ export default function StoreSearchView() {
                   {searchResults.map((el) => {
                     return (
                       <StoreBox
+                        navigate={navigate}
                         key={el.id}
                         imageUrl={el.imageUrl}
                         name={el.name}
@@ -125,7 +134,7 @@ const styles = StyleSheet.create({
   },
   jejuImageContainer: { width: "100%", height: "208%" },
   spinnerContainer: {
-    height:600,
+    height: 600,
     alignItems: "center",
     justifyContent: "center",
   },

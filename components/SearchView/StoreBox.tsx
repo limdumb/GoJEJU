@@ -3,12 +3,15 @@ import RatingCount from "./RatingCount";
 import { Image, Platform } from "react-native";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import truncateString from "../../function/truncateString";
+import { RootStackParamList } from "../../App";
+import { NavigationProp } from "@react-navigation/native";
 
 interface StoreBoxPropsType {
   imageUrl: string;
   name: string;
   storeDescription: string;
   rating: number;
+  navigate: NavigationProp<RootStackParamList>;
 }
 
 export default function StoreBox(props: StoreBoxPropsType) {
@@ -17,7 +20,12 @@ export default function StoreBox(props: StoreBoxPropsType) {
     maxLength: 18,
   });
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => {
+        props.navigate.navigate("StoreDetailView", { name: props.name });
+      }}
+    >
       <View style={styles.storeImageContainer}>
         <View style={styles.shadowView}>
           <Image
