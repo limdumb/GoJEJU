@@ -4,6 +4,8 @@ import PeopleIcon from "react-native-vector-icons/MaterialIcons";
 import CustomText from "../CustomText";
 import { StyleSheet, View } from "react-native";
 import { SignUpScreenNavigationProps } from "../../pages/auth/SignUpView";
+import { NavigationProp } from "@react-navigation/native";
+import { RootStackParamList } from "../../App";
 
 const CustomRolePicker = styled.TouchableOpacity`
   align-items: center;
@@ -17,7 +19,7 @@ const CustomRolePicker = styled.TouchableOpacity`
 export interface RolePickerProps {
   type: "로그인" | "회원가입";
   role: "일반 사용자" | "점주 사용자";
-  navigate: SignUpScreenNavigationProps;
+  navigate: NavigationProp<RootStackParamList>;
 }
 
 export default function RolePicker(props: RolePickerProps) {
