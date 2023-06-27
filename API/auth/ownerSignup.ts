@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { AuthResponseType } from "./loginLogic";
 
 interface OwnerSignupProps {
   email: string;
@@ -6,24 +7,15 @@ interface OwnerSignupProps {
   LEICode: string;
 }
 
-interface OwnerSignupResponseType {
-  accessToken: string;
-  refreshToken: string;
-  userId: number;
-  userType: "user" | "owner";
-}
-
-export default async function ownerSignup(
-  props: OwnerSignupProps
-): Promise<OwnerSignupResponseType> {
-  const response: OwnerSignupResponseType = {
+export default async function ownerSignup(props: OwnerSignupProps) {
+  const response: AuthResponseType = {
     accessToken: "berer",
     refreshToken: "berer",
     userId: 2,
     userType: "owner",
   };
   try {
-    await AsyncStorage.setItem("userId", `${response.userId}`);
+    // 추후 로그인로직 추가 예정
   } catch (err) {
     console.error(err);
   }
