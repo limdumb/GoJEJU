@@ -13,6 +13,7 @@ import OwnerSignUpView from "./pages/auth/OwnerSignUpView";
 import OwnerNormerSignUpView from "./pages/auth/OwnerNormelSignUpView";
 import UserNormalSignUpView from "./pages/auth/UserNormalSignUpView";
 import LEICodeView from "./pages/auth/LEICodeView";
+import FavoritView from "./pages/mypage/FavoritView";
 import MyReview from "./pages/mypage/MyReview";
 
 export type RootStackParamList = {
@@ -31,6 +32,7 @@ export type RootStackParamList = {
   OwnerNormalSignUpView: { role: "일반 사용자" | "점주 사용자" };
   UserNormalSignUpView: { role: "일반 사용자" | "점주 사용자" };
   LEICodeView: { email: string; password: string };
+  FavoritView: undefined;
   MyReview: undefined;
 };
 
@@ -100,6 +102,11 @@ export default function App() {
           name="LEICodeView"
           component={LEICodeView}
           options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="FavoritView"
+          component={FavoritView}
+          options={{ title: "즐겨찾기 목록" }}
         />
         <Stack.Screen
           name="MyReview"

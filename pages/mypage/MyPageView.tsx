@@ -8,7 +8,7 @@ import UserProfile from "../../components/MyPageView/UserProfile";
 
 type MenuType = {
   menuType: "review" | "favorit";
-  navigate: "MyReview";
+  navigate: "MyReview" | "FavoritView";
 };
 
 type MyPageScreenNavigationProps = NavigationProp<
@@ -17,11 +17,10 @@ type MyPageScreenNavigationProps = NavigationProp<
 >;
 
 export default function MyPageView() {
-  const navigate = useNavigation<MyPageScreenNavigationProps>()
+  const navigate = useNavigation<MyPageScreenNavigationProps>();
   const menuArr: MenuType[] = [
     { menuType: "review", navigate: "MyReview" },
-    // 추후 favorit navigate 변경예정
-    { menuType: "favorit", navigate: "MyReview" },
+    { menuType: "favorit", navigate: "FavoritView" },
   ];
   return (
     <View style={styles.container}>
@@ -36,7 +35,12 @@ export default function MyPageView() {
       <View style={styles.menuList}>
         {menuArr.map((el) => {
           return (
-            <TouchableOpacity key={el.menuType} onPress={()=>{navigate.navigate(el.navigate)}}>
+            <TouchableOpacity
+              key={el.menuType}
+              onPress={() => {
+                navigate.navigate(el.navigate);
+              }}
+            >
               <MenuBox usage={el.menuType} />
             </TouchableOpacity>
           );
