@@ -1663,11 +1663,6 @@
   dependencies:
     merge-options "^3.0.4"
 
-"@react-native-community/checkbox@^0.5.16":
-  version "0.5.16"
-  resolved "https://registry.yarnpkg.com/@react-native-community/checkbox/-/checkbox-0.5.16.tgz#3265260e5fd961a4f032d0c088bbfbdfa96ee44e"
-  integrity sha512-j4fmWe77EAayGnKJ52BljlN8apLT3xjxG/pJOA6HZ4ew63FiXmnY7VtxTzmvDKgSPrETdQc2lmx5mdXTAufJnw==
-
 "@react-native-community/cli-clean@^10.1.1":
   version "10.1.1"
   resolved "https://registry.npmjs.org/@react-native-community/cli-clean/-/cli-clean-10.1.1.tgz"
@@ -6687,6 +6682,11 @@ react-is@^18.0.0:
   version "18.2.0"
   resolved "https://registry.npmjs.org/react-is/-/react-is-18.2.0.tgz"
   integrity sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==
+
+react-native-bouncy-checkbox@^3.0.7:
+  version "3.0.7"
+  resolved "https://registry.yarnpkg.com/react-native-bouncy-checkbox/-/react-native-bouncy-checkbox-3.0.7.tgz#011aef92b4fbde2a1f223165626c56a9ffe637fb"
+  integrity sha512-776TgMGt9wTpOQA1TcvFjL5VUn6o945wFYf3Ztqva62/vT2o3JAezLiP7hYh2Svd+PewfWBYSPMs4jeaSoS8Sg==
 
 react-native-codegen@^0.71.5:
   version "0.71.5"
