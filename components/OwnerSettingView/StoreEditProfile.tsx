@@ -4,7 +4,13 @@ import { View } from "react-native";
 import CommonInput from "../CommonInput";
 import CustomText from "../CustomText";
 
-export default function StoreProfile() {
+interface ProfilePropsType{
+  imageUrl: string
+  name: string
+  storeDescription: string
+}
+
+export default function StoreProfile(props:ProfilePropsType) {
   const [storeName, setStoreName] = useState("");
   const [storeDescription, setStoreDescription] = useState("");
   return (

@@ -7,7 +7,8 @@ export default function OwnerSettingView() {
     <View style={styles.container}>
       <ScrollView style={styles.scrollViewContainer}>
         <View style={styles.profileContainer}>
-          <StoreProfile />
+          {/* 추후 데이터변경 예정 */}
+          <StoreProfile imageUrl={""} name={""} storeDescription={""} />
         </View>
       </ScrollView>
     </View>
@@ -16,6 +17,6 @@ export default function OwnerSettingView() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, alignItems: "center", backgroundColor: "white" },
-  scrollViewContainer:{width:"100%"},
-  profileContainer: { width: "100%", height: 160,  },
+  scrollViewContainer: { width: "100%" },
+  profileContainer: { width: "100%", height: 160 },
 });
