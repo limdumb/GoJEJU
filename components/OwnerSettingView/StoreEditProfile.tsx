@@ -4,15 +4,17 @@ import { View } from "react-native";
 import CommonInput from "../CommonInput";
 import CustomText from "../CustomText";
 
-interface ProfilePropsType{
-  imageUrl: string
-  name: string
-  storeDescription: string
+interface ProfilePropsType {
+  imageUrl: string;
+  name: string;
+  storeDescription: string;
 }
 
-export default function StoreProfile(props:ProfilePropsType) {
-  const [storeName, setStoreName] = useState("");
-  const [storeDescription, setStoreDescription] = useState("");
+export default function StoreProfile(props: ProfilePropsType) {
+  const [storeName, setStoreName] = useState(props.name);
+  const [storeDescription, setStoreDescription] = useState(
+    props.storeDescription
+  );
   return (
     <View style={styles.profileContainer}>
       <View style={styles.imageContainer}>
@@ -46,8 +48,8 @@ export default function StoreProfile(props:ProfilePropsType) {
             placeholder={"업체 소개를 입력해주세요"}
           />
           <CustomText
-          marginTop="5px"
-          marginLft="4px"
+            marginTop="5px"
+            marginLft="4px"
             fontSize="9px"
             color="#949494"
             children="업체 소개는 10자 이상 30자 이하로 입력 해주세요"
@@ -81,5 +83,5 @@ const styles = StyleSheet.create({
     }),
   },
   storeImage: { width: "100%", height: "100%", borderRadius: 10 },
-  storeInputContainer: {height:125, justifyContent:"space-between"},
+  storeInputContainer: { height: 125, justifyContent: "space-between" },
 });
