@@ -7,6 +7,7 @@ import StoreStateToggle from "../../components/OwnerSettingView/StoreStateToggle
 
 export default function OwnerSettingView() {
   const [isEnabled, setIsEnabled] = useState(false);
+  const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const toggleSwitch = () => {
     setIsEnabled((previousState) => !previousState);
   };
@@ -24,9 +25,10 @@ export default function OwnerSettingView() {
             toggleSwitch={toggleSwitch}
           />
         </View>
-        {/* <View style={{width:"100%",height:50,backgroundColor:'pink'}}> */}
-          <ScheduleBox/>
-        {/* </View> */}
+        <ScheduleBox
+          toggleCheckBox={toggleCheckBox}
+          setToggleCheckBox={setToggleCheckBox}
+        />
       </ScrollView>
     </View>
   );
