@@ -6,8 +6,10 @@ import generateTimeArray from "../../function/generateTimeArray";
 import CustomText from "../CustomText";
 
 interface ScheduleBoxProps {
-  toggleCheckBox: boolean;
-  setToggleCheckBox: React.Dispatch<React.SetStateAction<boolean>>;
+  day: string;
+  handleCheckboxChange: (index: number) => void;
+  index: number;
+  toggleCheckBox: boolean[];
 }
 
 export default function ScheduleBox(props: ScheduleBoxProps) {
@@ -19,27 +21,29 @@ export default function ScheduleBox(props: ScheduleBoxProps) {
         size={25}
         fillColor="#00B828"
         innerIconStyle={{ borderWidth: 2 }}
-        onPress={(isChecked: boolean) => {
-          props.setToggleCheckBox(isChecked);
+        onPress={() => {
+          props.handleCheckboxChange(props.index);
         }}
       />
-      <CustomText children="월요일" fontSize="17px" color="gray"/>
+      <CustomText children={props.day} fontSize="17px" color="gray" />
       <View style={styles.selectContainer}>
         <SelectDropdown
           data={tiemArray}
           onSelect={(selectedItem, index) => {
             console.log(selectedItem, index);
           }}
-          defaultValue={tiemArray[0]}
+          defaultValueByIndex={0}
+          disabled={!props.toggleCheckBox[props.index]}
           buttonStyle={styles.selectButtonStyle}
         />
         <CustomText children="~" marginLft="10px" />
         <SelectDropdown
-          defaultValue={tiemArray[0]}
+          defaultValueByIndex={0}
           data={tiemArray}
           onSelect={(selectedItem, index) => {
             console.log(selectedItem, index);
           }}
+          disabled={!props.toggleCheckBox[props.index]}
           buttonStyle={styles.selectButtonStyle}
         />
       </View>
@@ -51,7 +55,7 @@ const styles = StyleSheet.create({
   contaienr: {
     flexDirection: "row",
     justifyContent: "center",
-    alignItems:"center",
+    alignItems: "center",
     width: "100%",
     height: 25,
   },

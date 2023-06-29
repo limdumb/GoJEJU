@@ -4,13 +4,30 @@ import { View } from "react-native";
 import ScheduleBox from "../../components/OwnerSettingView/ScheduleBox";
 import StoreProfile from "../../components/OwnerSettingView/StoreEditProfile";
 import StoreStateToggle from "../../components/OwnerSettingView/StoreStateToggle";
+import { getWeekArray } from "../../function/getWeekArray";
 
 export default function OwnerSettingView() {
   const [isEnabled, setIsEnabled] = useState(false);
-  const [toggleCheckBox, setToggleCheckBox] = useState(false);
+  const [toggleCheckBox, setToggleCheckBox] = useState([
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ]);
+  const handleCheckboxChange = (index: number) => {
+    setToggleCheckBox((prevCheckboxes) => {
+      const newCheckboxes = [...prevCheckboxes];
+      newCheckboxes[index] = !newCheckboxes[index];
+      return newCheckboxes;
+    });
+  };
   const toggleSwitch = () => {
     setIsEnabled((previousState) => !previousState);
   };
+  const dayOfTheWeek = getWeekArray();
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollViewContainer}>
@@ -25,10 +42,16 @@ export default function OwnerSettingView() {
             toggleSwitch={toggleSwitch}
           />
         </View>
-        <ScheduleBox
-          toggleCheckBox={toggleCheckBox}
-          setToggleCheckBox={setToggleCheckBox}
-        />
+        {dayOfTheWeek.map((el, index) => {
+          return (
+            <ScheduleBox
+            toggleCheckBox={toggleCheckBox}
+              day={el}
+              index={index}
+              handleCheckboxChange={handleCheckboxChange}
+            />
+          );
+        })}
       </ScrollView>
     </View>
   );
