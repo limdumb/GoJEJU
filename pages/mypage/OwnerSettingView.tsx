@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ScrollView, StyleSheet } from "react-native";
 import { View } from "react-native";
 import CustomText from "../../components/CustomText";
+import EditContactBox from "../../components/OwnerSettingView/EditContactBox";
 import ScheduleBox from "../../components/OwnerSettingView/ScheduleBox";
 import StoreProfile from "../../components/OwnerSettingView/StoreEditProfile";
 import StoreStateToggle from "../../components/OwnerSettingView/StoreStateToggle";
@@ -18,6 +19,8 @@ export default function OwnerSettingView() {
     false,
     false,
   ]);
+  const [snsValue, setSnsValue] = useState("");
+  const [storeNumber, setStoreNumber] = useState("");
 
   const handleCheckboxChange = (index: number) => {
     setToggleCheckBox((prevCheckboxes) => {
@@ -62,6 +65,14 @@ export default function OwnerSettingView() {
               />
             );
           })}
+        </View>
+        <View>
+          <EditContactBox
+            setSnsValue={setSnsValue}
+            setStoreNumber={setStoreNumber}
+            snsValue={snsValue}
+            storeNumber={storeNumber}
+          />
         </View>
       </ScrollView>
     </View>
