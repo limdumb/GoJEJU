@@ -1,48 +1,48 @@
-import { NavigationContainer } from '@react-navigation/native'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { StatusBar } from 'expo-status-bar'
-import StoreDetailView from './pages/StoreDetailView'
-import LoginView from './pages/auth/LoginView'
-import MainView from './pages/MainView'
-import MyPageView from './pages/mypage/MyPageView'
-import SignUpView from './pages/auth/SignUpView'
-import StoreSuggestView from './pages/StoreSuggestView'
-import StoreSearchView from './pages/StoreSearchView'
-import UserSignUpView from './pages/auth/UserSignUpView'
-import OwnerSignUpView from './pages/auth/OwnerSignUpView'
-import OwnerNormerSignUpView from './pages/auth/OwnerNormelSignUpView'
-import UserNormalSignUpView from './pages/auth/UserNormalSignUpView'
-import LEICodeView from './pages/auth/LEICodeView'
-import FavoritView from './pages/mypage/FavoritView'
-import MyReview from './pages/mypage/MyReview'
-import OwnerSettingView from './pages/mypage/OwnerSettingView'
-import OwnerAddStoreView from './pages/OwnerAddStoreView'
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { StatusBar } from "expo-status-bar";
+import StoreDetailView from "./pages/StoreDetailView";
+import LoginView from "./pages/auth/LoginView";
+import MainView from "./pages/MainView";
+import MyPageView from "./pages/mypage/MyPageView";
+import SignUpView from "./pages/auth/SignUpView";
+import StoreSuggestView from "./pages/StoreSuggestView";
+import StoreSearchView from "./pages/StoreSearchView";
+import UserSignUpView from "./pages/auth/UserSignUpView";
+import OwnerSignUpView from "./pages/auth/OwnerSignUpView";
+import OwnerNormerSignUpView from "./pages/auth/OwnerNormelSignUpView";
+import UserNormalSignUpView from "./pages/auth/UserNormalSignUpView";
+import LEICodeView from "./pages/auth/LEICodeView";
+import FavoritView from "./pages/mypage/FavoritView";
+import MyReview from "./pages/mypage/MyReview";
+import OwnerSettingView from "./pages/mypage/OwnerSettingView";
+import OwnerAddStoreView from "./pages/OwnerAddStoreView";
 
-export interface RootStackParamList {
-  MainView: undefined
+export type RootStackParamList = {
+  MainView: undefined;
   StoreDetailView: {
-    name: string
-  }
-  LoginView: undefined
-  SignUpView: undefined
-  RoleSelectionView: undefined
-  MyPageView: undefined
-  StoreSuggestView: undefined
-  StoreSearchView: undefined
-  UserSignUpView: { role: '일반 사용자' | '점주 사용자' }
-  OwnerSignUpView: { role: '일반 사용자' | '점주 사용자' }
-  OwnerNormalSignUpView: { role: '일반 사용자' | '점주 사용자' }
-  UserNormalSignUpView: { role: '일반 사용자' | '점주 사용자' }
-  LEICodeView: { email: string, password: string }
-  FavoritView: undefined
-  MyReview: undefined
-  OwnerSettingView: undefined
-  OwnerAddStoreView: undefined
-}
+    name: string;
+  };
+  LoginView: undefined;
+  SignUpView: undefined;
+  RoleSelectionView: undefined;
+  MyPageView: undefined;
+  StoreSuggestView: undefined;
+  StoreSearchView: undefined;
+  UserSignUpView: { role: "일반 사용자" | "점주 사용자" };
+  OwnerSignUpView: { role: "일반 사용자" | "점주 사용자" };
+  OwnerNormalSignUpView: { role: "일반 사용자" | "점주 사용자" };
+  UserNormalSignUpView: { role: "일반 사용자" | "점주 사용자" };
+  LEICodeView: { email: string; password: string };
+  FavoritView: undefined;
+  MyReview: undefined;
+  OwnerSettingView: undefined;
+  OwnerAddStoreView: undefined;
+};
 
-const Stack = createNativeStackNavigator<RootStackParamList>()
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
-export default function App () {
+export default function App() {
   return (
     <NavigationContainer>
       <StatusBar style="auto" />
@@ -70,7 +70,7 @@ export default function App () {
         <Stack.Screen
           name="MyPageView"
           component={MyPageView}
-          options={{ title: '마이 페이지' }}
+          options={{ title: "마이 페이지" }}
         />
         <Stack.Screen
           name="StoreSuggestView"
@@ -110,24 +110,24 @@ export default function App () {
         <Stack.Screen
           name="FavoritView"
           component={FavoritView}
-          options={{ title: '즐겨찾기 목록' }}
+          options={{ title: "즐겨찾기 목록" }}
         />
         <Stack.Screen
           name="MyReview"
           component={MyReview}
-          options={{ title: '내가 작성한 리뷰' }}
+          options={{ title: "내가 작성한 리뷰" }}
         />
         <Stack.Screen
           name="OwnerSettingView"
           component={OwnerSettingView}
-          options={{ title: '사장님 수정 페이지' }}
+          options={{ title: "사장님 수정 페이지" }}
         />
         <Stack.Screen
           name="OwnerAddStoreView"
           component={OwnerAddStoreView}
-          options={{ title: '가계 등록 페이지' }}
+          options={{ title: "가계 등록 페이지" }}
         />
       </Stack.Navigator>
     </NavigationContainer>
-  )
+  );
 }
