@@ -12,7 +12,6 @@ interface ScheduleBoxProps {
 }
 
 export default function ScheduleBox (props: ScheduleBoxProps) {
-  // 스케줄박스 map처리해
   const tiemArray = generateTimeArray()
   return (
     <View style={styles.contaienr}>
