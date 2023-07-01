@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { ScrollView, StyleSheet } from "react-native";
-import { View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import CustomText from "../../components/CustomText";
 import EditContactBox from "../../components/OwnerSettingView/EditContactBox";
 import ScheduleBox from "../../components/OwnerSettingView/ScheduleBox";

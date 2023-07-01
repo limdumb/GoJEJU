@@ -1,30 +1,32 @@
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { useState } from "react";
-import { Alert, StyleSheet } from "react-native";
-import { View } from "react-native";
-import ownerSignup from "../../API/auth/ownerSignup";
-import { RootStackParamList } from "../../App";
-import AuthButton from "../../components/Auth/AuthButton";
-import AuthLogo from "../../components/Auth/AuthLogo";
-import CommonInput from "../../components/CommonInput";
-import CustomText from "../../components/CustomText";
+import { type NavigationProp, useNavigation } from '@react-navigation/native'
+import { type NativeStackScreenProps } from '@react-navigation/native-stack'
+import { useState } from 'react'
+import { Alert, StyleSheet, View } from 'react-native'
+import ownerSignup from '../../API/auth/ownerSignup'
+import { type RootStackParamList } from '../../App'
+import AuthButton from '../../components/Auth/AuthButton'
+import AuthLogo from '../../components/Auth/AuthLogo'
+import CommonInput from '../../components/CommonInput'
+import CustomText from '../../components/CustomText'
 
-type RouteType = NativeStackScreenProps<RootStackParamList, "LEICodeView">;
+type RouteType = NativeStackScreenProps<RootStackParamList, 'LEICodeView'>
 
-export default function LEICodeView({ route }: RouteType) {
-  const [LEIValue, setLEIValue] = useState("");
-  const signUpValue = route.params;
+export default function LEICodeView ({ route }: RouteType) {
+  const navigate = useNavigation<NavigationProp<RootStackParamList>>()
+  const [LEIValue, setLEIValue] = useState('')
+  const signUpValue = route.params
 
-  const onSignup = async() => {
+  const onSignup = async () => {
     const response = await ownerSignup({
       email: signUpValue.email,
       password: signUpValue.password,
-      LEICode: LEIValue,
-    });
-    if(response){
-      Alert.alert("회원가입이 완료 되었습니다!")
+      LEICode: LEIValue
+    })
+    if (response) {
+      Alert.alert('회원가입이 완료 되었습니다!')
+      navigate.navigate('OwnerAddStoreView')
     }
-  };
+  }
   return (
     <View style={styles.container}>
       <AuthLogo />
@@ -40,35 +42,35 @@ export default function LEICodeView({ route }: RouteType) {
       <View style={styles.inputContainer}>
         <CommonInput
           changeFunc={setLEIValue}
-          type={"text"}
-          width={"100%"}
-          height={"50px"}
+          type={'text'}
+          width={'100%'}
+          height={'50px'}
           value={LEIValue}
-          backgroundColor={"#EEEEEE"}
-          placeholder={"숫자만 입력해주세요"}
+          backgroundColor={'#EEEEEE'}
+          placeholder={'숫자만 입력해주세요'}
         />
       </View>
       <View style={styles.buttonContainer}>
-        <AuthButton children={"회원가입 완료"} pressFunction={onSignup} />
+        <AuthButton children={'회원가입 완료'} pressFunction={onSignup} />
       </View>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "white", alignItems: "center" },
+  container: { flex: 1, backgroundColor: 'white', alignItems: 'center' },
   LEICodeTitle: {
-    width: "90%",
+    width: '90%',
     height: 70,
-    alignItems: "center",
+    alignItems: 'center'
   },
   inputContainer: {
     marginTop: 40,
-    width: "90%",
-    marginBottom: 55,
+    width: '90%',
+    marginBottom: 55
   },
   buttonContainer: {
-    width: "90%",
-    alignItems: "center",
-  },
-});
+    width: '90%',
+    alignItems: 'center'
+  }
+})

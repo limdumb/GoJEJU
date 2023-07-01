@@ -1,28 +1,28 @@
-import React from "react";
-import styled from "styled-components/native";
+import React from 'react'
+import styled from 'styled-components/native'
 
-type StyledTextProps = {
-  children: string;
-  color?: string;
-  fontSize?: string;
-  fontWeight?: string;
-  margin?: string;
-  marginRgt?: string;
-  marginLft?: string;
-  marginTop?: string;
-  marginBtm?: string;
-};
+interface StyledTextProps {
+  children: string
+  color?: string
+  fontSize?: string
+  fontWeight?: string
+  margin?: string
+  marginRgt?: string
+  marginLft?: string
+  marginTop?: string
+  marginBtm?: string
+}
 
 const StyledText = styled.Text<StyledTextProps>`
-  color: ${(color: StyledTextProps) => color.color || "black"};
-  font-size: ${(fontSize: StyledTextProps) => fontSize.fontSize || "16px"};
+  color: ${(color: StyledTextProps) => color.color || 'black'};
+  font-size: ${(fontSize: StyledTextProps) => fontSize.fontSize || '16px'};
   font-weight: ${(fontWeight: StyledTextProps) =>
-    fontWeight.fontWeight || "normal"};
-  margin-top: ${(marginTop: StyledTextProps) => marginTop.marginTop || "0"};
-  margin-bottom: ${(marginBtm: StyledTextProps) => marginBtm.marginBtm || "0"};
-  margin-left: ${(marginLft: StyledTextProps) => marginLft.marginLft || "0"};
-  margin-right: ${(marginRgt: StyledTextProps) => marginRgt.marginRgt || "0"};
-`;
+    fontWeight.fontWeight || 'normal'};
+  margin-top: ${(marginTop: StyledTextProps) => marginTop.marginTop || '0'};
+  margin-bottom: ${(marginBtm: StyledTextProps) => marginBtm.marginBtm || '0'};
+  margin-left: ${(marginLft: StyledTextProps) => marginLft.marginLft || '0'};
+  margin-right: ${(marginRgt: StyledTextProps) => marginRgt.marginRgt || '0'};
+`
 
 const CustomText: React.FC<StyledTextProps> = ({
   children,
@@ -32,7 +32,7 @@ const CustomText: React.FC<StyledTextProps> = ({
   marginRgt,
   marginLft,
   marginTop,
-  marginBtm,
+  marginBtm
 }) => {
   return (
     <StyledText
@@ -46,7 +46,7 @@ const CustomText: React.FC<StyledTextProps> = ({
     >
       {children}
     </StyledText>
-  );
-};
+  )
+}
 
-export default CustomText;
+export default CustomText

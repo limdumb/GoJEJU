@@ -1,32 +1,30 @@
-import { NavigationProp } from "@react-navigation/native";
-import React from "react";
-import { Image, StyleSheet } from "react-native";
-import { TouchableOpacity } from "react-native";
-import { View } from "react-native";
-import { RootStackParamList } from "../../App";
-import CustomText from "../CustomText";
-import StatusToggle from "../StatusToggle"
+import { type NavigationProp } from '@react-navigation/native'
+import React from 'react'
+import { Image, StyleSheet, TouchableOpacity, View } from 'react-native'
+import { type RootStackParamList } from '../../App'
+import CustomText from '../CustomText'
+import StatusToggle from '../StatusToggle'
 
 export interface StoreCardType {
-  id: number;
-  imageUrl: string;
-  name: string;
-  storeDescription: string;
-  storeStatus: "OPEN" | "CLOSED" | "CLOSURE";
+  id: number
+  imageUrl: string
+  name: string
+  storeDescription: string
+  storeStatus: 'OPEN' | 'CLOSED' | 'CLOSURE'
 }
 
 interface StoreCardProps extends StoreCardType {
-  navigate: NavigationProp<RootStackParamList>;
+  navigate: NavigationProp<RootStackParamList>
 }
 
-export default function StoreCard(props: StoreCardProps) {
+export default function StoreCard (props: StoreCardProps) {
   return (
     <TouchableOpacity
       style={styles.cardContainer}
       onPress={() => {
-        props.navigate.navigate("StoreDetailView", {
-          name: props.name,
-        });
+        props.navigate.navigate('StoreDetailView', {
+          name: props.name
+        })
       }}
     >
       <View style={styles.storeImageWrapper}>
@@ -39,35 +37,35 @@ export default function StoreCard(props: StoreCardProps) {
         <CustomText children={props.storeDescription} fontSize="13px" />
       </View>
       <View style={styles.storeStatusContainer}>
-        <StatusToggle storeStatus={props.storeStatus} screen={"MainView"} />
+        <StatusToggle storeStatus={props.storeStatus} screen={'MainView'} />
       </View>
     </TouchableOpacity>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   cardContainer: {
     width: 155,
     height: 190,
-    marginBottom: 40,
+    marginBottom: 40
   },
-  storeImage: { width: "100%", height: "100%" },
-  storeImageWrapper: { width: "100%", height: "50%" },
+  storeImage: { width: '100%', height: '100%' },
+  storeImageWrapper: { width: '100%', height: '50%' },
   storeNameWrapper: {
-    width: "100%",
-    height: "10%",
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 4,
+    width: '100%',
+    height: '10%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 4
   },
   storePrefaceWrapper: {
-    width: "100%",
-    height: "20%",
-    alignItems: "center",
+    width: '100%',
+    height: '20%',
+    alignItems: 'center'
   },
   storeStatusContainer: {
-    height: "15%",
-    width: "100%",
-    alignItems: "flex-end",
-  },
-});
+    height: '15%',
+    width: '100%',
+    alignItems: 'flex-end'
+  }
+})

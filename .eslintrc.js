@@ -1,34 +1,27 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true
+    es2020: true,
   },
-  extends: [
-    'standard-with-typescript',
-    'plugin:react/recommended'
-  ],
-  ignorePatterns: ['.eslintrc.js'],
+  extends: ["standard-with-typescript", "plugin:react/recommended"],
+  ignorePatterns: [".eslintrc.js"],
   overrides: [
     {
       env: {
-        node: true
+        node: true,
       },
-      files: [
-        '.eslintrc.{js,cjs}'
-      ],
+      files: [".eslintrc.{js,cjs}"],
       parserOptions: {
-        sourceType: 'script',
-        project: ['./tsconfig.json']
-      }
-    }
+        sourceType: "script",
+        project: ["./tsconfig.json"],
+      },
+    },
   ],
   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module'
+    project: ["./tsconfig.json"],
+    ecmaVersion: "latest",
+    sourceType: "module",
   },
-  plugins: [
-    'react'
-  ],
-  rules: {
-  }
-}
+  plugins: ["react"],
+  rules: {},
+};

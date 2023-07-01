@@ -1,16 +1,16 @@
-import { StyleSheet, View } from "react-native";
-import AuthButton from "../Auth/AuthButton";
-import CommonInput from "../CommonInput";
-import CustomText from "../CustomText";
+import { StyleSheet, View } from 'react-native'
+import AuthButton from '../Auth/AuthButton'
+import CommonInput from '../CommonInput'
+import CustomText from '../CustomText'
 
 interface EditContactBoxProps {
-  setSnsValue: React.Dispatch<React.SetStateAction<string>>;
-  setStoreNumber: React.Dispatch<React.SetStateAction<string>>;
-  snsValue: string;
-  storeNumber: string;
+  setSnsValue: React.Dispatch<React.SetStateAction<string>>
+  setStoreNumber: React.Dispatch<React.SetStateAction<string>>
+  snsValue: string
+  storeNumber: string
 }
 
-export default function EditContactBox(props: EditContactBoxProps) {
+export default function EditContactBox (props: EditContactBoxProps) {
   return (
     <View style={styles.container}>
       <View>
@@ -24,9 +24,9 @@ export default function EditContactBox(props: EditContactBoxProps) {
           height="36px"
           changeFunc={props.setStoreNumber}
           value={props.storeNumber}
-          backgroundColor={"white"}
-          placeholder={"전화번호를 입력하세요"}
-          border={"1px solid #CACACA"}
+          backgroundColor={'white'}
+          placeholder={'전화번호를 입력하세요'}
+          border={'1px solid #CACACA'}
         />
         <View style={styles.SNSContainer}>
           <CommonInput
@@ -36,9 +36,9 @@ export default function EditContactBox(props: EditContactBoxProps) {
             height="36px"
             changeFunc={props.setSnsValue}
             value={props.snsValue}
-            backgroundColor={"white"}
-            placeholder={"인스타그램 ID를 입력해주세요"}
-            border={"1px solid #CACACA"}
+            backgroundColor={'white'}
+            placeholder={'인스타그램 ID를 입력해주세요'}
+            border={'1px solid #CACACA'}
           />
           <CustomText
             children="Instargram은 이메일이 아닌 @ 이후에 ID를 입력해주세요!"
@@ -55,28 +55,28 @@ export default function EditContactBox(props: EditContactBoxProps) {
         </View>
       </View>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
     paddingTop: 10,
-    justifyContent: "center",
+    justifyContent: 'center'
   },
   inputContainer: {
-    width: "100%",
+    width: '100%',
     paddingLeft: 20,
     marginTop: 12,
     borderBottomWidth: 1,
-    borderBottomColor: "#AAAAAA",
-    paddingBottom: 20,
+    borderBottomColor: '#AAAAAA',
+    paddingBottom: 20
   },
   SNSContainer: { marginTop: 10 },
-  submitbuttonWrapper: { width: "80%" },
+  submitbuttonWrapper: { width: '80%' },
   submitButtonContainer: {
     marginTop: 10,
-    width: "100%",
-    justifyContent: "center",
-    alignItems: "center"
-  },
-});
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+})
