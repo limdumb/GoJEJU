@@ -1,11 +1,11 @@
-import styled from "styled-components/native";
-import Icon from "react-native-vector-icons/FontAwesome";
-import PeopleIcon from "react-native-vector-icons/MaterialIcons";
-import CustomText from "../CustomText";
-import { StyleSheet, View } from "react-native";
-import { SignUpScreenNavigationProps } from "../../pages/auth/SignUpView";
-import { NavigationProp } from "@react-navigation/native";
-import { RootStackParamList } from "../../App";
+import styled from 'styled-components/native'
+import Icon from 'react-native-vector-icons/FontAwesome'
+import PeopleIcon from 'react-native-vector-icons/MaterialIcons'
+import CustomText from '../CustomText'
+import { StyleSheet, View } from 'react-native'
+import { SignUpScreenNavigationProps } from '../../pages/auth/SignUpView'
+import { type NavigationProp } from '@react-navigation/native'
+import { type RootStackParamList } from '../../App'
 
 const CustomRolePicker = styled.TouchableOpacity`
   align-items: center;
@@ -14,50 +14,52 @@ const CustomRolePicker = styled.TouchableOpacity`
   background-color: #f3f3f3;
   border-radius: 20px;
   padding-top: 15;
-`;
+`
 
 export interface RolePickerProps {
-  type: "로그인" | "회원가입";
-  role: "일반 사용자" | "점주 사용자";
-  navigate: NavigationProp<RootStackParamList>;
+  type: '로그인' | '회원가입'
+  role: '일반 사용자' | '점주 사용자'
+  navigate: NavigationProp<RootStackParamList>
 }
 
-export default function RolePicker(props: RolePickerProps) {
+export default function RolePicker (props: RolePickerProps) {
   const onRolePicked = () => {
-    if (props.type === "로그인") {
-      const navigateAdress = "LoginView";
-      props.navigate.navigate(navigateAdress);
+    if (props.type === '로그인') {
+      const navigateAdress = 'LoginView'
+      props.navigate.navigate(navigateAdress)
     }
 
-    if (props.type === "회원가입") {
+    if (props.type === '회원가입') {
       const navigateAdress =
-        props.role === "일반 사용자" ? "UserSignUpView" : "OwnerSignUpView";
-      props.navigate.navigate(navigateAdress, { role: props.role });
+        props.role === '일반 사용자' ? 'UserSignUpView' : 'OwnerSignUpView'
+      props.navigate.navigate(navigateAdress, { role: props.role })
     }
-  };
+  }
 
   return (
     <CustomRolePicker
       onPress={() => {
-        onRolePicked();
+        onRolePicked()
       }}
     >
-      {props.role !== "일반 사용자" ? (
-        <Icon name="coffee" color={"#80BFA0"} size={60} />
-      ) : (
-        <PeopleIcon name="emoji-people" color={"#80BFA0"} size={60} />
-      )}
+      {props.role !== '일반 사용자'
+        ? (
+        <Icon name="coffee" color={'#80BFA0'} size={60} />
+          )
+        : (
+        <PeopleIcon name="emoji-people" color={'#80BFA0'} size={60} />
+          )}
       <View style={styles.textContainer}>
         <CustomText
           children={props.role}
-          fontSize={"18px"}
-          fontWeight={"bold"}
+          fontSize={'18px'}
+          fontWeight={'bold'}
         />
       </View>
     </CustomRolePicker>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
-  textContainer: { marginTop: 15 },
-});
+  textContainer: { marginTop: 15 }
+})

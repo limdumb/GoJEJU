@@ -16,6 +16,7 @@ import LEICodeView from "./pages/auth/LEICodeView";
 import FavoritView from "./pages/mypage/FavoritView";
 import MyReview from "./pages/mypage/MyReview";
 import OwnerSettingView from "./pages/mypage/OwnerSettingView";
+import OwnerAddStoreView from "./pages/OwnerAddStoreView";
 
 export type RootStackParamList = {
   MainView: undefined;
@@ -36,6 +37,7 @@ export type RootStackParamList = {
   FavoritView: undefined;
   MyReview: undefined;
   OwnerSettingView: undefined;
+  OwnerAddStoreView: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -119,6 +121,11 @@ export default function App() {
           name="OwnerSettingView"
           component={OwnerSettingView}
           options={{ title: "사장님 수정 페이지" }}
+        />
+        <Stack.Screen
+          name="OwnerAddStoreView"
+          component={OwnerAddStoreView}
+          options={{ title: "가계 등록 페이지" }}
         />
       </Stack.Navigator>
     </NavigationContainer>

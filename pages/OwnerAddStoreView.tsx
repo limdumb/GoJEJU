@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
-import CustomText from "../../components/CustomText";
-import EditContactBox from "../../components/OwnerSettingView/EditContactBox";
-import ScheduleBox from "../../components/OwnerSettingView/ScheduleBox";
-import StoreProfile from "../../components/OwnerSettingView/StoreEditProfile";
-import StoreStateToggle from "../../components/OwnerSettingView/StoreStateToggle";
-import { getWeekArray } from "../../function/getWeekArray";
+import CustomText from "../components/CustomText";
+import AddAdressBox from "../components/OwnerAddStoreView.tsx/AddAdressBox";
+import EditContactBox from "../components/OwnerSettingView/EditContactBox";
+import ScheduleBox from "../components/OwnerSettingView/ScheduleBox";
+import StoreProfile from "../components/OwnerSettingView/StoreEditProfile";
+import { emdNameArray } from "../function/emdNameArray";
+import { getWeekArray } from "../function/getWeekArray";
 
-export default function OwnerSettingView() {
-  const [isEnabled, setIsEnabled] = useState(false);
+export default function OwnerAddStoreView() {
+  const [adressValue, setAdressValue] = useState("");
   const [toggleCheckBox, setToggleCheckBox] = useState([
     false,
     false,
@@ -29,23 +30,19 @@ export default function OwnerSettingView() {
     });
   };
 
-  const toggleSwitch = () => {
-    setIsEnabled((previousState) => !previousState);
-  };
-
   const dayOfTheWeek = getWeekArray();
+  const emdInformation = emdNameArray();
   return (
     <View style={styles.container}>
-      <ScrollView style={styles.scrollViewContainer}>
+      <ScrollView>
         <View style={styles.profileContainer}>
-          {/* 추후 데이터변경 예정 */}
           <StoreProfile imageUrl={""} name={""} storeDescription={""} />
         </View>
-        <View style={styles.storeToggleContainer}>
-          <StoreStateToggle
-            isEnabled={isEnabled}
-            setIsEnabled={setIsEnabled}
-            toggleSwitch={toggleSwitch}
+        <View style={styles.AddAdressWrapper}>
+          <AddAdressBox
+            adressValue={adressValue}
+            setAdressValue={setAdressValue}
+            emdArr={emdInformation}
           />
         </View>
         <View style={styles.dayCheckSection}>
@@ -53,6 +50,7 @@ export default function OwnerSettingView() {
             children="영업시간 선택"
             marginLft="20px"
             fontSize="16px"
+            fontWeight="bold"
           />
           {dayOfTheWeek.map((el, index) => {
             return (
@@ -65,29 +63,29 @@ export default function OwnerSettingView() {
             );
           })}
         </View>
-        <View>
-          <EditContactBox
-            setSnsValue={setSnsValue}
-            setStoreNumber={setStoreNumber}
-            snsValue={snsValue}
-            storeNumber={storeNumber}
-          />
-        </View>
+        <EditContactBox
+          setSnsValue={setSnsValue}
+          setStoreNumber={setStoreNumber}
+          snsValue={snsValue}
+          storeNumber={storeNumber}
+        />
       </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, alignItems: "center", backgroundColor: "white" },
-  scrollViewContainer: { width: "100%" },
+  container: { flex: 1, backgroundColor: "white", alignItems: "center" },
   profileContainer: {
     width: "100%",
     height: 160,
     borderBottomWidth: 1,
     borderBottomColor: "#C3C3C3",
   },
-  storeToggleContainer: { height: 39 },
+  AddAdressWrapper: {
+    width: "100%",
+    height: 300,
+  },
   dayCheckSection: {
     width: "100%",
     height: 270,
