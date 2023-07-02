@@ -1,13 +1,11 @@
-import { StyleSheet, View } from "react-native";
-import UserIcon from "react-native-vector-icons/FontAwesome";
-import CustomText from "../CustomText";
-import Carousel from "./Carousel";
-import { Dimensions } from "react-native";
-import { ReviewType } from "../../API/getReviewList";
+import { StyleSheet, View, Dimensions } from 'react-native'
+import UserIcon from 'react-native-vector-icons/FontAwesome'
+import CustomText from '../CustomText'
+import Carousel from './Carousel'
+import { type ReviewType } from '../../API/getReviewList'
 
-
-export default function ReviewBox(props: ReviewType) {
-  const screenWidth = Math.round(Dimensions.get("window").width);
+export default function ReviewBox (props: ReviewType) {
+  const screenWidth = Math.round(Dimensions.get('window').width)
   return (
     <View style={styles.reviewBoxContainer}>
       <View style={styles.userInfoContainer}>
@@ -33,22 +31,22 @@ export default function ReviewBox(props: ReviewType) {
         <CustomText children={`${props.reviewText}`} />
       </View>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   reviewBoxContainer: {
-    width: "100%",
+    width: '100%',
     minHeight: 380,
-    backgroundColor: "white",
+    backgroundColor: 'white',
     padding: 20,
     borderBottomWidth: 1,
-    borderBottomColor: "#C3C3C3",
+    borderBottomColor: '#C3C3C3'
   },
   userInfoContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20
   },
-  reviewImageContainer: { marginBottom: 20 },
-});
+  reviewImageContainer: { marginBottom: 20 }
+})

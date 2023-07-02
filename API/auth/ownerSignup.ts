@@ -1,23 +1,23 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { AuthResponseType } from "./loginLogic";
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { type AuthResponseType } from './loginLogic'
 
 interface OwnerSignupProps {
-  email: string;
-  password: string;
-  LEICode: string;
+  email: string
+  password: string
+  LEICode: string
 }
 
-export default async function ownerSignup(props: OwnerSignupProps) {
+export default async function ownerSignup (props: OwnerSignupProps) {
   const response: AuthResponseType = {
-    accessToken: "berer",
-    refreshToken: "berer",
+    accessToken: 'berer',
+    refreshToken: 'berer',
     userId: 2,
-    userType: "owner",
-  };
+    userType: 'owner'
+  }
   try {
     // 추후 로그인로직 추가 예정
   } catch (err) {
-    console.error(err);
+    console.error(err)
   }
-  return response;
+  return response
 }

@@ -1,101 +1,101 @@
 export interface StoreSchedulesType {
   day:
-    | "MONDAY"
-    | "TUESDAY"
-    | "WEDNESDAY"
-    | "THURSDAY"
-    | "FRIDAY"
-    | "SATURDAY"
-    | "SUNDAY";
-  start: string;
-  end: string;
-  lastOrder: string;
-  type: "OPEN" | "CLOSED";
+  | 'MONDAY'
+  | 'TUESDAY'
+  | 'WEDNESDAY'
+  | 'THURSDAY'
+  | 'FRIDAY'
+  | 'SATURDAY'
+  | 'SUNDAY'
+  start: string
+  end: string
+  lastOrder: string
+  type: 'OPEN' | 'CLOSED'
 }
 
 export interface StoreDetailType {
-  id: number;
-  images: string[];
-  name: string;
-  storeStatus: "OPEN" | "CLOSED" | "CLOSURE";
-  storeDescription: string;
-  jubunAddress: string;
-  roadAddress: string;
-  storeSchedules: StoreSchedulesType[];
-  storePhoneNumber: string;
-  sns: { type: string; url: string,nickName:string }[];
+  id: number
+  images: string[]
+  name: string
+  storeStatus: 'OPEN' | 'CLOSED' | 'CLOSURE'
+  storeDescription: string
+  jubunAddress: string
+  roadAddress: string
+  storeSchedules: StoreSchedulesType[]
+  storePhoneNumber: string
+  sns: Array<{ type: string, url: string, nickName: string }>
 }
 
 interface StoreDetailProps {
-  id: number;
+  id: number
 }
 
-export const getStoreDetail = (
+export const getStoreDetail = async (
   props: StoreDetailProps
 ): Promise<StoreDetailType> => {
-  return new Promise((resolve, reject) => {
+  return await new Promise((resolve, reject) => {
     const test: StoreDetailType = {
       id: 1,
-      images: ["https://newsimg.sedaily.com/2021/12/12/22V9KRDG8B_9.jpeg"],
-      name: "덤덤카페",
-      storeStatus: "OPEN",
-      storeDescription: "안녕하세요 덤덤카페 입니다.",
-      jubunAddress: "제주특별시 서귀포구 행복동 12-12",
-      roadAddress: "제주특별시 서귀포구 행복동 초록마을로 12길 8",
+      images: ['https://newsimg.sedaily.com/2021/12/12/22V9KRDG8B_9.jpeg'],
+      name: '덤덤카페',
+      storeStatus: 'OPEN',
+      storeDescription: '안녕하세요 덤덤카페 입니다.',
+      jubunAddress: '제주특별시 서귀포구 행복동 12-12',
+      roadAddress: '제주특별시 서귀포구 행복동 초록마을로 12길 8',
       storeSchedules: [
         {
-          day: "MONDAY",
-          start: "11:10",
-          end: "22:40",
-          lastOrder: "22:10",
-          type: "OPEN",
+          day: 'MONDAY',
+          start: '11:10',
+          end: '22:40',
+          lastOrder: '22:10',
+          type: 'OPEN'
         },
         {
-          day: "TUESDAY",
-          start: "11:10",
-          end: "22:40",
-          lastOrder: "22:10",
-          type: "OPEN",
+          day: 'TUESDAY',
+          start: '11:10',
+          end: '22:40',
+          lastOrder: '22:10',
+          type: 'OPEN'
         },
         {
-          day: "WEDNESDAY",
-          start: "11:10",
-          end: "22:40",
-          lastOrder: "22:10",
-          type: "OPEN",
+          day: 'WEDNESDAY',
+          start: '11:10',
+          end: '22:40',
+          lastOrder: '22:10',
+          type: 'OPEN'
         },
         {
-          day: "THURSDAY",
-          start: "11:10",
-          end: "22:40",
-          lastOrder: "22:10",
-          type: "OPEN",
+          day: 'THURSDAY',
+          start: '11:10',
+          end: '22:40',
+          lastOrder: '22:10',
+          type: 'OPEN'
         },
         {
-          day: "FRIDAY",
-          start: "11:10",
-          end: "22:40",
-          lastOrder: "22:10",
-          type: "OPEN",
+          day: 'FRIDAY',
+          start: '11:10',
+          end: '22:40',
+          lastOrder: '22:10',
+          type: 'OPEN'
         },
         {
-          day: "SATURDAY",
-          start: "11:10",
-          end: "22:40",
-          lastOrder: "22:10",
-          type: "CLOSED",
+          day: 'SATURDAY',
+          start: '11:10',
+          end: '22:40',
+          lastOrder: '22:10',
+          type: 'CLOSED'
         },
         {
-          day: "SUNDAY",
-          start: "11:10",
-          end: "22:40",
-          lastOrder: "22:10",
-          type: "CLOSED",
-        },
+          day: 'SUNDAY',
+          start: '11:10',
+          end: '22:40',
+          lastOrder: '22:10',
+          type: 'CLOSED'
+        }
       ],
-      storePhoneNumber: "010-7702-9884",
-      sns: [{ type: "INSTARGRAM", url: "ss" ,nickName:"dumb_Lim"}],
-    };
-    resolve(test);
-  });
-};
+      storePhoneNumber: '010-7702-9884',
+      sns: [{ type: 'INSTARGRAM', url: 'ss', nickName: 'dumb_Lim' }]
+    }
+    resolve(test)
+  })
+}

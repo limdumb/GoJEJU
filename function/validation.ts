@@ -1,17 +1,17 @@
 export const emailValidation = (email: string): boolean => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-  return emailRegex.test(email);
-};
+  return emailRegex.test(email)
+}
 
 export const passwordValidation = (password: string): boolean => {
   const passwordRegex =
-    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/
 
-  return passwordRegex.test(password);
-};
+  return passwordRegex.test(password)
+}
 
 export const LEICodeValidation = (LEICode: string) => {
-  const LEICodeRegex = /^[0-9]+$/;
-  return LEICodeRegex.test(LEICode);
-};
+  const LEICodeRegex = /^[0-9]+$/
+  return LEICodeRegex.test(LEICode)
+}
