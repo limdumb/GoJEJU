@@ -9,6 +9,7 @@ export const getStoreList = async (): Promise<StoreListDataType> => {
       stores: []
     }
     try {
+      // 추후 머지 진행후 추가 예정
       for (let i = 1; i < 10; i++) {
         if (i !== 4) {
           test.stores.push({
