@@ -71,7 +71,11 @@ export default function UserNormalSignUpView() {
             children="회원가입 완료"
             pressFunction={() => {
               const validateResult = signupValidate();
-              if (validateResult) registerUser();
+              if (validateResult){
+                registerUser();
+              } else {
+                Alert.alert("로그인 정보를 다시 확인해주세요")
+              }
             }}
           />
         </View>
