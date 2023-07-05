@@ -7,6 +7,8 @@ import StoreCard from "../components/MainView/StoreCard";
 import Header from "../components/Header";
 import { emdNameArray } from "../function/emdNameArray";
 import AdressBox from "../components/AdressBox";
+import useFetch from "../customHook/useFetch";
+import Spinner from "../components/Spinner";
 
 export type MainScreenNavigationProps = NavigationProp<
   RootStackParamList,
@@ -14,20 +16,12 @@ export type MainScreenNavigationProps = NavigationProp<
 >;
 
 export default function MainView() {
-  const [storeList, setStoreList] = useState<StoreListDataType>({
-    stores: [],
-  });
+  const [pages, setPages] = useState(0);
   const [adressValue, setAdressValue] = useState("");
+  const { data, isLoading, error } = useFetch<StoreListDataType>(
+    `/api/store/list?emdName=${adressValue}&page=${pages}`
+  );
   const adressArr = emdNameArray();
-
-  useEffect(() => {
-    const storeListResponse = async () => {
-      const response = await getStoreList();
-      setStoreList(response);
-    };
-
-    storeListResponse();
-  }, []);
 
   const navigate = useNavigation<MainScreenNavigationProps>();
 
@@ -50,19 +44,27 @@ export default function MainView() {
         <View style={styles.storeListContainer}>
           <Text style={styles.storeListTitle}>카페리스트</Text>
           <View style={styles.storeList}>
-            {storeList.stores.map((el) => {
-              return (
-                <StoreCard
-                  key={el.id}
-                  navigate={navigate}
-                  id={el.id}
-                  imageUrl={el.imageUrl}
-                  name={el.name}
-                  storeDescription={el.storeDescription}
-                  storeStatus={el.storeStatus}
-                />
-              );
-            })}
+            {!isLoading ? (
+              <>
+                {data?.stores.length !== 0
+                  ? data?.stores.map((el) => {
+                      return (
+                        <StoreCard
+                          key={el.id}
+                          navigate={navigate}
+                          id={el.id}
+                          imageUrl={el.imageUrl}
+                          name={el.name}
+                          storeDescription={el.storeDescription}
+                          storeStatus={el.storeStatus}
+                        />
+                      );
+                    })
+                  : null}
+              </>
+            ) : (
+              <Spinner />
+            )}
           </View>
         </View>
       </ScrollView>
