@@ -3,13 +3,13 @@ import { useEffect, useState } from "react";
 import { baseInstance } from "../API/instance";
 
 interface FetchResponse<T> {
-  data: T | null;
+  data: T;
   error: Error | null;
   isLoading: boolean;
 }
 
 function useFetch<T>(endPoint: string): FetchResponse<T> {
-  const [data, setData] = useState<T | null>(null);
+  const [data, setData] = useState<T>({} as T);
   const [error, setError] = useState<Error | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
