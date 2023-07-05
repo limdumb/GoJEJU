@@ -1,14 +1,19 @@
 import { type NavigationProp, useNavigation } from "@react-navigation/native";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
-import { getStoreList, type StoreListDataType } from "../API/getStoreList";
 import { type RootStackParamList } from "../App";
-import StoreCard from "../components/MainView/StoreCard";
+import StoreCard, { StoreCardType } from "../components/MainView/StoreCard";
 import Header from "../components/Header";
 import { emdNameArray } from "../function/emdNameArray";
 import AdressBox from "../components/AdressBox";
 import useFetch from "../customHook/useFetch";
 import Spinner from "../components/Spinner";
+
+export interface StoreListDataType {
+  total: number
+  hasNext: boolean
+  stores: StoreCardType[]
+}
 
 export type MainScreenNavigationProps = NavigationProp<
   RootStackParamList,
@@ -24,7 +29,6 @@ export default function MainView() {
   const adressArr = emdNameArray();
 
   const navigate = useNavigation<MainScreenNavigationProps>();
-
   return (
     <View style={styles.container}>
       <Header />
