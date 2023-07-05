@@ -1,22 +1,21 @@
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import { type AuthResponseType } from './loginLogic'
+import { AxiosResponse } from "axios";
+import { baseInstance } from "../instance";
+import { type AuthResponseType } from "./loginLogic";
 
 interface UserSignupProps {
-  email: string
-  password: string
+  email: string;
+  password: string;
 }
 
-export default async function userSignup (props: UserSignupProps) {
-  const request = { email: props.email, password: props.password }
+export default async function userSignup(props: UserSignupProps) {
+  const request = { email: props.email, password: props.password };
   try {
-    const response: AuthResponseType = {
-      accessToken: 'berer',
-      refreshToken: 'berer',
-      userId: 2,
-      userType: 'user'
-    }
-    // 추후 회원가입 Post 로직 추가 예정
+    const response: AxiosResponse<AuthResponseType> = await baseInstance.post(
+      "/api/user/signup",
+      request
+    );
+    return response.status;
   } catch (err) {
-    console.error(err)
+    console.error(err);
   }
 }
