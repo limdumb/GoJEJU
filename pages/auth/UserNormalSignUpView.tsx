@@ -1,20 +1,41 @@
 import { useState } from "react";
+import { Alert } from "react-native";
 import { View, StyleSheet } from "react-native";
+import loginLogic from "../../API/auth/loginLogic";
 import userSignup from "../../API/auth/userSignup";
 import AuthButton from "../../components/Auth/AuthButton";
 import AuthLogo from "../../components/Auth/AuthLogo";
 import CommonInput from "../../components/CommonInput";
+import { emailValidation, passwordValidation } from "../../function/validation";
 
 export default function UserNormalSignUpView() {
   const [emailId, setEmailId] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const registerUser = () => {
-    const signupResult = userSignup({
+  const signupValidate = () => {
+    const emailValidateResult = emailValidation(emailId);
+    const passwordValidateResult = passwordValidation(passwordValue);
+    return emailValidateResult && passwordValidateResult ? true : false;
+  };
+
+  const registerUser = async () => {
+    setIsLoading(true);
+    const signupResult = await userSignup({
       email: emailId,
       password: passwordValue,
     });
-    // 추후 Login Logic 추가 예정
+    setIsLoading(false);
+
+    if (signupResult && !isLoading) {
+      const signin = await loginLogic({
+        email: emailId,
+        password: passwordValue,
+      });
+      signin === 200
+        ? Alert.alert("로그인이 완료되었습니다")
+        : Alert.alert("정보가 잘못돼었습니다 다시 시도해주세요");
+    }
   };
 
   return (
@@ -49,7 +70,12 @@ export default function UserNormalSignUpView() {
           <AuthButton
             children="회원가입 완료"
             pressFunction={() => {
-              registerUser();
+              const validateResult = signupValidate();
+              if (validateResult){
+                registerUser();
+              } else {
+                Alert.alert("로그인 정보를 다시 확인해주세요")
+              }
             }}
           />
         </View>
