@@ -1,12 +1,17 @@
-import { View } from 'react-native'
-import { type ReviewResponseType } from '../../API/getReviewList'
-import ReviewBox from './ReviewBox'
+import { useState } from "react";
+import { View } from "react-native";
+import { type ReviewResponseType } from "../../API/getReviewList";
+import useFetch from "../../customHook/useFetch";
+import ReviewBox from "./ReviewBox";
 
 interface Props extends ReviewResponseType {
   // 추후 들어와야하는 Props가 생기면 추가예정
 }
 
-export default function DetailReviewView (props: Props) {
+export default function DetailReviewView(props: Props) {
+  const [page, setPage] = useState(0);
+  const { data, isLoading, error } = useFetch(``);
+  // 리뷰API 추가 후 변경 예정
   return (
     <View>
       {props.reviews.map((el) => {
@@ -19,8 +24,8 @@ export default function DetailReviewView (props: Props) {
             reviewImages={el.reviewImages}
             reviewText={el.reviewText}
           />
-        )
+        );
       })}
     </View>
-  )
+  );
 }

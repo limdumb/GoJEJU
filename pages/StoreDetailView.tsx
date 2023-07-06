@@ -21,7 +21,6 @@ type StoreDetailProps = NativeStackScreenProps<
 export default function StoreDetailView({ route }: StoreDetailProps) {
   const storeId = route.params.id;
   const [isTabType, setIsTabType] = useState<"홈" | "리뷰">("홈");
-  const [page, setPage] = useState(0);
   const [reviewData, setReviewData] = useState<ReviewResponseType>({
     hasNext: false,
     total: 0,
@@ -31,18 +30,6 @@ export default function StoreDetailView({ route }: StoreDetailProps) {
   const { data, isLoading, error } = useFetch<StoreDetailType>(
     `api/store/${storeId}`
   );
-
-  useEffect(() => {
-    const fetchReviewData = async () => {
-      const response = await getReviewList({
-        storeId: storeId,
-        page: 0,
-      });
-      setReviewData(response);
-    };
-
-    fetchReviewData();
-  }, [page]);
 
   return (
     <View style={styles.container}>
