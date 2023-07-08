@@ -11,7 +11,6 @@ interface Props extends ReviewResponseType {
 export default function DetailReviewView(props: Props) {
   const [page, setPage] = useState(0);
   const { data, isLoading, error } = useFetch(``);
-  // 리뷰API 추가 후 변경 예정
   return (
     <View>
       {props.reviews.map((el) => {
