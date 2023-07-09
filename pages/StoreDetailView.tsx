@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Image, ScrollView, StyleSheet, View } from "react-native";
 import { type StoreDetailType, getStoreDetail } from "../API/getStoreDetail";
 import CustomText from "../components/CustomText";
@@ -7,7 +7,7 @@ import TabSwitcher from "../components/TabSwitcher";
 import { cautionText } from "../function/cautionText";
 import DetailHomeView from "../components/StoreDetailView/DetailHomeView";
 import DetailReviewView from "../components/StoreDetailView/DetailReviewView";
-import { getReviewList, type ReviewResponseType } from "../API/getReviewList";
+import { type ReviewResponseType } from "../API/getReviewList";
 import useFetch from "../customHook/useFetch";
 import { RootStackParamList } from "../App";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
