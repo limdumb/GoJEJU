@@ -5,6 +5,7 @@ export interface EmdType {
 
 export const emdNameArray = ():EmdType[] => {
   const emdArr = [
+    { name: "전체", adress: "" },
     { name: "한경면", adress: "제주 제주시 한경면 " },
     { name: "한림읍", adress: "제주 제주시 한림읍 " },
     { name: "애월읍", adress: "제주 제주시 애월읍 " },
