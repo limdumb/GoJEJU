@@ -21,6 +21,7 @@ import OwnerAddStoreView from "./pages/OwnerAddStoreView";
 export type RootStackParamList = {
   MainView: undefined;
   StoreDetailView: {
+    id: number
     name: string;
   };
   LoginView: undefined;
