@@ -1,4 +1,4 @@
-import { Alert, View, TextInput, StyleSheet } from 'react-native'
+import { Alert } from 'react-native'
 import SearchIcon from 'react-native-vector-icons/Fontisto'
 import styled from 'styled-components/native'
 

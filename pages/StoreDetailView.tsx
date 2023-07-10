@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Image, ScrollView, StyleSheet, View } from "react-native";
-import { type StoreDetailType, getStoreDetail } from "../API/getStoreDetail";
+import { type StoreDetailType } from "../API/getStoreDetail";
 import CustomText from "../components/CustomText";
 import StatusToggle from "../components/StatusToggle";
 import TabSwitcher from "../components/TabSwitcher";
@@ -76,6 +76,7 @@ export default function StoreDetailView({ route }: StoreDetailProps) {
               <DetailHomeView storeDetails={data} />
             ) : (
               <DetailReviewView
+              storeId={storeId}
                 hasNext={reviewData.hasNext}
                 total={reviewData.total}
                 reviews={reviewData.reviews}
