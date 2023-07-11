@@ -1,5 +1,5 @@
-// 1. 리뷰 작성뷰 => 카페뷰 리뷰탭에 작성버튼 누르기 => 누를떄 카페 ID도 같이 가기
-// 2. 별점 컴포넌트 => 소수점 단위로 구현해보기 0.5
+// 1. 리뷰 작성뷰 => 카페뷰 리뷰탭에 작성버튼 누르기 => 누를떄 카페 ID도 같이 가기 O
+// 2. 별점 컴포넌트
 // 리뷰 업로드를 위한 요청함수 => 요청함수 만들기
 // 리뷰작성 예외처리 => 만약에 로그인이 되어있지 않다면 작성할수없게 리뷰탭에 작성버튼에 예외처리 진행하기
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
@@ -10,6 +10,7 @@ import { Image, StyleSheet, View } from "react-native";
 import { RootStackParamList } from "../App";
 import CommonInput from "../components/CommonInput";
 import CustomText from "../components/CustomText";
+import RatingStar from "../components/RatingStar";
 import Carousel from "../components/StoreDetailView/Carousel";
 interface ImageData {
   uri: string;
@@ -25,6 +26,7 @@ export default function ReviewPostView({ route }: ReviewPostRouteType) {
   const screenWidth = Math.round(Dimensions.get("window").width);
   const [images, setImages] = useState<string[]>([]);
   const [reviewText, setReviewText] = useState("");
+  const [rating, setRating] = useState(3);
 
   const renderImages = () => {
     return (
@@ -52,6 +54,11 @@ export default function ReviewPostView({ route }: ReviewPostRouteType) {
       reviewText,
     });
   };
+
+  const handleRate = (rating: number) => {
+    console.log(`Selected rating: ${rating}`);
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -70,8 +77,14 @@ export default function ReviewPostView({ route }: ReviewPostRouteType) {
             />
           </TouchableOpacity>
         </View>
-        <View>
+        <View style={styles.ratingContainer}>
           <CustomText children="별점을 입력해주세요" fontWeight="600" />
+          <RatingStar
+            totalStars={5}
+            onRate={handleRate}
+            setRating={setRating}
+            rating={rating}
+          />
         </View>
         <View style={styles.inputWrapper}>
           <CommonInput
@@ -92,6 +105,15 @@ export default function ReviewPostView({ route }: ReviewPostRouteType) {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "white" },
+  ratingContainer: {
+    borderBottomWidth: 1,
+    borderColor: "#C3C3C3",
+    height: 40,
+    flexDirection: "row",
+    alignItems: "center",
+    paddingLeft: 16,
+    paddingright: 16,
+  },
   carouselContainer: { height: 210, borderWidth: 1, borderColor: "#C3C3C3" },
   imageuploardContainer: {
     width: 100,
