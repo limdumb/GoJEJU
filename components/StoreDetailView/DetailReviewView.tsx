@@ -18,10 +18,13 @@ export default function DetailReviewView(props: Props) {
           <ReviewBox
             key={el.id}
             id={el.id}
+            userId={el.userId}
             userName={el.userName}
             userProfileImage={el.userProfileImage}
             reviewImages={el.reviewImages}
             reviewText={el.reviewText}
+            loginUserId={2}
+            // 추후 머지 진행후 변경예정
           />
         );
       })}
