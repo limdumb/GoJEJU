@@ -2,6 +2,7 @@
 // 리뷰작성 예외처리 => 만약에 로그인이 되어있지 않다면 작성할수없게 리뷰탭에 작성버튼에 예외처리 진행하기
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useState } from "react";
+import { Alert } from "react-native";
 import { Dimensions, TouchableOpacity } from "react-native";
 import { ScrollView } from "react-native";
 import { StyleSheet, View } from "react-native";
@@ -21,7 +22,7 @@ type ReviewPostRouteType = NativeStackScreenProps<
 >;
 
 export default function ReviewPostView({ route }: ReviewPostRouteType) {
-  const storeId = route.params;
+  const storeId = route.params.storeId;
   const screenWidth = Math.round(Dimensions.get("window").width);
   const [images, setImages] = useState<string[]>([]);
   const [reviewText, setReviewText] = useState("");
@@ -47,12 +48,18 @@ export default function ReviewPostView({ route }: ReviewPostRouteType) {
   };
 
   const handleSubmitReview = async () => {
-    const response = await postReview({
-      images: images,
-      body: reviewText,
-      rating: rating,
-    });
-    
+    if (reviewText.length === 0) Alert.alert("리뷰를 입력해주세요!");
+    if (reviewText.length >= 100)
+      Alert.alert("리뷰는 100자 이상 입력할 수 없습니다. 확인해주세요!");
+    if (reviewText.length !== 0 && reviewText.length < 100) {
+      const response = await postReview({
+        storeId:storeId,
+        images: images,
+        body: reviewText,
+        rating: rating,
+      });
+      if(response === 200) {}
+    }
   };
 
   return (
@@ -85,9 +92,18 @@ export default function ReviewPostView({ route }: ReviewPostRouteType) {
             placeholder={"리뷰를 입력하세요"}
             border={"1px solid #56C38D"}
           />
+          <View style={styles.textLengthBox}>
+            <CustomText
+              children={`${reviewText.length}/100`}
+              color={"#C3C3C3"}
+            />
+          </View>
         </View>
         <View style={styles.submitSection}>
-          <TouchableOpacity onPress={() => {}} style={styles.buttonContainer}>
+          <TouchableOpacity
+            onPress={() => handleSubmitReview()}
+            style={styles.buttonContainer}
+          >
             <CustomText
               children="작성하기"
               color="white"
@@ -113,6 +129,12 @@ const styles = StyleSheet.create({
     paddingRight: 16,
     justifyContent: "space-between",
   },
+  textLengthBox: {
+    width: "100%",
+    alignItems: "flex-end",
+    marginTop: 3,
+    paddingRight: 15,
+  },
   carouselContainer: { height: 210, borderWidth: 1, borderColor: "#C3C3C3" },
   buttonContainer: {
     width: 100,
@@ -135,7 +157,7 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
-    height: 350,
+    height: 360,
     borderBottomWidth: 1,
     borderBottomColor: "#C3C3C3",
   },

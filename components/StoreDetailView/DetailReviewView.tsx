@@ -1,5 +1,4 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useState } from "react";
 import { Alert, StyleSheet } from "react-native";
 import { TouchableOpacity, View } from "react-native";
