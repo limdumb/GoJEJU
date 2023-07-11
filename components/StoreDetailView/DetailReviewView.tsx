@@ -1,12 +1,13 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useState } from "react";
-import { StyleSheet } from "react-native";
+import { Alert, StyleSheet } from "react-native";
 import { TouchableOpacity, View } from "react-native";
 import PenIcon from "react-native-vector-icons/FontAwesome5";
 import { type ReviewResponseType } from "../../API/getReviewList";
 import { RootStackParamList } from "../../App";
 import useFetch from "../../customHook/useFetch";
+import { useUserId } from "../../customHook/useUserId";
 import CustomText from "../CustomText";
 import ReviewBox from "./ReviewBox";
 
@@ -15,16 +16,22 @@ interface Props extends ReviewResponseType {
 }
 
 export default function DetailReviewView(props: Props) {
+  const userId = useUserId()
   const tabArr = [{ tabName: "최신순" }, { tabName: "추천순" }];
   const navigate = useNavigation<NavigationProp<RootStackParamList>>();
   const [page, setPage] = useState(0);
   const { data, isLoading, error } = useFetch(``);
+  console.log(userId)
   return (
     <View>
       <View style={styles.reviewTabContainer}>
         <TouchableOpacity
           onPress={() => {
-            navigate.navigate("ReviewPostView", { storeId: props.storeId });
+            if(userId !== null){
+              navigate.navigate("ReviewPostView", { storeId: props.storeId });
+            } else {
+              Alert.alert("로그인 이후 이용 가능한 기능입니다.")
+            }
           }}
         >
           <View style={styles.reviewTabWrapper}>

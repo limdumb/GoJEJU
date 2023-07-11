@@ -1,5 +1,3 @@
-// 1. 리뷰 작성뷰 => 카페뷰 리뷰탭에 작성버튼 누르기 => 누를떄 카페 ID도 같이 가기 O
-// 2. 별점 컴포넌트
 // 리뷰 업로드를 위한 요청함수 => 요청함수 만들기
 // 리뷰작성 예외처리 => 만약에 로그인이 되어있지 않다면 작성할수없게 리뷰탭에 작성버튼에 예외처리 진행하기
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
@@ -7,6 +5,7 @@ import { useState } from "react";
 import { Dimensions, TouchableOpacity } from "react-native";
 import { ScrollView } from "react-native";
 import { StyleSheet, View } from "react-native";
+import postReview from "../API/postReview";
 import { RootStackParamList } from "../App";
 import CommonInput from "../components/CommonInput";
 import CustomText from "../components/CustomText";
@@ -47,12 +46,13 @@ export default function ReviewPostView({ route }: ReviewPostRouteType) {
     );
   };
 
-  const handleSubmitReview = () => {
-    // 리뷰 작성 후 서버에 저장하는 로직 추가예정
-    console.log("Review:", {
-      images,
-      reviewText,
+  const handleSubmitReview = async () => {
+    const response = await postReview({
+      images: images,
+      body: reviewText,
+      rating: rating,
     });
+    
   };
 
   return (
@@ -61,10 +61,7 @@ export default function ReviewPostView({ route }: ReviewPostRouteType) {
         {/* 추후 이미지 업로드 기능 예정 */}
         <ScrollView>{renderImages()}</ScrollView>
         <View style={styles.imageUploardWrapper}>
-          <TouchableOpacity
-            onPress={() => {}}
-            style={styles.buttonContainer}
-          >
+          <TouchableOpacity onPress={() => {}} style={styles.buttonContainer}>
             <CustomText
               children="사진 추가"
               color="white"
@@ -75,11 +72,7 @@ export default function ReviewPostView({ route }: ReviewPostRouteType) {
         </View>
         <View style={styles.ratingContainer}>
           <CustomText children="별점을 입력해주세요" fontWeight="600" />
-          <RatingStar
-            totalStars={5}
-            setRating={setRating}
-            rating={rating}
-          />
+          <RatingStar totalStars={5} setRating={setRating} rating={rating} />
         </View>
         <View style={styles.inputWrapper}>
           <CommonInput
@@ -94,10 +87,7 @@ export default function ReviewPostView({ route }: ReviewPostRouteType) {
           />
         </View>
         <View style={styles.submitSection}>
-        <TouchableOpacity
-            onPress={() => {}}
-            style={styles.buttonContainer}
-          >
+          <TouchableOpacity onPress={() => {}} style={styles.buttonContainer}>
             <CustomText
               children="작성하기"
               color="white"
@@ -120,8 +110,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     paddingLeft: 16,
-    paddingRight:16,
-    justifyContent:"space-between"
+    paddingRight: 16,
+    justifyContent: "space-between",
   },
   carouselContainer: { height: 210, borderWidth: 1, borderColor: "#C3C3C3" },
   buttonContainer: {
@@ -149,5 +139,5 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: "#C3C3C3",
   },
-  submitSection:{marginTop:20, alignItems:"flex-end",paddingRight:15}
+  submitSection: { marginTop: 20, alignItems: "flex-end", paddingRight: 15 },
 });
