@@ -5,8 +5,8 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useState } from "react";
 import { Dimensions, TouchableOpacity } from "react-native";
-import { Button, ScrollView, TextInput } from "react-native";
-import { Image, StyleSheet, View } from "react-native";
+import { ScrollView } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { RootStackParamList } from "../App";
 import CommonInput from "../components/CommonInput";
 import CustomText from "../components/CustomText";
@@ -48,15 +48,11 @@ export default function ReviewPostView({ route }: ReviewPostRouteType) {
   };
 
   const handleSubmitReview = () => {
-    // 리뷰 작성 후 서버에 저장하는 로직 구현
+    // 리뷰 작성 후 서버에 저장하는 로직 추가예정
     console.log("Review:", {
       images,
       reviewText,
     });
-  };
-
-  const handleRate = (rating: number) => {
-    console.log(`Selected rating: ${rating}`);
   };
 
   return (
@@ -67,7 +63,7 @@ export default function ReviewPostView({ route }: ReviewPostRouteType) {
         <View style={styles.imageUploardWrapper}>
           <TouchableOpacity
             onPress={() => {}}
-            style={styles.imageuploardContainer}
+            style={styles.buttonContainer}
           >
             <CustomText
               children="사진 추가"
@@ -81,7 +77,6 @@ export default function ReviewPostView({ route }: ReviewPostRouteType) {
           <CustomText children="별점을 입력해주세요" fontWeight="600" />
           <RatingStar
             totalStars={5}
-            onRate={handleRate}
             setRating={setRating}
             rating={rating}
           />
@@ -98,6 +93,19 @@ export default function ReviewPostView({ route }: ReviewPostRouteType) {
             border={"1px solid #56C38D"}
           />
         </View>
+        <View style={styles.submitSection}>
+        <TouchableOpacity
+            onPress={() => {}}
+            style={styles.buttonContainer}
+          >
+            <CustomText
+              children="작성하기"
+              color="white"
+              fontWeight="bold"
+              fontSize="20"
+            />
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </View>
   );
@@ -112,10 +120,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     paddingLeft: 16,
-    paddingright: 16,
+    paddingRight:16,
+    justifyContent:"space-between"
   },
   carouselContainer: { height: 210, borderWidth: 1, borderColor: "#C3C3C3" },
-  imageuploardContainer: {
+  buttonContainer: {
     width: 100,
     height: 35,
     borderRadius: 5,
@@ -137,5 +146,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     height: 350,
+    borderBottomWidth: 1,
+    borderBottomColor: "#C3C3C3",
   },
+  submitSection:{marginTop:20, alignItems:"flex-end",paddingRight:15}
 });
