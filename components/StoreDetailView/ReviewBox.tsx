@@ -4,14 +4,27 @@ import CustomText from "../CustomText";
 import Carousel from "./Carousel";
 import { type ReviewType } from "../../API/getReviewList";
 import DeleteIcon from "react-native-vector-icons/Feather";
+import EditIcon from "react-native-vector-icons/AntDesign";
 import deleteReview from "../../API/deleteReview";
+import { NavigationProp } from "@react-navigation/native";
+import { RootStackParamList } from "../../App";
 
 interface ReviewBoxPropsType extends ReviewType {
   loginUserId: number | null;
+  navigate: NavigationProp<RootStackParamList>;
+  storeId: number;
 }
 
 export default function ReviewBox(props: ReviewBoxPropsType) {
   const screenWidth = Math.round(Dimensions.get("window").width);
+  const reviewEditFunc = async () => {
+    props.navigate.navigate("ReviewEditView", {
+      storeId: props.storeId,
+      images: props.reviewImages,
+      reviewText: props.reviewText,
+      rating: props.rating,
+    });
+  };
   const reviewDeleteFunc = async () => {
     const response = await deleteReview({ reviewId: props.id });
     if (response === 200) {
@@ -33,22 +46,25 @@ export default function ReviewBox(props: ReviewBoxPropsType) {
           />
         </View>
         {props.userId === props.loginUserId ? (
-          <DeleteIcon
-            name="trash-2"
-            size={24}
-            onPress={() => {
-              reviewDeleteFunc();
-            }}
-          />
+          <View style={styles.editContainer}>
+            <DeleteIcon
+              style={styles.deleteIcon}
+              name="trash-2"
+              size={24}
+              onPress={() => {
+                reviewDeleteFunc();
+              }}
+            />
+            <EditIcon
+              style={styles.editIcon}
+              name="edit"
+              size={24}
+              onPress={() => {
+                reviewEditFunc();
+              }}
+            />
+          </View>
         ) : null}
-        <UserIcon name="user-circle-o" size={40} />
-        <CustomText
-          children="유저이름입니다"
-          fontWeight="bold"
-          fontSize="20px"
-          marginLft="12px"
-          marginTop="2px"
-        />
       </View>
       <View style={styles.reviewImageContainer}>
         <Carousel
@@ -80,6 +96,9 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     justifyContent: "space-between",
   },
+  deleteIcon: { marginRight: 5 },
+  editIcon: { paddingTop: 1 },
   userProfileWrapper: { flexDirection: "row", alignItems: "center" },
   reviewImageContainer: { marginBottom: 20 },
+  editContainer: { flexDirection: "row" },
 });

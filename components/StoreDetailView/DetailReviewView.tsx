@@ -1,13 +1,12 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { useState } from "react";
 import { Alert, StyleSheet } from "react-native";
 import { TouchableOpacity, View } from "react-native";
 import PenIcon from "react-native-vector-icons/FontAwesome5";
 import { type ReviewResponseType } from "../../API/getReviewList";
 import { RootStackParamList } from "../../App";
-import useFetch from "../../customHook/useFetch";
 import { useUserId } from "../../customHook/useUserId";
 import CustomText from "../CustomText";
+import NotFoundImage from "../NotFoundImage";
 import ReviewBox from "./ReviewBox";
 
 interface Props extends ReviewResponseType {
@@ -18,8 +17,6 @@ export default function DetailReviewView(props: Props) {
   const userId = useUserId();
   const tabArr = [{ tabName: "최신순" }, { tabName: "추천순" }];
   const navigate = useNavigation<NavigationProp<RootStackParamList>>();
-  const [page, setPage] = useState(0);
-  const { data, isLoading, error } = useFetch(``);
 
   return (
     <View>
@@ -49,6 +46,8 @@ export default function DetailReviewView(props: Props) {
           {props.reviews.map((el) => {
             return (
               <ReviewBox
+                rating={el.rating}
+                storeId={props.storeId}
                 key={el.id}
                 id={el.id}
                 userName={el.userName}
@@ -57,11 +56,27 @@ export default function DetailReviewView(props: Props) {
                 reviewText={el.reviewText}
                 loginUserId={userId}
                 userId={el.userId}
+                navigate={navigate}
               />
             );
           })}
         </>
-      ) : null}
+      ) : (
+        <NotFoundImage />
+      )}
+      <ReviewBox
+        rating={5}
+        storeId={props.storeId}
+        key={1}
+        id={1}
+        userName={"유저"}
+        userProfileImage={"ㅇㄹ"}
+        reviewImages={["ㅇㄹ"]}
+        reviewText={"아리리리"}
+        loginUserId={userId}
+        userId={2}
+        navigate={navigate}
+      />
     </View>
   );
 }

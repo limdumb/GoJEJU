@@ -18,6 +18,7 @@ import MyReview from "./pages/mypage/MyReview";
 import OwnerSettingView from "./pages/mypage/OwnerSettingView";
 import OwnerAddStoreView from "./pages/OwnerAddStoreView";
 import ReviewPostView from "./pages/ReviewPostView";
+import ReviewEditView from "./pages/ReviewEditView";
 
 export type RootStackParamList = {
   MainView: undefined;
@@ -41,6 +42,7 @@ export type RootStackParamList = {
   OwnerSettingView: undefined;
   OwnerAddStoreView: undefined;
   ReviewPostView: { storeId: number };
+  ReviewEditView: { storeId: number; reviewText: string; images: string[],rating:number };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -134,6 +136,11 @@ export default function App() {
           name="ReviewPostView"
           component={ReviewPostView}
           options={{ title: "리뷰 등록" }}
+        />
+        <Stack.Screen
+          name="ReviewEditView"
+          component={ReviewEditView}
+          options={{ title: "리뷰 수정" }}
         />
       </Stack.Navigator>
     </NavigationContainer>

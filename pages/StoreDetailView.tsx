@@ -76,7 +76,7 @@ export default function StoreDetailView({ route }: StoreDetailProps) {
               <DetailHomeView storeDetails={data} />
             ) : (
               <DetailReviewView
-              storeId={storeId}
+                storeId={storeId}
                 hasNext={reviewData.hasNext}
                 total={reviewData.total}
                 reviews={reviewData.reviews}

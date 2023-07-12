@@ -13,22 +13,18 @@ import Carousel from "../components/StoreDetailView/Carousel";
 import * as ImagePicker from "expo-image-picker";
 import Spinner from "../components/Spinner";
 
-interface ImageData {
-  uri: string;
-}
-
-type ReviewPostRouteType = NativeStackScreenProps<
+type ReviewEditPropsType = NativeStackScreenProps<
   RootStackParamList,
-  "ReviewPostView"
+  "ReviewEditView"
 >;
 
-export default function ReviewPostView({ route }: ReviewPostRouteType) {
-  const storeId = route.params.storeId;
+export default function ReviewEditView({ route }: ReviewEditPropsType) {
+  const reviewData = route.params
   const [status, requestPermission] = ImagePicker.useMediaLibraryPermissions();
   const screenWidth = Math.round(Dimensions.get("window").width);
-  const [images, setImages] = useState<Array<string>>([]);
-  const [reviewText, setReviewText] = useState("");
-  const [rating, setRating] = useState(3);
+  const [images, setImages] = useState<Array<string>>(reviewData.images);
+  const [reviewText, setReviewText] = useState(reviewData.reviewText);
+  const [rating, setRating] = useState(reviewData.rating);
   const [uploadLoading, setUploadLoading] = useState(false);
 
   const renderImages = () => {
@@ -42,8 +38,7 @@ export default function ReviewPostView({ route }: ReviewPostRouteType) {
             pageWidth={screenWidth - (15 + 36) * 2}
           />
         ) : (
-          <View style={styles.carouselContainer}>
-          </View>
+          <View style={styles.carouselContainer}></View>
         )}
       </>
     );
@@ -76,7 +71,7 @@ export default function ReviewPostView({ route }: ReviewPostRouteType) {
       Alert.alert("리뷰는 100자 이상 입력할 수 없습니다. 확인해주세요!");
     if (reviewText.length !== 0 && reviewText.length < 100) {
       const response = await postReview({
-        storeId: storeId,
+        storeId: reviewData.storeId,
         images: images,
         body: reviewText,
         rating: rating,
@@ -89,7 +84,7 @@ export default function ReviewPostView({ route }: ReviewPostRouteType) {
   return (
     <View style={styles.container}>
       <ScrollView>
-      {uploadLoading ? <Spinner /> : null}
+        {uploadLoading ? <Spinner /> : null}
         <ScrollView>{renderImages()}</ScrollView>
         <View style={styles.imageUploardWrapper}>
           <TouchableOpacity
