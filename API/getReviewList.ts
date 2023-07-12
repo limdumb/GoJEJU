@@ -5,6 +5,7 @@ export interface ReviewType {
   userProfileImage: string
   reviewImages: string[]
   reviewText: string
+  rating:number
 }
 
 export interface ReviewResponseType {
@@ -32,6 +33,7 @@ export const getReviewList = async (props: Props): Promise<ReviewResponseType> =
           id: i,
           userName: `유저${i}`,
           userId:1,
+          rating:4,
           userProfileImage:
             'https://upload3.inven.co.kr/upload/2023/05/06/bbs/i15108989430.jpg?MW=800',
           reviewImages: [
