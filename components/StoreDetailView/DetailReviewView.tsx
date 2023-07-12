@@ -15,7 +15,7 @@ interface Props extends ReviewResponseType {
 }
 
 export default function DetailReviewView(props: Props) {
-  const userId = useUserId()
+  const userId = useUserId();
   const tabArr = [{ tabName: "최신순" }, { tabName: "추천순" }];
   const navigate = useNavigation<NavigationProp<RootStackParamList>>();
   const [page, setPage] = useState(0);
@@ -26,10 +26,10 @@ export default function DetailReviewView(props: Props) {
       <View style={styles.reviewTabContainer}>
         <TouchableOpacity
           onPress={() => {
-            if(userId !== null){
+            if (userId !== null) {
               navigate.navigate("ReviewPostView", { storeId: props.storeId });
             } else {
-              Alert.alert("로그인 이후 이용 가능한 기능입니다.")
+              Alert.alert("로그인 이후 이용 가능한 기능입니다.");
             }
           }}
         >
@@ -55,6 +55,8 @@ export default function DetailReviewView(props: Props) {
                 userProfileImage={el.userProfileImage}
                 reviewImages={el.reviewImages}
                 reviewText={el.reviewText}
+                loginUserId={userId}
+                userId={el.userId}
               />
             );
           })}

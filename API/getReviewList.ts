@@ -1,5 +1,6 @@
 export interface ReviewType {
   id: number
+  userId: number
   userName: string
   userProfileImage: string
   reviewImages: string[]
@@ -30,6 +31,7 @@ export const getReviewList = async (props: Props): Promise<ReviewResponseType> =
         test.reviews.push({
           id: i,
           userName: `유저${i}`,
+          userId:1,
           userProfileImage:
             'https://upload3.inven.co.kr/upload/2023/05/06/bbs/i15108989430.jpg?MW=800',
           reviewImages: [
