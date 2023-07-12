@@ -8,6 +8,7 @@ import getSearch, { type SearchDataType } from "../API/getSearch";
 import Spinner from "../components/Spinner";
 import { type NavigationProp, useNavigation } from "@react-navigation/native";
 import { type RootStackParamList } from "../App";
+import NotFoundImage from "../components/NotFoundImage";
 
 type StoreSearchNavigate = NavigationProp<
   RootStackParamList,
@@ -73,6 +74,7 @@ export default function StoreSearchView() {
                     );
                   })}
                 </View>
+              ) : <NotFoundImage/>}
               ) : null}
             </>
           )
@@ -117,6 +119,7 @@ const styles = StyleSheet.create({
   },
   searchCompletedSection: {
     width: "100%",
+    height: 80,
     height: 100,
     alignItems: "center",
     justifyContent: "center",
