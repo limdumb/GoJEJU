@@ -20,7 +20,7 @@ export default function DetailReviewView(props: Props) {
   const navigate = useNavigation<NavigationProp<RootStackParamList>>();
   const [page, setPage] = useState(0);
   const { data, isLoading, error } = useFetch(``);
-  console.log(userId)
+
   return (
     <View>
       <View style={styles.reviewTabContainer}>

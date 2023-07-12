@@ -12,6 +12,9 @@ import CommonInput from "../components/CommonInput";
 import CustomText from "../components/CustomText";
 import RatingStar from "../components/RatingStar";
 import Carousel from "../components/StoreDetailView/Carousel";
+import * as ImagePicker from "expo-image-picker";
+import Spinner from "../components/Spinner";
+
 interface ImageData {
   uri: string;
 }
@@ -23,10 +26,12 @@ type ReviewPostRouteType = NativeStackScreenProps<
 
 export default function ReviewPostView({ route }: ReviewPostRouteType) {
   const storeId = route.params.storeId;
+  const [status, requestPermission] = ImagePicker.useMediaLibraryPermissions();
   const screenWidth = Math.round(Dimensions.get("window").width);
-  const [images, setImages] = useState<string[]>([]);
+  const [images, setImages] = useState<Array<string>>([]);
   const [reviewText, setReviewText] = useState("");
   const [rating, setRating] = useState(3);
+  const [uploadLoading, setUploadLoading] = useState(false);
 
   const renderImages = () => {
     return (
@@ -47,28 +52,53 @@ export default function ReviewPostView({ route }: ReviewPostRouteType) {
     );
   };
 
+  const uploadImage = async () => {
+    if (!status?.granted) {
+      const permission = await requestPermission();
+      if (!permission.granted) return null;
+    }
+
+    const imageArr: string[] = [...images];
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: false,
+      quality: 1,
+      aspect: [1, 1],
+    });
+    if (result.assets) {
+      setUploadLoading(true);
+      imageArr.push(result.assets[0].uri);
+      setImages(imageArr);
+      setUploadLoading(false);
+    }
+  };
+
   const handleSubmitReview = async () => {
     if (reviewText.length === 0) Alert.alert("리뷰를 입력해주세요!");
     if (reviewText.length >= 100)
       Alert.alert("리뷰는 100자 이상 입력할 수 없습니다. 확인해주세요!");
     if (reviewText.length !== 0 && reviewText.length < 100) {
       const response = await postReview({
-        storeId:storeId,
+        storeId: storeId,
         images: images,
         body: reviewText,
         rating: rating,
       });
-      if(response === 200) {}
+      if (response === 200) {
+      }
     }
   };
 
   return (
     <View style={styles.container}>
       <ScrollView>
-        {/* 추후 이미지 업로드 기능 예정 */}
+      {uploadLoading ? <Spinner /> : null}
         <ScrollView>{renderImages()}</ScrollView>
         <View style={styles.imageUploardWrapper}>
-          <TouchableOpacity onPress={() => {}} style={styles.buttonContainer}>
+          <TouchableOpacity
+            onPress={uploadImage}
+            style={styles.buttonContainer}
+          >
             <CustomText
               children="사진 추가"
               color="white"
