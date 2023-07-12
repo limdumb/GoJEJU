@@ -75,6 +75,7 @@ export default function StoreSearchView() {
                   })}
                 </View>
               ) : <NotFoundImage/>}
+              ) : null}
             </>
           )
         ) : (
@@ -119,6 +120,7 @@ const styles = StyleSheet.create({
   searchCompletedSection: {
     width: "100%",
     height: 80,
+    height: 100,
     alignItems: "center",
     justifyContent: "center",
   },

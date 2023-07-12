@@ -9,7 +9,6 @@ export default function ReviewBox (props: ReviewType) {
   return (
     <View style={styles.reviewBoxContainer}>
       <View style={styles.userInfoContainer}>
-        {/* 5월 31일 2시 8분 User Icon 추후 데이터값 인입시 Image로 변경 예정 */}
         <UserIcon name="user-circle-o" size={40} />
         <CustomText
           children="유저이름입니다"
