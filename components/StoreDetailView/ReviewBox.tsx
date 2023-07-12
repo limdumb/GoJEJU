@@ -7,7 +7,7 @@ import DeleteIcon from "react-native-vector-icons/Feather";
 import deleteReview from "../../API/deleteReview";
 
 interface ReviewBoxPropsType extends ReviewType {
-  loginUserId: number;
+  loginUserId: number | null;
 }
 
 export default function ReviewBox(props: ReviewBoxPropsType) {
@@ -41,6 +41,14 @@ export default function ReviewBox(props: ReviewBoxPropsType) {
             }}
           />
         ) : null}
+        <UserIcon name="user-circle-o" size={40} />
+        <CustomText
+          children="유저이름입니다"
+          fontWeight="bold"
+          fontSize="20px"
+          marginLft="12px"
+          marginTop="2px"
+        />
       </View>
       <View style={styles.reviewImageContainer}>
         <Carousel
