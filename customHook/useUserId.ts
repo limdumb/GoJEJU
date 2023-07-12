@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react'
 
 export const useUserId = () => {
   const [userIdValue, setUserIdValue] = useState<number | null>(null)
-
   useEffect(() => {
     const getUserId = async () => {
       try {

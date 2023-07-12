@@ -17,11 +17,12 @@ import FavoritView from "./pages/mypage/FavoritView";
 import MyReview from "./pages/mypage/MyReview";
 import OwnerSettingView from "./pages/mypage/OwnerSettingView";
 import OwnerAddStoreView from "./pages/OwnerAddStoreView";
+import ReviewPostView from "./pages/ReviewPostView";
 
 export type RootStackParamList = {
   MainView: undefined;
   StoreDetailView: {
-    id: number
+    id: number;
     name: string;
   };
   LoginView: undefined;
@@ -39,6 +40,7 @@ export type RootStackParamList = {
   MyReview: undefined;
   OwnerSettingView: undefined;
   OwnerAddStoreView: undefined;
+  ReviewPostView: { storeId: number };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -127,6 +129,11 @@ export default function App() {
           name="OwnerAddStoreView"
           component={OwnerAddStoreView}
           options={{ title: "가계 등록 페이지" }}
+        />
+        <Stack.Screen
+          name="ReviewPostView"
+          component={ReviewPostView}
+          options={{ title: "리뷰 등록" }}
         />
       </Stack.Navigator>
     </NavigationContainer>
