@@ -1,13 +1,8 @@
 import { baseInstance } from "./instance";
+import { ReviewRequestType } from "./postReview";
 
-export interface ReviewRequestType {
-  images: string[];
-  body: string;
-  rating: number;
-  storeId: number
-}
 
-export default async function postReview(props: ReviewRequestType) {
+export default async function editReview(props: ReviewRequestType) {
   const request = {
     storeId: props.storeId,
     images: props.images,

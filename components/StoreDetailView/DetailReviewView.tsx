@@ -64,19 +64,6 @@ export default function DetailReviewView(props: Props) {
       ) : (
         <NotFoundImage />
       )}
-      <ReviewBox
-        rating={5}
-        storeId={props.storeId}
-        key={1}
-        id={1}
-        userName={"유저"}
-        userProfileImage={"ㅇㄹ"}
-        reviewImages={["ㅇㄹ"]}
-        reviewText={"아리리리"}
-        loginUserId={userId}
-        userId={2}
-        navigate={navigate}
-      />
     </View>
   );
 }

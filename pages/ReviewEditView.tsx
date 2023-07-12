@@ -65,7 +65,7 @@ export default function ReviewEditView({ route }: ReviewEditPropsType) {
     }
   };
 
-  const handleSubmitReview = async () => {
+  const handleEditReview = async () => {
     if (reviewText.length === 0) Alert.alert("리뷰를 입력해주세요!");
     if (reviewText.length >= 100)
       Alert.alert("리뷰는 100자 이상 입력할 수 없습니다. 확인해주세요!");
@@ -123,11 +123,11 @@ export default function ReviewEditView({ route }: ReviewEditPropsType) {
         </View>
         <View style={styles.submitSection}>
           <TouchableOpacity
-            onPress={() => handleSubmitReview()}
+            onPress={() => handleEditReview()}
             style={styles.buttonContainer}
           >
             <CustomText
-              children="작성하기"
+              children="수정하기"
               color="white"
               fontWeight="bold"
               fontSize="20"
