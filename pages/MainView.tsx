@@ -16,6 +16,7 @@ import AdressBox from "../components/AdressBox";
 import useFetch from "../customHook/useFetch";
 import Spinner from "../components/Spinner";
 import CustomText from "../components/CustomText";
+import { isCloseToBottom } from "../function/isCloseToBottom";
 
 export interface StoreListDataType {
   total: number;
@@ -47,22 +48,14 @@ export default function MainView() {
     }
   };
 
-  const isCloseToBottom = (nativeEvent: NativeScrollEvent) => {
-    const paddingToBottom = 34;
-    return (
-      nativeEvent.layoutMeasurement.height + nativeEvent.contentOffset.y >=
-      nativeEvent.contentSize.height - paddingToBottom
-    );
-  };
-
   return (
     <View style={styles.container}>
       <Header />
       <ScrollView
         style={styles.scrollViewContainer}
-        onScrollEndDrag={(nativeEvent) => {
-          const eventValue = nativeEvent.nativeEvent;
-          if (isCloseToBottom(eventValue)) {
+        onScrollEndDrag={({nativeEvent}) => {
+          const bottomResult = isCloseToBottom(nativeEvent)
+          if (bottomResult) {
             onEndCatched();
           }
         }}

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import CustomText from "../components/CustomText";
 import StoreBox from "../components/SearchView/StoreBox";
@@ -9,6 +9,7 @@ import Spinner from "../components/Spinner";
 import { type NavigationProp, useNavigation } from "@react-navigation/native";
 import { type RootStackParamList } from "../App";
 import NotFoundImage from "../components/NotFoundImage";
+import { isCloseToBottom } from "../function/isCloseToBottom";
 
 type StoreSearchNavigate = NavigationProp<
   RootStackParamList,
@@ -18,9 +19,14 @@ type StoreSearchNavigate = NavigationProp<
 export default function StoreSearchView() {
   const navigate = useNavigation<StoreSearchNavigate>();
   const [searchValue, setSearchValue] = useState("");
+  const [pages, setPages] = useState(0);
   const [isSearchCompleted, setIsSearchCompleted] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-  const [searchResults, setSearchResults] = useState<SearchDataType[]>([]);
+  const [searchResults, setSearchResults] = useState<SearchDataType>({
+    hasNext: false,
+    total: 0,
+    stores: [],
+  });
 
   const fetchSearchResults = async () => {
     setIsLoading(true);
@@ -34,9 +40,25 @@ export default function StoreSearchView() {
     }
   };
 
+  useEffect(() => {
+    fetchSearchResults();
+  }, [pages]);
+
+  const onEndCatched = () => {
+    if (searchResults.hasNext) {
+      setPages(pages + 1);
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <ScrollView style={styles.scrollViewContainer}>
+      <ScrollView
+        style={styles.scrollViewContainer}
+        onScroll={({ nativeEvent }) => {
+          const checkBottomResult = isCloseToBottom(nativeEvent);
+          if (checkBottomResult) onEndCatched();
+        }}
+      >
         <Header />
         {!isSearchCompleted ? (
           isLoading ? (
@@ -55,13 +77,13 @@ export default function StoreSearchView() {
               </View>
               <View style={styles.searchConuntContainer}>
                 <CustomText
-                  children={`${searchResults.length}개의 카페 검색결과`}
+                  children={`${searchResults.total}개의 카페 검색결과`}
                   fontSize={"18px"}
                 />
               </View>
-              {searchResults.length !== 0 ? (
+              {searchResults.stores.length !== 0 ? (
                 <View style={styles.searchResultContainer}>
-                  {searchResults.map((el) => {
+                  {searchResults.stores.map((el) => {
                     return (
                       <StoreBox
                         navigate={navigate}
@@ -74,7 +96,9 @@ export default function StoreSearchView() {
                     );
                   })}
                 </View>
-              ) : <NotFoundImage/>}
+              ) : (
+                <NotFoundImage />
+              )}
             </>
           )
         ) : (
