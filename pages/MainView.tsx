@@ -1,6 +1,13 @@
 import { type NavigationProp, useNavigation } from "@react-navigation/native";
 import { useState } from "react";
-import { FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  FlatList,
+  NativeScrollEvent,
+  ScrollView,
+  ScrollViewBase,
+  StyleSheet,
+  View,
+} from "react-native";
 import { type RootStackParamList } from "../App";
 import StoreCard, { StoreCardType } from "../components/MainView/StoreCard";
 import Header from "../components/Header";
@@ -15,6 +22,11 @@ export interface StoreListDataType {
   hasNext: boolean;
   stores: StoreCardType[];
 }
+interface BottomCheckPropsType {
+  layoutMeasurement: { width: number; height: number };
+  contentOffset: { y: number; x: number };
+  contentSize: { width: number; height: number };
+}
 
 export type MainScreenNavigationProps = NavigationProp<
   RootStackParamList,
@@ -22,6 +34,7 @@ export type MainScreenNavigationProps = NavigationProp<
 >;
 
 export default function MainView() {
+  const navigate = useNavigation<MainScreenNavigationProps>();
   const [pages, setPages] = useState(0);
   const [adressValue, setAdressValue] = useState("");
   const { data, isLoading, error } = useFetch<StoreListDataType>(
@@ -33,13 +46,27 @@ export default function MainView() {
       setPages(pages + 1);
     }
   };
-  
 
-  const navigate = useNavigation<MainScreenNavigationProps>();
+  const isCloseToBottom = (nativeEvent: NativeScrollEvent) => {
+    const paddingToBottom = 34;
+    return (
+      nativeEvent.layoutMeasurement.height + nativeEvent.contentOffset.y >=
+      nativeEvent.contentSize.height - paddingToBottom
+    );
+  };
+
   return (
     <View style={styles.container}>
       <Header />
-      <View style={styles.scrollViewContainer}>
+      <ScrollView
+        style={styles.scrollViewContainer}
+        onScrollEndDrag={(nativeEvent) => {
+          const eventValue = nativeEvent.nativeEvent;
+          if (isCloseToBottom(eventValue)) {
+            onEndCatched();
+          }
+        }}
+      >
         <View style={styles.map}>
           {adressArr.map((el) => {
             return (
@@ -54,36 +81,38 @@ export default function MainView() {
           })}
         </View>
         <View style={styles.storeListContainer}>
-          <CustomText children="카페 리스트" fontSize="20px" fontWeight="bold"/>
+          <CustomText
+            children="카페 리스트"
+            fontSize="20px"
+            fontWeight="bold"
+          />
           <View style={styles.storeList}>
             {!isLoading ? (
               <>
                 {data?.stores.length !== 0 ? (
-                  <FlatList
-                    data={data.stores}
-                    onEndReached={onEndCatched}
-                    onEndReachedThreshold={0.75}
-                    renderItem={(item) => {
+                  <>
+                    {data.stores.map((el) => {
                       return (
                         <StoreCard
                           navigate={navigate}
-                          id={item.item.id}
-                          imageUrl={item.item.imageUrl}
-                          name={item.item.name}
-                          storeDescription={item.item.storeDescription}
-                          storeStatus={item.item.storeStatus}
+                          id={el.id}
+                          imageUrl={el.imageUrl}
+                          name={el.name}
+                          storeDescription={el.storeDescription}
+                          storeStatus={el.storeStatus}
                         />
                       );
-                    }}
-                  />
-                ) : null}
+                    })}
+                  </>
+                ) : // renderStoreList()
+                null}
               </>
             ) : (
               <Spinner />
             )}
           </View>
         </View>
-      </View>
+      </ScrollView>
     </View>
   );
 }
@@ -127,6 +156,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     justifyContent: "space-between",
     width: "100%",
+    minHeight: "70%",
     marginTop: 20,
   },
 });

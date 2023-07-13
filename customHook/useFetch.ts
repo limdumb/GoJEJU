@@ -14,7 +14,6 @@ function useFetch<T>(endPoint: string): FetchResponse<T> {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    console.log(endPoint)
     const fetchData = async () => {
       setIsLoading(true);
 
