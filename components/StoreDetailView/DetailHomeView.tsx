@@ -6,8 +6,6 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 import StarIcon from "react-native-vector-icons/AntDesign";
 import CallIcon from "react-native-vector-icons/MaterialIcons";
 import InstagramIcon from "react-native-vector-icons/FontAwesome";
-import { addFavorit } from "../../API/addFavorit";
-import { deleteFavorit } from "../../API/deleteFavorit";
 
 interface DetailHomeViewProps {
   storeDetails: StoreDetailType;
@@ -23,7 +21,7 @@ export default function DetailHomeView(props: DetailHomeViewProps) {
         <TouchableOpacity
           style={styles.favoritContainer}
           onPress={() => {
-            props.favoritClickChange(props.favoritAdd);
+            props.favoritClickChange(true);
           }}
         >
           <StarIcon
@@ -40,7 +38,7 @@ export default function DetailHomeView(props: DetailHomeViewProps) {
         <TouchableOpacity
           style={styles.favoritContainer}
           onPress={() => {
-            props.favoritClickChange(props.favoritAdd);
+            props.favoritClickChange(false);
           }}
         >
           <StarIcon

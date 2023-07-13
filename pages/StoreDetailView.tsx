@@ -37,18 +37,18 @@ export default function StoreDetailView({ route }: StoreDetailProps) {
   );
 
   const favoritClickChange = async (favoritStatus: boolean) => {
-    if (favoritStatus) {
+    if (favoritAdd) {
       if (userId !== null) {
         const response = await addFavorit({ userId: userId });
         if (response === 200) {
-          setFavoritAdd(false);
+          setFavoritAdd(favoritStatus);
         }
       }
     } else {
       if (userId !== null) {
         const response = await deleteFavorit({ userId: userId });
         if (response === 200) {
-          setFavoritAdd(true);
+          setFavoritAdd(favoritStatus);
         }
       }
     }
