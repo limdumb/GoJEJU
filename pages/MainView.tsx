@@ -1,10 +1,7 @@
 import { type NavigationProp, useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import {
-  FlatList,
-  NativeScrollEvent,
   ScrollView,
-  ScrollViewBase,
   StyleSheet,
   View,
 } from "react-native";
@@ -23,11 +20,7 @@ export interface StoreListDataType {
   hasNext: boolean;
   stores: StoreCardType[];
 }
-interface BottomCheckPropsType {
-  layoutMeasurement: { width: number; height: number };
-  contentOffset: { y: number; x: number };
-  contentSize: { width: number; height: number };
-}
+
 
 export type MainScreenNavigationProps = NavigationProp<
   RootStackParamList,
@@ -97,7 +90,7 @@ export default function MainView() {
                       );
                     })}
                   </>
-                ) : // renderStoreList()
+                ) :
                 null}
               </>
             ) : (

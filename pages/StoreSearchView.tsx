@@ -40,10 +40,6 @@ export default function StoreSearchView() {
     }
   };
 
-  useEffect(() => {
-    fetchSearchResults();
-  }, [pages]);
-
   const onEndCatched = () => {
     if (searchResults.hasNext) {
       setPages(pages + 1);
@@ -54,12 +50,12 @@ export default function StoreSearchView() {
     <View style={styles.container}>
       <ScrollView
         style={styles.scrollViewContainer}
-        onScroll={({ nativeEvent }) => {
+        onScrollEndDrag={({ nativeEvent }) => {
           const checkBottomResult = isCloseToBottom(nativeEvent);
           if (checkBottomResult) onEndCatched();
         }}
       >
-        <Header />
+      <Header />
         {!isSearchCompleted ? (
           isLoading ? (
             <View style={styles.spinnerContainer}>
@@ -129,10 +125,12 @@ export default function StoreSearchView() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
     alignItems: "center",
+    backgroundColor: "white",
   },
-  scrollViewContainer: { height: "100%" },
+  scrollViewContainer: {
+    width: "100%",
+  },
   searchInputSection: {
     position: "absolute",
     alignItems: "center",
