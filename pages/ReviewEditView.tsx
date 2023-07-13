@@ -4,7 +4,6 @@ import { Alert } from "react-native";
 import { Dimensions, TouchableOpacity } from "react-native";
 import { ScrollView } from "react-native";
 import { StyleSheet, View } from "react-native";
-import postReview from "../API/postReview";
 import { RootStackParamList } from "../App";
 import CommonInput from "../components/CommonInput";
 import CustomText from "../components/CustomText";
@@ -12,6 +11,7 @@ import RatingStar from "../components/RatingStar";
 import Carousel from "../components/StoreDetailView/Carousel";
 import * as ImagePicker from "expo-image-picker";
 import Spinner from "../components/Spinner";
+import editReview from "../API/editReview";
 
 type ReviewEditPropsType = NativeStackScreenProps<
   RootStackParamList,
@@ -70,7 +70,7 @@ export default function ReviewEditView({ route }: ReviewEditPropsType) {
     if (reviewText.length >= 100)
       Alert.alert("리뷰는 100자 이상 입력할 수 없습니다. 확인해주세요!");
     if (reviewText.length !== 0 && reviewText.length < 100) {
-      const response = await postReview({
+      const response = await editReview({
         storeId: reviewData.storeId,
         images: images,
         body: reviewText,
