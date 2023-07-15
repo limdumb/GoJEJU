@@ -25,7 +25,6 @@ export default function LoginView() {
       email: emailValue,
       password: password,
     });
-
     if (!validateResult || LoginResult !== 200) {
       Alert.alert("로그인 정보가 잘못돼었습니다 다시 확인해주세요");
     }
