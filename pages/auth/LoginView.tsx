@@ -19,7 +19,7 @@ export default function LoginView() {
     const passwordValidateResult = passwordValidation(password);
     return emailValidateResult && passwordValidateResult ? true : false;
   };
-  
+
   const userLogin = async () => {
     const validateResult = loginValidate();
     const LoginResult = await loginLogic({

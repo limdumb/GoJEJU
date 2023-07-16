@@ -14,7 +14,7 @@ export default function UserNormalSignUpView() {
   const [emailId, setEmailId] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigation<NavigationProp<RootStackParamList>>()
+  const navigate = useNavigation<NavigationProp<RootStackParamList>>();
 
   const signupValidate = () => {
     const emailValidateResult = emailValidation(emailId);
@@ -37,7 +37,7 @@ export default function UserNormalSignUpView() {
       });
       if (signin === 200) {
         Alert.alert("로그인이 완료되었습니다");
-        navigate.navigate("MainView")
+        navigate.navigate("MainView");
       } else {
         Alert.alert("정보가 잘못돼었습니다 다시 시도해주세요");
       }
