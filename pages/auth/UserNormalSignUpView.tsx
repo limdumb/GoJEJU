@@ -2,12 +2,12 @@ import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import { Alert } from "react-native";
 import { View, StyleSheet } from "react-native";
+import { RootStackParamList } from "../../App";
 import loginLogic from "../../API/auth/loginLogic";
 import userSignup from "../../API/auth/userSignup";
-import { RootStackParamList } from "../../App";
-import AuthButton from "../../components/Auth/AuthButton";
 import AuthLogo from "../../components/Auth/AuthLogo";
 import CommonInput from "../../components/CommonInput";
+import AuthButton from "../../components/Auth/AuthButton";
 import { emailValidation, passwordValidation } from "../../function/validation";
 
 export default function UserNormalSignUpView() {
