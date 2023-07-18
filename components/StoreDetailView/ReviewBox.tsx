@@ -8,14 +8,16 @@ import EditIcon from "react-native-vector-icons/AntDesign";
 import deleteReview from "../../API/deleteReview";
 import { NavigationProp } from "@react-navigation/native";
 import { RootStackParamList } from "../../App";
+import RatingStar from "../RatingStar";
 
 interface ReviewBoxPropsType extends ReviewType {
   loginUserId: number | null;
   navigate: NavigationProp<RootStackParamList>;
   storeId: number;
+  // setRating:React.Dispatch<React.SetStateAction<number>>
 }
 
-export default function ReviewBox(props: ReviewBoxPropsType) {
+export default function ReviewBox(props: ReviewBoxPropsType): JSX.Element {
   const screenWidth = Math.round(Dimensions.get("window").width);
   const reviewEditFunc = async () => {
     props.navigate.navigate("ReviewEditView", {
@@ -77,6 +79,10 @@ export default function ReviewBox(props: ReviewBoxPropsType) {
       <View>
         <CustomText children={`${props.reviewText}`} />
       </View>
+      <View style={styles.ratingContainer}>
+        <RatingStar totalStars={5} rating={props.rating} />
+        <CustomText children={`${props.rating}점`} marginLft={"5px"} fontWeight={"600"}/>
+      </View>
     </View>
   );
 }
@@ -101,4 +107,9 @@ const styles = StyleSheet.create({
   userProfileWrapper: { flexDirection: "row", alignItems: "center" },
   reviewImageContainer: { marginBottom: 20 },
   editContainer: { flexDirection: "row" },
+  ratingContainer: {
+    width: "100%",
+    justifyContent: "flex-end",
+    flexDirection: "row",
+  },
 });
