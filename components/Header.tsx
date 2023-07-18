@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { type MainScreenNavigationProps } from '../pages/MainView'
 import { Text, View, StyleSheet, Button, TouchableOpacity } from 'react-native'
+import { useUserId } from '../customHook/useUserId'
 
 const HeaderContainer = styled.View`
   height: 160px;
@@ -21,17 +22,7 @@ interface TabType {
 
 export default function Header () {
   const navigate = useNavigation<MainScreenNavigationProps>()
-  const [userId, setUserId] = useState<number | null>(null)
-
-  useEffect(() => {
-    const getUserId = async () => {
-      const response = await userIdValue()
-      setUserId(response)
-    }
-
-    getUserId()
-  }, [])
-
+  const userId = useUserId()
   const tabArray: TabType[] = [
     { tabName: '지도', navScreen: 'MainView' },
     { tabName: '카페검색', navScreen: 'StoreSearchView' },

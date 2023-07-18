@@ -1,13 +1,17 @@
 import { useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import CustomText from "../../components/CustomText";
+import AddAdressBox from "../../components/OwnerAddStoreView.tsx/AddAdressBox";
 import EditContactBox from "../../components/OwnerSettingView/EditContactBox";
 import ScheduleBox from "../../components/OwnerSettingView/ScheduleBox";
 import StoreProfile from "../../components/OwnerSettingView/StoreEditProfile";
 import StoreStateToggle from "../../components/OwnerSettingView/StoreStateToggle";
+import useFetch from "../../customHook/useFetch";
+import { emdNameArray } from "../../function/emdNameArray";
 import { getWeekArray } from "../../function/getWeekArray";
 
 export default function OwnerSettingView() {
+  const { data, isLoading, error } = useFetch("");
   const [isEnabled, setIsEnabled] = useState(false);
   const [toggleCheckBox, setToggleCheckBox] = useState([
     false,
@@ -20,6 +24,7 @@ export default function OwnerSettingView() {
   ]);
   const [snsValue, setSnsValue] = useState("");
   const [storeNumber, setStoreNumber] = useState("");
+  const [adressValue, setAdressValue] = useState("");
 
   const handleCheckboxChange = (index: number) => {
     setToggleCheckBox((prevCheckboxes) => {
@@ -34,12 +39,22 @@ export default function OwnerSettingView() {
   };
 
   const dayOfTheWeek = getWeekArray();
+  const emdInformation = emdNameArray().filter((el) => {
+    return el.name !== "전체";
+  });
+  
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollViewContainer}>
         <View style={styles.profileContainer}>
-          {/* 추후 데이터변경 예정 */}
           <StoreProfile imageUrl={""} name={""} storeDescription={""} />
+        </View>
+        <View style={styles.AddAdressWrapper}>
+          <AddAdressBox
+            adressValue={adressValue}
+            setAdressValue={setAdressValue}
+            emdArr={emdInformation}
+          />
         </View>
         <View style={styles.storeToggleContainer}>
           <StoreStateToggle
@@ -96,5 +111,9 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     paddingBottom: 10,
     borderBottomColor: "#C3C3C3",
+  },
+  AddAdressWrapper: {
+    width: "100%",
+    height: 300,
   },
 });
