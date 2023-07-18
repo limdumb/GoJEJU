@@ -1,40 +1,53 @@
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { useState } from "react";
-import { Alert } from "react-native";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Alert } from "react-native";
+import { RootStackParamList } from "../../App";
 import loginLogic from "../../API/auth/loginLogic";
 import userSignup from "../../API/auth/userSignup";
-import AuthButton from "../../components/Auth/AuthButton";
 import AuthLogo from "../../components/Auth/AuthLogo";
 import CommonInput from "../../components/CommonInput";
-import { emailValidation, passwordValidation } from "../../function/validation";
+import AuthButton from "../../components/Auth/AuthButton";
+import {
+  authValueLengthChecked,
+  emailValidation,
+  passwordValidation,
+} from "../../function/validation";
 
 export default function UserNormalSignUpView() {
-  const [emailId, setEmailId] = useState("");
-  const [passwordValue, setPasswordValue] = useState("");
+  const [emailValue, setEmailValue] = useState("");
+  const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigation<NavigationProp<RootStackParamList>>();
 
   const signupValidate = () => {
-    const emailValidateResult = emailValidation(emailId);
-    const passwordValidateResult = passwordValidation(passwordValue);
+    const emailValidateResult = emailValidation(emailValue);
+    const passwordValidateResult = passwordValidation(password);
     return emailValidateResult && passwordValidateResult ? true : false;
   };
 
   const registerUser = async () => {
-    setIsLoading(true);
-    const signupResult = await userSignup({
-      email: emailId,
-      password: passwordValue,
-    });
-    setIsLoading(false);
-
-    if (signupResult && !isLoading) {
-      const signin = await loginLogic({
-        email: emailId,
-        password: passwordValue,
+    const lengthResult = authValueLengthChecked(emailValue, password);
+    if (lengthResult) {
+      setIsLoading(true);
+      const signupResult = await userSignup({
+        email: emailValue,
+        password: password,
       });
-      signin === 200
-        ? Alert.alert("로그인이 완료되었습니다")
-        : Alert.alert("정보가 잘못돼었습니다 다시 시도해주세요");
+      setIsLoading(false);
+      if (signupResult && !isLoading) {
+        const signin = await loginLogic({
+          email: emailValue,
+          password: password,
+        });
+        if (signin === 200) {
+          Alert.alert("로그인이 완료되었습니다");
+          navigate.navigate("MainView");
+        } else {
+          Alert.alert("정보가 잘못돼었습니다 다시 시도해주세요");
+        }
+      }
+    } else {
+      Alert.alert("이메일 및 비밀번호를 입력해주세요");
     }
   };
 
@@ -46,10 +59,10 @@ export default function UserNormalSignUpView() {
           <CommonInput
             width={"100%"}
             height={"54px"}
-            value={emailId}
+            value={emailValue}
             backgroundColor={"#EEEEEE"}
             placeholder={"이메일을 입력해 주세요"}
-            changeFunc={setEmailId}
+            changeFunc={setEmailValue}
             label={"이메일"}
             type={"text"}
           />
@@ -58,10 +71,10 @@ export default function UserNormalSignUpView() {
           <CommonInput
             width={"100%"}
             height={"54px"}
-            value={passwordValue}
+            value={password}
             backgroundColor={"#EEEEEE"}
             placeholder={"비밀번호를 입력해 주세요"}
-            changeFunc={setPasswordValue}
+            changeFunc={setPassword}
             label={"비밀번호"}
             type={"password"}
           />
@@ -70,12 +83,7 @@ export default function UserNormalSignUpView() {
           <AuthButton
             children="회원가입 완료"
             pressFunction={() => {
-              const validateResult = signupValidate();
-              if (validateResult){
-                registerUser();
-              } else {
-                Alert.alert("로그인 정보를 다시 확인해주세요")
-              }
+              registerUser();
             }}
           />
         </View>
