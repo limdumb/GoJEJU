@@ -13,3 +13,10 @@ export const LEICodeValidation = (LEICode: string) => {
   const LEICodeRegex = /^[0-9]+$/;
   return LEICodeRegex.test(LEICode);
 };
+
+export const authValueLengthChecked = (
+  email: string,
+  password: string
+): boolean => {
+  return email.length !== 0 && password.length !== 0 ? true : false;
+};

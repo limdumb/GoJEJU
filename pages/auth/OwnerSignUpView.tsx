@@ -19,7 +19,6 @@ export default function OwnerSignUpView ({ route }: RouteType) {
   const navigate = useNavigation<SignUpScreenNavigationProps>()
   const navigateAdress = roleNavigateAdress(route.params.role)
   const signupType: SignupType[] = [
-    // Oauth Navigate Url은 추후 추가 예정
     { type: 'kakao', navigate: navigateAdress },
     { type: 'google', navigate: navigateAdress },
     { type: 'normer', navigate: navigateAdress }
