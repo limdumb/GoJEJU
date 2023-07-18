@@ -7,7 +7,11 @@ import AuthLogo from "../../components/Auth/AuthLogo";
 import CommonInput from "../../components/CommonInput";
 import AuthButton from "../../components/Auth/AuthButton";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { emailValidation, passwordValidation } from "../../function/validation";
+import {
+  authValueLengthChecked,
+  emailValidation,
+  passwordValidation,
+} from "../../function/validation";
 
 export default function LoginView() {
   const navigate = useNavigation<NavigationProp<RootStackParamList>>();
@@ -22,16 +26,21 @@ export default function LoginView() {
 
   const userLogin = async () => {
     const validateResult = loginValidate();
-    const LoginResult = await loginLogic({
-      email: emailValue,
-      password: password,
-    });
-    if (!validateResult || LoginResult !== 200) {
-      Alert.alert("로그인 정보가 잘못돼었습니다 다시 확인해주세요");
-    }
-    if (validateResult && LoginResult === 200) {
-      Alert.alert("로그인이 완료되었습니다");
-      navigate.navigate("MainView");
+    const lengthResult = authValueLengthChecked(emailValue, password);
+    if(lengthResult){
+      const LoginResult = await loginLogic({
+        email: emailValue,
+        password: password,
+      });
+      if (!validateResult || LoginResult !== 200) {
+        Alert.alert("로그인 정보가 잘못돼었습니다 다시 확인해주세요");
+      }
+      if (validateResult && LoginResult === 200) {
+        Alert.alert("로그인이 완료되었습니다");
+        navigate.navigate("MainView");
+      }
+    } else {
+      Alert.alert("이메일 및 비밀번호를 입력 해주세요")
     }
   };
 
