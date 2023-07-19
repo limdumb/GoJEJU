@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Header from "../components/Header";
 import CustomText from "../components/CustomText";
 import StoreBox from "../components/SearchView/StoreBox";
@@ -15,7 +15,7 @@ type StoreSearchNavigate = NavigationProp<
   RootStackParamList,
   "StoreSearchView"
 >;
-
+// Edit에 Submit Button 만들기
 export default function StoreSearchView() {
   const navigate = useNavigation<StoreSearchNavigate>();
   const [searchValue, setSearchValue] = useState("");
@@ -55,7 +55,7 @@ export default function StoreSearchView() {
           if (checkBottomResult) onEndCatched();
         }}
       >
-      <Header />
+        <Header />
         {!isSearchCompleted ? (
           isLoading ? (
             <View style={styles.spinnerContainer}>
