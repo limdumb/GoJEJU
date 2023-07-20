@@ -12,11 +12,12 @@ export default function MyReview() {
   const [reviewData, setReviewData] = useState<ReviewType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [pages, setPages] = useState(0);
+  const [filterValue, setFilterValue ] = useState("최신순")
 
   useEffect(() => {
     const fetchReviewData = async () => {
       setIsLoading(true);
-      const response = await getReviewList({ page: pages });
+      const response = await getReviewList({ page: pages , filterValue:filterValue});
       setIsLoading(false);
       if (!isLoading) setReviewData(response.reviews);
     };

@@ -16,6 +16,7 @@ export interface ReviewResponseType {
 
 interface Props {
   storeId?: number
+  filterValue: string
   userId?: number
   page: number
 }
