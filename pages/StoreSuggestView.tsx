@@ -1,7 +1,6 @@
 import { type NavigationProp, useNavigation } from "@react-navigation/native";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
-import { getSuggestList, type SuggestDataType } from "../API/getSuggestList";
 import { type RootStackParamList } from "../App";
 import CustomText from "../components/CustomText";
 import Header from "../components/Header";
@@ -14,6 +13,21 @@ export type StoreSuggestNavigationProps = NavigationProp<
   RootStackParamList,
   "StoreSuggestView"
 >;
+
+interface SuggestCardType {
+  id: number;
+  imageUrl: string;
+  name: string;
+  rating: number;
+  storeDescription: string;
+}
+
+interface SuggestDataType {
+  hasNext: boolean;
+  stores: SuggestCardType[];
+  total: number;
+}
+
 
 export default function StoreSuggestView() {
   const navigate = useNavigation<StoreSuggestNavigationProps>();

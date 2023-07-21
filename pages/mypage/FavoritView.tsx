@@ -1,7 +1,7 @@
 import { type NavigationProp, useNavigation } from '@react-navigation/native'
 import { useEffect, useState } from 'react'
 import { ScrollView, StyleSheet, View } from 'react-native'
-import { type FavoritType, getFavoritList } from '../../API/getFavoritList'
+import { type FavoritType, getFavoritList } from '../../API/favorit/getFavoritList'
 import { type RootStackParamList } from '../../App'
 import StoreBox from '../../components/SearchView/StoreBox'
 import Spinner from '../../components/Spinner'

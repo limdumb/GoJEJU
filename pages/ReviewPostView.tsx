@@ -4,7 +4,7 @@ import { Alert } from "react-native";
 import { Dimensions, TouchableOpacity } from "react-native";
 import { ScrollView } from "react-native";
 import { StyleSheet, View } from "react-native";
-import postReview from "../API/postReview";
+import postReview from "../API/review/postReview";
 import { RootStackParamList } from "../App";
 import CommonInput from "../components/CommonInput";
 import CustomText from "../components/CustomText";

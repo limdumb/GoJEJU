@@ -6,14 +6,14 @@ import TabSwitcher from "../components/TabSwitcher";
 import { cautionText } from "../function/cautionText";
 import DetailHomeView from "../components/StoreDetailView/DetailHomeView";
 import DetailReviewView from "../components/StoreDetailView/DetailReviewView";
-import { type ReviewResponseType } from "../API/getReviewList";
+import { type ReviewResponseType } from "../API/review/getReviewList";
 import useFetch from "../customHook/useFetch";
 import { RootStackParamList } from "../App";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import Spinner from "../components/Spinner";
 import { useUserId } from "../customHook/useUserId";
-import { addFavorit } from "../API/addFavorit";
-import { deleteFavorit } from "../API/deleteFavorit";
+import { addFavorit } from "../API/favorit/addFavorit";
+import { deleteFavorit } from "../API/favorit/deleteFavorit";
 
 type StoreDetailProps = NativeStackScreenProps<
   RootStackParamList,

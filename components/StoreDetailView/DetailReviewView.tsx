@@ -3,7 +3,7 @@ import { FlatList, ListRenderItemInfo } from "react-native";
 import { Alert, StyleSheet } from "react-native";
 import { TouchableOpacity, View } from "react-native";
 import PenIcon from "react-native-vector-icons/FontAwesome5";
-import { ReviewType, type ReviewResponseType } from "../../API/getReviewList";
+import { ReviewType, type ReviewResponseType } from "../../API/review/getReviewList";
 import { RootStackParamList } from "../../App";
 import { useUserId } from "../../customHook/useUserId";
 import CustomText from "../CustomText";

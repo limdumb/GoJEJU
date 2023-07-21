@@ -1,4 +1,4 @@
-import { baseInstance } from "./instance";
+import { baseInstance } from "../instance";
 
 interface DeleteReviewProps {
   reviewId: number;

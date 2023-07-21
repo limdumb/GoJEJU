@@ -1,7 +1,7 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
-import { getReviewList, type ReviewType } from "../../API/getReviewList";
+import { getReviewList, type ReviewType } from "../../API/review/getReviewList";
 import { RootStackParamList } from "../../App";
 import ReviewBox from "../../components/StoreDetailView/ReviewBox";
 import { useUserId } from "../../customHook/useUserId";

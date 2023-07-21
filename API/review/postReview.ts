@@ -1,4 +1,4 @@
-import { baseInstance } from "./instance";
+import { baseInstance } from "../instance";
 
 export interface ReviewRequestType {
   images: string[];
