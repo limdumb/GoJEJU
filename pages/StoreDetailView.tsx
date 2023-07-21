@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Image, ScrollView, StyleSheet, View } from "react-native";
-import { type StoreDetailType } from "../API/getStoreDetail";
 import CustomText from "../components/CustomText";
 import StatusToggle from "../components/StatusToggle";
 import TabSwitcher from "../components/TabSwitcher";
@@ -21,6 +20,34 @@ type StoreDetailProps = NativeStackScreenProps<
   "StoreDetailView"
 >;
 
+interface StoreSchedulesType {
+  day:
+  | 'MONDAY'
+  | 'TUESDAY'
+  | 'WEDNESDAY'
+  | 'THURSDAY'
+  | 'FRIDAY'
+  | 'SATURDAY'
+  | 'SUNDAY'
+  start: string
+  end: string
+  lastOrder: string
+  type: 'OPEN' | 'CLOSED'
+}
+
+interface StoreDetailType {
+  id: number
+  images: string[]
+  name: string
+  storeStatus: 'OPEN' | 'CLOSED' | 'CLOSURE'
+  storeDescription: string
+  jubunAddress: string
+  roadAddress: string
+  storeSchedules: StoreSchedulesType[]
+  storePhoneNumber: string
+  sns: Array<{ type: string, url: string, nickName: string }>
+}
+
 export default function StoreDetailView({ route }: StoreDetailProps) {
   const storeId = route.params.id;
   const userId = useUserId();
@@ -32,6 +59,9 @@ export default function StoreDetailView({ route }: StoreDetailProps) {
   });
   const [favoritAdd, setFavoritAdd] = useState(false);
   const [pages, setPages] = useState(0);
+  const { data, isLoading, error } = useFetch<StoreDetailType>(
+    `api/store/${storeId}`
+  );
 
   const onEndCatched = () => {
     if (reviewData.hasNext) {
@@ -39,9 +69,6 @@ export default function StoreDetailView({ route }: StoreDetailProps) {
     }
   };
 
-  const { data, isLoading, error } = useFetch<StoreDetailType>(
-    `api/store/${storeId}`
-  );
 
   const favoritClickChange = async (favoritStatus: boolean) => {
     if (favoritAdd) {

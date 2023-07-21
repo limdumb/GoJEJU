@@ -42,8 +42,7 @@ export default function ReviewPostView({ route }: ReviewPostRouteType) {
             pageWidth={screenWidth - (15 + 36) * 2}
           />
         ) : (
-          <View style={styles.carouselContainer}>
-          </View>
+          <View style={styles.carouselContainer}></View>
         )}
       </>
     );
@@ -89,7 +88,7 @@ export default function ReviewPostView({ route }: ReviewPostRouteType) {
   return (
     <View style={styles.container}>
       <ScrollView>
-      {uploadLoading ? <Spinner /> : null}
+        {uploadLoading ? <Spinner /> : null}
         <ScrollView>{renderImages()}</ScrollView>
         <View style={styles.imageUploardWrapper}>
           <TouchableOpacity
