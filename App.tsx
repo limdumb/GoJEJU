@@ -16,7 +16,7 @@ import LEICodeView from "./pages/auth/LEICodeView";
 import FavoritView from "./pages/mypage/FavoritView";
 import MyReview from "./pages/mypage/MyReview";
 import OwnerSettingView from "./pages/mypage/OwnerSettingView";
-import OwnerAddStoreView from "./pages/OwnerAddStoreView";
+import OwnerAddStoreView from "./pages/mypage/OwnerAddStoreView";
 import ReviewPostView from "./pages/ReviewPostView";
 import ReviewEditView from "./pages/ReviewEditView";
 
