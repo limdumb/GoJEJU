@@ -6,7 +6,6 @@ import TabSwitcher from "../components/TabSwitcher";
 import { cautionText } from "../function/cautionText";
 import DetailHomeView from "../components/StoreDetailView/DetailHomeView";
 import DetailReviewView from "../components/StoreDetailView/DetailReviewView";
-import { type ReviewResponseType } from "../API/review/getReviewList";
 import useFetch from "../customHook/useFetch";
 import { RootStackParamList } from "../App";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
@@ -22,43 +21,62 @@ type StoreDetailProps = NativeStackScreenProps<
 
 interface StoreSchedulesType {
   day:
-  | 'MONDAY'
-  | 'TUESDAY'
-  | 'WEDNESDAY'
-  | 'THURSDAY'
-  | 'FRIDAY'
-  | 'SATURDAY'
-  | 'SUNDAY'
-  start: string
-  end: string
-  lastOrder: string
-  type: 'OPEN' | 'CLOSED'
+    | "MONDAY"
+    | "TUESDAY"
+    | "WEDNESDAY"
+    | "THURSDAY"
+    | "FRIDAY"
+    | "SATURDAY"
+    | "SUNDAY";
+  start: string;
+  end: string;
+  lastOrder: string;
+  type: "OPEN" | "CLOSED";
 }
 
 interface StoreDetailType {
-  id: number
-  images: string[]
-  name: string
-  storeStatus: 'OPEN' | 'CLOSED' | 'CLOSURE'
-  storeDescription: string
-  jubunAddress: string
-  roadAddress: string
-  storeSchedules: StoreSchedulesType[]
-  storePhoneNumber: string
-  sns: Array<{ type: string, url: string, nickName: string }>
+  id: number;
+  images: string[];
+  name: string;
+  storeStatus: "OPEN" | "CLOSED" | "CLOSURE";
+  storeDescription: string;
+  jubunAddress: string;
+  roadAddress: string;
+  storeSchedules: StoreSchedulesType[];
+  storePhoneNumber: string;
+  sns: Array<{ type: string; url: string; nickName: string }>;
+}
+
+interface ReviewType {
+  id: number;
+  userId: number;
+  userName: string;
+  userProfileImage: string;
+  reviewImages: string[];
+  reviewText: string;
+  rating: number;
+}
+
+interface ReviewResponseType {
+  hasNext: boolean;
+  total: number;
+  reviews: ReviewType[];
 }
 
 export default function StoreDetailView({ route }: StoreDetailProps) {
   const storeId = route.params.id;
   const userId = useUserId();
+  const [reviewFilter, setReviewFilter] = useState<"최신순" | "추천순">(
+    "최신순"
+  );
   const [isTabType, setIsTabType] = useState<"홈" | "리뷰">("홈");
+  const [pages, setPages] = useState(0);
   const [reviewData, setReviewData] = useState<ReviewResponseType>({
     hasNext: false,
     total: 0,
     reviews: [],
   });
   const [favoritAdd, setFavoritAdd] = useState(false);
-  const [pages, setPages] = useState(0);
   const { data, isLoading, error } = useFetch<StoreDetailType>(
     `api/store/${storeId}`
   );
@@ -68,7 +86,6 @@ export default function StoreDetailView({ route }: StoreDetailProps) {
       setPages(pages + 1);
     }
   };
-
 
   const favoritClickChange = async (favoritStatus: boolean) => {
     if (favoritAdd) {

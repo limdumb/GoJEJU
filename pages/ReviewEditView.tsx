@@ -11,7 +11,7 @@ import RatingStar from "../components/RatingStar";
 import Carousel from "../components/StoreDetailView/Carousel";
 import * as ImagePicker from "expo-image-picker";
 import Spinner from "../components/Spinner";
-import editReview from "../API/editReview";
+import editReview from "../API/review/editReview";
 
 type ReviewEditPropsType = NativeStackScreenProps<
   RootStackParamList,

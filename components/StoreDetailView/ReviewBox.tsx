@@ -2,19 +2,18 @@ import { StyleSheet, View, Dimensions, Alert } from "react-native";
 import UserIcon from "react-native-vector-icons/FontAwesome";
 import CustomText from "../CustomText";
 import Carousel from "./Carousel";
-import { type ReviewType } from "../../API/review/getReviewList";
 import DeleteIcon from "react-native-vector-icons/Feather";
 import EditIcon from "react-native-vector-icons/AntDesign";
 import deleteReview from "../../API/review/deleteReview";
 import { NavigationProp } from "@react-navigation/native";
 import { RootStackParamList } from "../../App";
 import RatingStar from "../RatingStar";
+import { ReviewDataType } from "./DetailReviewView";
 
-interface ReviewBoxPropsType extends ReviewType {
+interface ReviewBoxPropsType extends ReviewDataType {
   loginUserId: number | null;
   navigate: NavigationProp<RootStackParamList>;
   storeId: number;
-  // setRating:React.Dispatch<React.SetStateAction<number>>
 }
 
 export default function ReviewBox(props: ReviewBoxPropsType): JSX.Element {
