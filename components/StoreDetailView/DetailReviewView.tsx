@@ -19,17 +19,16 @@ export interface ReviewDataType {
   rating: number;
 }
 
-interface ReviewResponseType{
-  hasNext: boolean
-  total: number
-  reviews: ReviewDataType[]
+interface ReviewResponseType {
+  hasNext: boolean;
+  total: number;
+  reviews: ReviewDataType[];
 }
 
-interface Props extends ReviewResponseType{
+interface Props extends ReviewResponseType {
   storeId: number;
   onEndCatched: () => void;
 }
-
 
 export default function DetailReviewView(props: Props) {
   const userId = useUserId();
