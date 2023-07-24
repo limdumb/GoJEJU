@@ -1,5 +1,5 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { FlatList, ListRenderItemInfo } from "react-native";
+import { FlatList } from "react-native";
 import { Alert, StyleSheet } from "react-native";
 import { TouchableOpacity, View } from "react-native";
 import PenIcon from "react-native-vector-icons/FontAwesome5";
