@@ -87,6 +87,11 @@ export default function ReviewPostView({ route }: ReviewPostRouteType) {
         {uploadLoading ? <Spinner /> : null}
         <ScrollView>{renderImages()}</ScrollView>
         <View style={styles.imageUploardWrapper}>
+          <CustomText
+            children="사진은 여러장 등록 가능합니다"
+            color="#C3C3C3"
+            fontSize="14px"
+          />
           <TouchableOpacity
             onPress={uploadImage}
             style={styles.buttonContainer}
@@ -172,9 +177,11 @@ const styles = StyleSheet.create({
   imageUploardWrapper: {
     width: "100%",
     height: 50,
-    alignItems: "flex-end",
-    justifyContent: "center",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     paddingRight: 15,
+    paddingLeft:15,
     borderBottomWidth: 1,
     borderBottomColor: "#C3C3C3",
   },
