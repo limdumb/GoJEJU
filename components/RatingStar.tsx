@@ -4,12 +4,13 @@ import StarIcon from "react-native-vector-icons/FontAwesome";
 
 interface RatingPropsType {
   totalStars: number;
-  setRating: React.Dispatch<React.SetStateAction<number>>;
+  setRating?: React.Dispatch<React.SetStateAction<number>>;
   rating: number;
 }
 
 const RatingStar = (props: RatingPropsType) => {
   const handleRate = (newRating: number) => {
+    if(props.setRating)
     props.setRating(newRating);
   };
 

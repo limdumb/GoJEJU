@@ -15,8 +15,8 @@ import UserNormalSignUpView from "./pages/auth/UserNormalSignUpView";
 import LEICodeView from "./pages/auth/LEICodeView";
 import FavoritView from "./pages/mypage/FavoritView";
 import MyReview from "./pages/mypage/MyReview";
-import OwnerSettingView from "./pages/mypage/OwnerSettingView";
-import OwnerAddStoreView from "./pages/OwnerAddStoreView";
+import OwnerEditStoreView from "./pages/mypage/OwnerEditStoreView";
+import OwnerAddStoreView from "./pages/mypage/OwnerAddStoreView";
 import ReviewPostView from "./pages/ReviewPostView";
 import ReviewEditView from "./pages/ReviewEditView";
 
@@ -39,7 +39,7 @@ export type RootStackParamList = {
   LEICodeView: { email: string; password: string };
   FavoritView: undefined;
   MyReview: undefined;
-  OwnerSettingView: undefined;
+  OwnerEditStoreView: undefined;
   OwnerAddStoreView: undefined;
   ReviewPostView: { storeId: number };
   ReviewEditView: { storeId: number; reviewText: string; images: string[],rating:number };
@@ -123,8 +123,8 @@ export default function App() {
           options={{ title: "내가 작성한 리뷰" }}
         />
         <Stack.Screen
-          name="OwnerSettingView"
-          component={OwnerSettingView}
+          name="OwnerEditStoreView"
+          component={OwnerEditStoreView}
           options={{ title: "사장님 수정 페이지" }}
         />
         <Stack.Screen

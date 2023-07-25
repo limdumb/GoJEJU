@@ -2,20 +2,21 @@ import { StyleSheet, View, Dimensions, Alert } from "react-native";
 import UserIcon from "react-native-vector-icons/FontAwesome";
 import CustomText from "../CustomText";
 import Carousel from "./Carousel";
-import { type ReviewType } from "../../API/getReviewList";
 import DeleteIcon from "react-native-vector-icons/Feather";
 import EditIcon from "react-native-vector-icons/AntDesign";
-import deleteReview from "../../API/deleteReview";
+import deleteReview from "../../API/review/deleteReview";
 import { NavigationProp } from "@react-navigation/native";
 import { RootStackParamList } from "../../App";
+import RatingStar from "../RatingStar";
+import { ReviewDataType } from "./DetailReviewView";
 
-interface ReviewBoxPropsType extends ReviewType {
+interface ReviewBoxPropsType extends ReviewDataType {
   loginUserId: number | null;
   navigate: NavigationProp<RootStackParamList>;
   storeId: number;
 }
 
-export default function ReviewBox(props: ReviewBoxPropsType) {
+export default function ReviewBox(props: ReviewBoxPropsType): JSX.Element {
   const screenWidth = Math.round(Dimensions.get("window").width);
   const reviewEditFunc = async () => {
     props.navigate.navigate("ReviewEditView", {
@@ -26,7 +27,10 @@ export default function ReviewBox(props: ReviewBoxPropsType) {
     });
   };
   const reviewDeleteFunc = async () => {
-    const response = await deleteReview({ reviewId: props.id });
+    const response = await deleteReview({
+      reviewId: props.id,
+      userId: props.userId,
+    });
     if (response === 200) {
       Alert.alert("리뷰가 삭제 되었습니다!");
     }
@@ -77,6 +81,14 @@ export default function ReviewBox(props: ReviewBoxPropsType) {
       <View>
         <CustomText children={`${props.reviewText}`} />
       </View>
+      <View style={styles.ratingContainer}>
+        <RatingStar totalStars={5} rating={props.rating} />
+        <CustomText
+          children={`${props.rating}점`}
+          marginLft={"5px"}
+          fontWeight={"600"}
+        />
+      </View>
     </View>
   );
 }
@@ -101,4 +113,9 @@ const styles = StyleSheet.create({
   userProfileWrapper: { flexDirection: "row", alignItems: "center" },
   reviewImageContainer: { marginBottom: 20 },
   editContainer: { flexDirection: "row" },
+  ratingContainer: {
+    width: "100%",
+    justifyContent: "flex-end",
+    flexDirection: "row",
+  },
 });
