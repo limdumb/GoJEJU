@@ -12,19 +12,16 @@ import { authValueLengthChecked } from "../../function/validation";
 export default function UserNormalSignUpView() {
   const [emailValue, setEmailValue] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigation<NavigationProp<RootStackParamList>>();
 
   const registerUser = async () => {
     const lengthResult = authValueLengthChecked(emailValue, password);
     if (lengthResult) {
-      setIsLoading(true);
       const signupResult = await userSignup({
         email: emailValue,
         password: password,
       });
-      setIsLoading(false);
-      if (signupResult && !isLoading) {
+      if (signupResult === 200) {
         const signin = await loginLogic({
           email: emailValue,
           password: password,
