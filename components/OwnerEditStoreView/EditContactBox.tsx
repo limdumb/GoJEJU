@@ -1,5 +1,4 @@
 import { StyleSheet, View } from 'react-native'
-import AuthButton from '../Auth/AuthButton'
 import CommonInput from '../CommonInput'
 import CustomText from '../CustomText'
 
@@ -50,9 +49,6 @@ export default function EditContactBox (props: EditContactBoxProps) {
         </View>
       </View>
       <View style={styles.submitButtonContainer}>
-        <View style={styles.submitbuttonWrapper}>
-          <AuthButton children="업체 등록하기" pressFunction={() => {}} />
-        </View>
       </View>
     </View>
   )
@@ -72,7 +68,6 @@ const styles = StyleSheet.create({
     paddingBottom: 20
   },
   SNSContainer: { marginTop: 10 },
-  submitbuttonWrapper: { width: '80%' },
   submitButtonContainer: {
     marginTop: 10,
     width: '100%',

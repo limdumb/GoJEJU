@@ -5,7 +5,7 @@ import SettingsIcon from 'react-native-vector-icons/Ionicons'
 
 import CustomText from '../CustomText'
 interface MenuProps {
-  usage: 'review' | 'favorit' | 'ownerSetting'
+  usage: 'review' | 'favorit' | 'ownerEdit'
 }
 
 export default function MenuBox (props: MenuProps) {
@@ -14,7 +14,7 @@ export default function MenuBox (props: MenuProps) {
       return '내가 작성한 리뷰'
     } else if (props.usage === 'favorit') {
       return '내가 즐겨찾는 카페'
-    } else if (props.usage === 'ownerSetting') {
+    } else if (props.usage === 'ownerEdit') {
       return '사장님 환경 설정'
     } else {
       return ''
@@ -26,7 +26,7 @@ export default function MenuBox (props: MenuProps) {
       return <ReviewIcon size={20} name="speech" />
     } else if (props.usage === 'favorit') {
       return <CafeIcon size={20} name="coffee" />
-    } else if (props.usage === 'ownerSetting') {
+    } else if (props.usage === 'ownerEdit') {
       return <SettingsIcon size={20} name="settings-outline"/>
     } else {
       return (<></>)

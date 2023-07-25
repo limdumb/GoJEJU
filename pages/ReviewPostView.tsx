@@ -4,7 +4,7 @@ import { Alert } from "react-native";
 import { Dimensions, TouchableOpacity } from "react-native";
 import { ScrollView } from "react-native";
 import { StyleSheet, View } from "react-native";
-import postReview from "../API/postReview";
+import postReview from "../API/review/postReview";
 import { RootStackParamList } from "../App";
 import CommonInput from "../components/CommonInput";
 import CustomText from "../components/CustomText";
@@ -12,10 +12,6 @@ import RatingStar from "../components/RatingStar";
 import Carousel from "../components/StoreDetailView/Carousel";
 import * as ImagePicker from "expo-image-picker";
 import Spinner from "../components/Spinner";
-
-interface ImageData {
-  uri: string;
-}
 
 type ReviewPostRouteType = NativeStackScreenProps<
   RootStackParamList,
@@ -42,8 +38,7 @@ export default function ReviewPostView({ route }: ReviewPostRouteType) {
             pageWidth={screenWidth - (15 + 36) * 2}
           />
         ) : (
-          <View style={styles.carouselContainer}>
-          </View>
+          <View style={styles.carouselContainer}></View>
         )}
       </>
     );
@@ -89,7 +84,7 @@ export default function ReviewPostView({ route }: ReviewPostRouteType) {
   return (
     <View style={styles.container}>
       <ScrollView>
-      {uploadLoading ? <Spinner /> : null}
+        {uploadLoading ? <Spinner /> : null}
         <ScrollView>{renderImages()}</ScrollView>
         <View style={styles.imageUploardWrapper}>
           <TouchableOpacity

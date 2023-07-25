@@ -1,27 +1,22 @@
 import { useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
+import { OwnerEditType } from "../../API/OwnerStore/ownerEditStore";
 import CustomText from "../../components/CustomText";
 import AddAdressBox from "../../components/OwnerAddStoreView.tsx/AddAdressBox";
-import EditContactBox from "../../components/OwnerSettingView/EditContactBox";
-import ScheduleBox from "../../components/OwnerSettingView/ScheduleBox";
-import StoreProfile from "../../components/OwnerSettingView/StoreEditProfile";
-import StoreStateToggle from "../../components/OwnerSettingView/StoreStateToggle";
+import EditContactBox from "../../components/OwnerEditStoreView/EditContactBox";
+import ScheduleBox from "../../components/OwnerEditStoreView/ScheduleBox";
+import StoreProfile from "../../components/OwnerEditStoreView/StoreEditProfile";
+import StoreStateToggle from "../../components/OwnerEditStoreView/StoreStateToggle";
 import useFetch from "../../customHook/useFetch";
 import { emdNameArray } from "../../function/emdNameArray";
 import { getWeekArray } from "../../function/getWeekArray";
 
-export default function OwnerSettingView() {
-  const { data, isLoading, error } = useFetch("");
+export default function OwnerEditStoreView() {
+  const { data, isLoading, error } = useFetch<OwnerEditType>("");
   const [isEnabled, setIsEnabled] = useState(false);
-  const [toggleCheckBox, setToggleCheckBox] = useState([
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-  ]);
+  const [toggleCheckBox, setToggleCheckBox] = useState(
+    data.storeSchedules.map((el) => el.type)
+  );
   const [snsValue, setSnsValue] = useState("");
   const [storeNumber, setStoreNumber] = useState("");
   const [adressValue, setAdressValue] = useState("");
@@ -42,7 +37,7 @@ export default function OwnerSettingView() {
   const emdInformation = emdNameArray().filter((el) => {
     return el.name !== "전체";
   });
-  
+
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollViewContainer}>

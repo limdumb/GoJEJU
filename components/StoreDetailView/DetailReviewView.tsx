@@ -1,14 +1,29 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { FlatList, ListRenderItemInfo } from "react-native";
+import { FlatList } from "react-native";
 import { Alert, StyleSheet } from "react-native";
 import { TouchableOpacity, View } from "react-native";
 import PenIcon from "react-native-vector-icons/FontAwesome5";
-import { ReviewType, type ReviewResponseType } from "../../API/getReviewList";
 import { RootStackParamList } from "../../App";
 import { useUserId } from "../../customHook/useUserId";
 import CustomText from "../CustomText";
 import NotFoundImage from "../NotFoundImage";
 import ReviewBox from "./ReviewBox";
+
+export interface ReviewDataType {
+  id: number;
+  userId: number;
+  userName: string;
+  userProfileImage: string;
+  reviewImages: string[];
+  reviewText: string;
+  rating: number;
+}
+
+export interface ReviewResponseType {
+  hasNext: boolean;
+  total: number;
+  reviews: ReviewDataType[];
+}
 
 interface Props extends ReviewResponseType {
   storeId: number;
@@ -19,7 +34,7 @@ export default function DetailReviewView(props: Props) {
   const userId = useUserId();
   const tabArr = [{ tabName: "최신순" }, { tabName: "추천순" }];
   const navigate = useNavigation<NavigationProp<RootStackParamList>>();
-  const renderReviews = (item: ReviewType) => {
+  const renderReviews = (item: ReviewDataType) => {
     return (
       <ReviewBox
         rating={item.rating}

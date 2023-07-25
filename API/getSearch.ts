@@ -4,6 +4,7 @@ export interface SearchCardType {
   name: string;
   rating: number;
   storeDescription: string;
+  reviewCount:number;
 }
 
 export interface SearchDataType {
@@ -35,6 +36,7 @@ export default async function getSearch(
           storeDescription:
             "안녕하세요 가격 뷰 모두 겸비한 임덤덤이 주비한 카페에용 히히",
           rating: i,
+          reviewCount:i
         });
       }
     } catch (err) {}
