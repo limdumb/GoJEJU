@@ -155,6 +155,7 @@ export default function StoreDetailView({ route }: StoreDetailProps) {
               />
             ) : (
               <DetailReviewView
+                name={data.name}
                 onEndCatched={onEndCatched}
                 storeId={storeId}
                 hasNext={reviewData.hasNext}

@@ -12,6 +12,11 @@ import RatingStar from "../components/RatingStar";
 import Carousel from "../components/StoreDetailView/Carousel";
 import * as ImagePicker from "expo-image-picker";
 import Spinner from "../components/Spinner";
+import {
+  NavigationProp,
+  useLinkProps,
+  useNavigation,
+} from "@react-navigation/native";
 
 type ReviewPostRouteType = NativeStackScreenProps<
   RootStackParamList,
@@ -19,7 +24,8 @@ type ReviewPostRouteType = NativeStackScreenProps<
 >;
 
 export default function ReviewPostView({ route }: ReviewPostRouteType) {
-  const storeId = route.params.storeId;
+  const routeParams = route.params;
+  const navigate = useNavigation<NavigationProp<RootStackParamList>>();
   const [status, requestPermission] = ImagePicker.useMediaLibraryPermissions();
   const screenWidth = Math.round(Dimensions.get("window").width);
   const [images, setImages] = useState<Array<string>>([]);
@@ -71,12 +77,16 @@ export default function ReviewPostView({ route }: ReviewPostRouteType) {
       Alert.alert("리뷰는 100자 이상 입력할 수 없습니다. 확인해주세요!");
     if (reviewText.length !== 0 && reviewText.length < 100) {
       const response = await postReview({
-        storeId: storeId,
+        storeId: routeParams.storeId,
         images: images,
         body: reviewText,
         rating: rating,
       });
       if (response === 200) {
+        navigate.navigate("StoreDetailView", {
+          storeId: routeParams.storeId,
+          name: route.params.name,
+        });
       }
     }
   };
@@ -181,7 +191,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     paddingRight: 15,
-    paddingLeft:15,
+    paddingLeft: 15,
     borderBottomWidth: 1,
     borderBottomColor: "#C3C3C3",
   },
