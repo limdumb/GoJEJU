@@ -13,10 +13,6 @@ import Carousel from "../components/StoreDetailView/Carousel";
 import * as ImagePicker from "expo-image-picker";
 import Spinner from "../components/Spinner";
 
-interface ImageData {
-  uri: string;
-}
-
 type ReviewPostRouteType = NativeStackScreenProps<
   RootStackParamList,
   "ReviewPostView"
