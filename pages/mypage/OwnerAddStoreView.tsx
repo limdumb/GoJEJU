@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
-import CustomText from "../components/CustomText";
-import AddAdressBox from "../components/OwnerAddStoreView.tsx/AddAdressBox";
-import EditContactBox from "../components/OwnerSettingView/EditContactBox";
-import ScheduleBox from "../components/OwnerSettingView/ScheduleBox";
-import StoreProfile from "../components/OwnerSettingView/StoreEditProfile";
-import { emdNameArray } from "../function/emdNameArray";
-import { getWeekArray } from "../function/getWeekArray";
+import AuthButton from "../../components/Auth/AuthButton";
+import CustomText from "../../components/CustomText";
+import AddAdressBox from "../../components/OwnerAddStoreView.tsx/AddAdressBox";
+import EditContactBox from "../../components/OwnerEditStoreView/EditContactBox";
+import ScheduleBox from "../../components/OwnerEditStoreView/ScheduleBox";
+import StoreProfile from "../../components/OwnerEditStoreView/StoreEditProfile";
+import { emdNameArray } from "../../function/emdNameArray";
+import { getWeekArray } from "../../function/getWeekArray";
 
 export default function OwnerAddStoreView() {
   const [adressValue, setAdressValue] = useState("");
@@ -69,6 +70,9 @@ export default function OwnerAddStoreView() {
           snsValue={snsValue}
           storeNumber={storeNumber}
         />
+        <View style={styles.submitbuttonWrapper}>
+          <AuthButton children="업체 등록하기" pressFunction={() => {}} />
+        </View>
       </ScrollView>
     </View>
   );
@@ -95,4 +99,5 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     borderBottomColor: "#C3C3C3",
   },
+  submitbuttonWrapper: { width: "80%" },
 });

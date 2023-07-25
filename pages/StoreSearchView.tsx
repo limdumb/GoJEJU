@@ -15,7 +15,6 @@ type StoreSearchNavigate = NavigationProp<
   RootStackParamList,
   "StoreSearchView"
 >;
-// Edit에 Submit Button 만들기
 export default function StoreSearchView() {
   const navigate = useNavigation<StoreSearchNavigate>();
   const [searchValue, setSearchValue] = useState("");

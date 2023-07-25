@@ -1,37 +1,27 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
-import { getReviewList, type ReviewType } from "../../API/getReviewList";
 import { RootStackParamList } from "../../App";
+import { ReviewResponseType } from "../../components/StoreDetailView/DetailReviewView";
 import ReviewBox from "../../components/StoreDetailView/ReviewBox";
+import useFetch from "../../customHook/useFetch";
 import { useUserId } from "../../customHook/useUserId";
 
 export default function MyReview() {
   const navigate = useNavigation<NavigationProp<RootStackParamList>>()
   const userId = useUserId()
-  const [reviewData, setReviewData] = useState<ReviewType[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const {data, isLoading, error} = useFetch<ReviewResponseType>("");
   const [pages, setPages] = useState(0);
-
-  useEffect(() => {
-    const fetchReviewData = async () => {
-      setIsLoading(true);
-      const response = await getReviewList({ page: pages });
-      setIsLoading(false);
-      if (!isLoading) setReviewData(response.reviews);
-    };
-
-    fetchReviewData();
-  }, []);
+  const [filterValue, setFilterValue ] = useState("최신순")
 
   return (
     <View style={styles.container}>
       <ScrollView>
         {!isLoading ? (
           <View>
-            {reviewData.length !== 0 ? (
+            {data.reviews.length !== 0 ? (
               <View>
-                {reviewData.map((el) => {
+                {data.reviews.map((el) => {
                   return (
                     <ReviewBox
                       key={el.id}

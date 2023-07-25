@@ -34,7 +34,7 @@ export default function Header () {
       <View style={styles.headerTopContainer}>
         <View style={styles.headerTop}>
           <Text>☁️Watching JEJU</Text>
-          {!userId
+          {userId
             ? (
             <Icon
               name="user-circle-o"
