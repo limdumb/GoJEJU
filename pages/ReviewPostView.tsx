@@ -67,7 +67,7 @@ export default function ReviewPostView({ route }: ReviewPostRouteType) {
 
   const handleSubmitReview = async () => {
     if (reviewText.length === 0) Alert.alert("리뷰를 입력해주세요!");
-    if (reviewText.length >= 100)
+    if (reviewText.length >= 150)
       Alert.alert("리뷰는 100자 이상 입력할 수 없습니다. 확인해주세요!");
     if (reviewText.length !== 0 && reviewText.length < 100) {
       const response = await postReview({
@@ -113,11 +113,14 @@ export default function ReviewPostView({ route }: ReviewPostRouteType) {
             backgroundColor={"white"}
             placeholder={"리뷰를 입력하세요"}
             border={"1px solid #56C38D"}
+            paddingTop={"8px"}
+            fontsize={"15px"}
+            multiline={true}
           />
           <View style={styles.textLengthBox}>
             <CustomText
-              children={`${reviewText.length}/100`}
-              color={"#C3C3C3"}
+              children={`${reviewText.length}/150`}
+              color={reviewText.length > 150 ? "red" : "#C3C3C3"}
             />
           </View>
         </View>
@@ -128,7 +131,7 @@ export default function ReviewPostView({ route }: ReviewPostRouteType) {
           >
             <CustomText
               children="작성하기"
-              color="white"
+              color={"white"}
               fontWeight="bold"
               fontSize="20"
             />
@@ -147,8 +150,8 @@ const styles = StyleSheet.create({
     height: 40,
     flexDirection: "row",
     alignItems: "center",
-    paddingLeft: 16,
-    paddingRight: 16,
+    paddingLeft: 15,
+    paddingRight: 15,
     justifyContent: "space-between",
   },
   textLengthBox: {
@@ -171,7 +174,7 @@ const styles = StyleSheet.create({
     height: 50,
     alignItems: "flex-end",
     justifyContent: "center",
-    paddingRight: 10,
+    paddingRight: 15,
     borderBottomWidth: 1,
     borderBottomColor: "#C3C3C3",
   },
