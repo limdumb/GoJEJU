@@ -3,9 +3,9 @@ import { ScrollView, StyleSheet, View } from "react-native";
 import AuthButton from "../../components/Auth/AuthButton";
 import CustomText from "../../components/CustomText";
 import AddAdressBox from "../../components/OwnerAddStoreView.tsx/AddAdressBox";
-import EditContactBox from "../../components/OwnerSettingView/EditContactBox";
-import ScheduleBox from "../../components/OwnerSettingView/ScheduleBox";
-import StoreProfile from "../../components/OwnerSettingView/StoreEditProfile";
+import EditContactBox from "../../components/OwnerEditStoreView/EditContactBox";
+import ScheduleBox from "../../components/OwnerEditStoreView/ScheduleBox";
+import StoreProfile from "../../components/OwnerEditStoreView/StoreEditProfile";
 import { emdNameArray } from "../../function/emdNameArray";
 import { getWeekArray } from "../../function/getWeekArray";
 

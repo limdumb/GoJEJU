@@ -20,6 +20,7 @@ interface SuggestCardType {
   name: string;
   rating: number;
   storeDescription: string;
+  reviewCount:number
 }
 
 interface SuggestDataType {

@@ -1,4 +1,4 @@
-import { baseInstance } from "./instance";
+import { baseInstance } from "../instance";
 // 7월 21일(금) Store Post 타입은 BackEnd확인 후 타입 재조정 예정
 interface AddStoreRequestType {
   name: string

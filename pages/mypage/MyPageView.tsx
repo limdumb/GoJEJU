@@ -6,7 +6,7 @@ import UserProfile from '../../components/MyPageView/UserProfile'
 
 interface MenuType {
   menuType: 'review' | 'favorit' | 'ownerSetting'
-  navigate: 'MyReview' | 'FavoritView' | 'OwnerSettingView'
+  navigate: 'MyReview' | 'FavoritView' | 'OwnerEditStoreView'
 }
 
 type MyPageScreenNavigationProps = NavigationProp<RootStackParamList>
@@ -16,7 +16,7 @@ export default function MyPageView () {
   const menuArr: MenuType[] = [
     { menuType: 'review', navigate: 'MyReview' },
     { menuType: 'favorit', navigate: 'FavoritView' },
-    { menuType: 'ownerSetting', navigate: 'OwnerSettingView' }
+    { menuType: 'ownerSetting', navigate: 'OwnerEditStoreView' }
   ]
   return (
     <View style={styles.container}>

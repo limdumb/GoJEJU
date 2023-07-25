@@ -19,7 +19,7 @@ export interface ReviewDataType {
   rating: number;
 }
 
-interface ReviewResponseType {
+export interface ReviewResponseType {
   hasNext: boolean;
   total: number;
   reviews: ReviewDataType[];

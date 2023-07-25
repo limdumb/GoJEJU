@@ -27,7 +27,10 @@ export default function ReviewBox(props: ReviewBoxPropsType): JSX.Element {
     });
   };
   const reviewDeleteFunc = async () => {
-    const response = await deleteReview({ reviewId: props.id });
+    const response = await deleteReview({
+      reviewId: props.id,
+      userId: props.userId,
+    });
     if (response === 200) {
       Alert.alert("리뷰가 삭제 되었습니다!");
     }
@@ -80,7 +83,11 @@ export default function ReviewBox(props: ReviewBoxPropsType): JSX.Element {
       </View>
       <View style={styles.ratingContainer}>
         <RatingStar totalStars={5} rating={props.rating} />
-        <CustomText children={`${props.rating}점`} marginLft={"5px"} fontWeight={"600"}/>
+        <CustomText
+          children={`${props.rating}점`}
+          marginLft={"5px"}
+          fontWeight={"600"}
+        />
       </View>
     </View>
   );
