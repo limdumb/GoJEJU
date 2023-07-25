@@ -1,5 +1,5 @@
 export const emailValidation = (email: string): boolean => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
   return emailRegex.test(email);
 };
 
@@ -10,7 +10,7 @@ export const passwordValidation = (password: string): boolean => {
 };
 
 export const LEICodeValidation = (LEICode: string) => {
-  const LEICodeRegex = /^[0-9]+$/;
+  const LEICodeRegex = /^\d{10}$/;
   return LEICodeRegex.test(LEICode);
 };
 
