@@ -7,23 +7,13 @@ import userSignup from "../../API/auth/userSignup";
 import AuthLogo from "../../components/Auth/AuthLogo";
 import CommonInput from "../../components/CommonInput";
 import AuthButton from "../../components/Auth/AuthButton";
-import {
-  authValueLengthChecked,
-  emailValidation,
-  passwordValidation,
-} from "../../function/validation";
+import { authValueLengthChecked } from "../../function/validation";
 
 export default function UserNormalSignUpView() {
   const [emailValue, setEmailValue] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigation<NavigationProp<RootStackParamList>>();
-
-  const signupValidate = () => {
-    const emailValidateResult = emailValidation(emailValue);
-    const passwordValidateResult = passwordValidation(password);
-    return emailValidateResult && passwordValidateResult ? true : false;
-  };
 
   const registerUser = async () => {
     const lengthResult = authValueLengthChecked(emailValue, password);

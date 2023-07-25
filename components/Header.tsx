@@ -1,6 +1,4 @@
-import { useEffect, useState } from 'react'
 import styled from 'styled-components/native'
-import { userIdValue } from '../function/userIdValue'
 import { useNavigation } from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { type MainScreenNavigationProps } from '../pages/MainView'
@@ -34,7 +32,7 @@ export default function Header () {
       <View style={styles.headerTopContainer}>
         <View style={styles.headerTop}>
           <Text>☁️Watching JEJU</Text>
-          {userId
+          {userId !== null
             ? (
             <Icon
               name="user-circle-o"
