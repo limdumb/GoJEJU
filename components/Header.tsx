@@ -32,7 +32,7 @@ export default function Header () {
       <View style={styles.headerTopContainer}>
         <View style={styles.headerTop}>
           <Text>☁️Watching JEJU</Text>
-          {userId !== null
+          {userId === null
             ? (
             <Icon
               name="user-circle-o"

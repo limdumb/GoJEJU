@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
-import { OwnerEditType } from "../../API/OwnerStore/ownerEditStore";
+import {
+  OwnerEditType,
+  ScheduleValue,
+} from "../../API/OwnerStore/ownerEditStore";
 import CustomText from "../../components/CustomText";
 import AddAdressBox from "../../components/OwnerAddStoreView.tsx/AddAdressBox";
 import EditContactBox from "../../components/OwnerEditStoreView/EditContactBox";
@@ -13,9 +16,12 @@ import { getWeekArray } from "../../function/getWeekArray";
 
 export default function OwnerEditStoreView() {
   const { data, isLoading, error } = useFetch<OwnerEditType>("");
-  const [isEnabled, setIsEnabled] = useState(false);
-  const [toggleCheckBox, setToggleCheckBox] = useState(
-    data.storeSchedules.map((el) => el.type)
+  const [isEnabled, setIsEnabled] = useState<boolean>(false);
+  const [scheduleValue, setScheduleValue] = useState<Array<ScheduleValue>>(
+    data.storeSchedules
+  );
+  const [toggleCheckBox, setToggleCheckBox] = useState<Array<boolean>>(
+    Array(7).fill(false, 0, 7)
   );
   const [snsValue, setSnsValue] = useState("");
   const [storeNumber, setStoreNumber] = useState("");
@@ -68,7 +74,7 @@ export default function OwnerEditStoreView() {
             return (
               <ScheduleBox
                 toggleCheckBox={toggleCheckBox}
-                day={el}
+                day={el.day}
                 index={index}
                 handleCheckboxChange={handleCheckboxChange}
               />

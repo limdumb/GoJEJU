@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
+import { ScheduleValue } from "../../API/OwnerStore/ownerEditStore";
 import AuthButton from "../../components/Auth/AuthButton";
 import CustomText from "../../components/CustomText";
 import AddAdressBox from "../../components/OwnerAddStoreView.tsx/AddAdressBox";
@@ -10,18 +11,27 @@ import { emdNameArray } from "../../function/emdNameArray";
 import { getWeekArray } from "../../function/getWeekArray";
 
 export default function OwnerAddStoreView() {
+  const dayOfTheWeek = getWeekArray();
   const [adressValue, setAdressValue] = useState("");
-  const [toggleCheckBox, setToggleCheckBox] = useState([
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-  ]);
+  const [toggleCheckBox, setToggleCheckBox] = useState<Array<boolean>>(
+    Array(7).fill(false, 0, 7)
+  );
+  const [scheduleValue, setScheduleValue] =
+    useState<Array<ScheduleValue>>(dayOfTheWeek);
   const [snsValue, setSnsValue] = useState("");
   const [storeNumber, setStoreNumber] = useState("");
+
+  const handleScheduleChange = (index: number, start: string, end: string) => {
+    setScheduleValue((preValue) => {
+      const newScheduleValue = [...preValue];
+      newScheduleValue[index] = {
+        ...newScheduleValue[index],
+        start: start,
+        end: end,
+      };
+      return newScheduleValue;
+    });
+  };
 
   const handleCheckboxChange = (index: number) => {
     setToggleCheckBox((prevCheckboxes) => {
@@ -31,7 +41,6 @@ export default function OwnerAddStoreView() {
     });
   };
 
-  const dayOfTheWeek = getWeekArray();
   const emdInformation = emdNameArray();
   return (
     <View style={styles.container}>
@@ -53,11 +62,11 @@ export default function OwnerAddStoreView() {
             fontSize="16px"
             fontWeight="bold"
           />
-          {dayOfTheWeek.map((el, index) => {
+          {scheduleValue.map((el, index) => {
             return (
               <ScheduleBox
                 toggleCheckBox={toggleCheckBox}
-                day={el}
+                day={el.day}
                 index={index}
                 handleCheckboxChange={handleCheckboxChange}
               />

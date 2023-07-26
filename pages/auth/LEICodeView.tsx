@@ -32,7 +32,7 @@ export default function LEICodeView({ route }: RouteType) {
           email: routeValue.email,
           password: routeValue.password,
         });
-        if (loginResult === 200) {
+        if (loginResult !== 200) {
           Alert.alert("회원가입이 완료 되었습니다!");
           navigate.navigate("OwnerAddStoreView");
         }

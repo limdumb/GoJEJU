@@ -1,19 +1,18 @@
 import { baseInstance } from "../instance";
 
+export interface ScheduleValue {
+  day: string;
+  start: string;
+  end: string;
+  type: "OPEN" | "CLOSED";
+}
+
 export interface OwnerEditType {
   name: string;
   description: string;
   jibunAddress: string;
   roadAddress: string;
-  storeSchedules: [
-    {
-      day: string;
-      start: string;
-      end: string;
-      lastOrder: string;
-      type: boolean;
-    }
-  ];
+  storeSchedules: ScheduleValue[];
   phone: string;
   SNS: [
     {
