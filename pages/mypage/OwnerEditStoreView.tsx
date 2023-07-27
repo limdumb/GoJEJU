@@ -20,15 +20,16 @@ export default function OwnerEditStoreView() {
   const [scheduleValue, setScheduleValue] = useState<Array<ScheduleValue>>(
     data.storeSchedules
   );
-
+  const [storeName, setStoreName] = useState(data.name);
+  const [storeDescription, setStoreDescription] = useState(data.description);
   const [snsValue, setSnsValue] = useState("");
-  const [storeNumber, setStoreNumber] = useState("");
+  const [storeNumber, setStoreNumber] = useState(data.phone);
   const [adressValue, setAdressValue] = useState("");
 
-  const handleCheckboxChange = (index: number,checked:boolean) => {
+  const handleCheckboxChange = (index: number, checked: boolean) => {
     setScheduleValue((prevCheckboxes) => {
       const newCheckboxes = [...prevCheckboxes];
-      newCheckboxes[index].type = checked ? "OPEN" : "CLOSED"
+      newCheckboxes[index].type = checked ? "OPEN" : "CLOSED";
       return newCheckboxes;
     });
   };
@@ -40,15 +41,15 @@ export default function OwnerEditStoreView() {
   const openScheduleChange = (index: number, start: string) => {
     setScheduleValue((preValue) => {
       const newScheduleValue = [...preValue];
-      newScheduleValue[index].start = start
+      newScheduleValue[index].start = start;
       return newScheduleValue;
     });
   };
-  
+
   const closedScheduleChange = (index: number, end: string) => {
     setScheduleValue((preValue) => {
       const newScheduleValue = [...preValue];
-      newScheduleValue[index].end = end
+      newScheduleValue[index].end = end;
       return newScheduleValue;
     });
   };
@@ -62,7 +63,14 @@ export default function OwnerEditStoreView() {
     <View style={styles.container}>
       <ScrollView style={styles.scrollViewContainer}>
         <View style={styles.profileContainer}>
-          <StoreProfile imageUrl={""} name={""} storeDescription={""} />
+          <StoreProfile
+            setStoreDescription={setStoreDescription}
+            storeName={storeName}
+            setStoreName={setStoreName}
+            storeDescription={storeDescription}
+            imageUrl={""}
+            name={""}
+          />
         </View>
         <View style={styles.AddAdressWrapper}>
           <AddAdressBox
@@ -87,8 +95,8 @@ export default function OwnerEditStoreView() {
           {dayOfTheWeek.map((el, index) => {
             return (
               <ScheduleBox
-              openScheduleChange={openScheduleChange}
-              closedScheduleChange={closedScheduleChange}
+                openScheduleChange={openScheduleChange}
+                closedScheduleChange={closedScheduleChange}
                 scheduleValue={scheduleValue}
                 day={el.day}
                 index={index}

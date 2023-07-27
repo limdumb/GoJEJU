@@ -57,15 +57,15 @@ export default function EditContactBox (props: EditContactBoxProps) {
 const styles = StyleSheet.create({
   container: {
     paddingTop: 10,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: '#AAAAAA',
   },
   inputContainer: {
     width: '100%',
     paddingLeft: 20,
     marginTop: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: '#AAAAAA',
-    paddingBottom: 20
+    paddingBottom: 10
   },
   SNSContainer: { marginTop: 10 },
   submitButtonContainer: {

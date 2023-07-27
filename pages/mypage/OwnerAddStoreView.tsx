@@ -12,11 +12,13 @@ import { getWeekArray } from "../../function/getWeekArray";
 
 export default function OwnerAddStoreView() {
   const dayOfTheWeek = getWeekArray();
+  const [storeName, setStoreName] = useState("");
+  const [storeDescription, setStoreDescription] = useState("");
+  const [storeNumber, setStoreNumber] = useState("");
   const [adressValue, setAdressValue] = useState("");
   const [scheduleValue, setScheduleValue] =
     useState<Array<ScheduleValue>>(dayOfTheWeek);
   const [snsValue, setSnsValue] = useState("");
-  const [storeNumber, setStoreNumber] = useState("");
 
   const openScheduleChange = (index: number, start: string) => {
     setScheduleValue((preValue) => {
@@ -41,13 +43,19 @@ export default function OwnerAddStoreView() {
       return newCheckboxes;
     });
   };
-
   const emdInformation = emdNameArray();
   return (
     <View style={styles.container}>
       <ScrollView>
         <View style={styles.profileContainer}>
-          <StoreProfile imageUrl={""} name={""} storeDescription={""} />
+          <StoreProfile
+            setStoreDescription={setStoreDescription}
+            storeName={storeName}
+            setStoreName={setStoreName}
+            storeDescription={storeDescription}
+            imageUrl={""}
+            name={""}
+          />
         </View>
         <View style={styles.AddAdressWrapper}>
           <AddAdressBox
@@ -91,7 +99,8 @@ export default function OwnerAddStoreView() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "white", alignItems: "center" },
+  container: { flex: 1, backgroundColor: "white" },
+  scrollStyle: { alignItems: "center" },
   profileContainer: {
     width: "100%",
     height: 160,
@@ -111,5 +120,9 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     borderBottomColor: "#C3C3C3",
   },
-  submitbuttonWrapper: { width: "80%" },
+  submitbuttonWrapper: {
+    width: "100%",
+    height: 80,
+    justifyContent: "center",
+  },
 });
