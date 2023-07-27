@@ -19,31 +19,8 @@ export default function OwnerAddStoreView() {
   const [scheduleValue, setScheduleValue] =
     useState<Array<ScheduleValue>>(dayOfTheWeek);
   const [snsValue, setSnsValue] = useState("");
-
-  const openScheduleChange = (index: number, start: string) => {
-    setScheduleValue((preValue) => {
-      const newScheduleValue = [...preValue];
-      newScheduleValue[index].start = start;
-      return newScheduleValue;
-    });
-  };
-
-  const closedScheduleChange = (index: number, end: string) => {
-    setScheduleValue((preValue) => {
-      const newScheduleValue = [...preValue];
-      newScheduleValue[index].end = end;
-      return newScheduleValue;
-    });
-  };
-
-  const handleCheckboxChange = (index: number, checked: boolean) => {
-    setScheduleValue((prevCheckboxes) => {
-      const newCheckboxes = [...prevCheckboxes];
-      newCheckboxes[index].type = checked ? "OPEN" : "CLOSED";
-      return newCheckboxes;
-    });
-  };
   const emdInformation = emdNameArray();
+
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -74,12 +51,10 @@ export default function OwnerAddStoreView() {
           {scheduleValue.map((el, index) => {
             return (
               <ScheduleBox
+              setScheduleValue={setScheduleValue}
                 scheduleValue={scheduleValue}
                 day={el.day}
                 index={index}
-                openScheduleChange={openScheduleChange}
-                closedScheduleChange={closedScheduleChange}
-                handleCheckboxChange={handleCheckboxChange}
               />
             );
           })}

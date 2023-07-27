@@ -3,13 +3,19 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 import SelectDropdown from "react-native-select-dropdown";
 import { ScheduleValue } from "../../API/OwnerStore/ownerEditStore";
 import generateTimeArray from "../../function/generateTimeArray";
+import {
+  endScheduleChange,
+  handleCheckboxChange,
+  openScheduleChange,
+} from "../../function/sceduleChange";
 import CustomText from "../CustomText";
 
 interface ScheduleBoxProps {
   day: string;
-  openScheduleChange: (index: number, start: string) => void;
-  closedScheduleChange: (index: number, end: string) => void;
-  handleCheckboxChange: (index: number, checked: boolean) => void;
+  setScheduleValue: React.Dispatch<React.SetStateAction<ScheduleValue[]>>;
+  // openScheduleChange: (index: number, start: string) => void;
+  // closedScheduleChange: (index: number, end: string) => void;
+  // handleCheckboxChange: (index: number, checked: boolean) => void;
   index: number;
   scheduleValue: ScheduleValue[];
 }
@@ -24,7 +30,11 @@ export default function ScheduleBox(props: ScheduleBoxProps) {
         innerIconStyle={{ borderWidth: 2 }}
         isChecked={false}
         onPress={(preventValue) => {
-          props.handleCheckboxChange(props.index, preventValue);
+          handleCheckboxChange(
+            props.index,
+            preventValue,
+            props.setScheduleValue
+          );
         }}
       />
       <CustomText children={props.day} fontSize="17px" color="gray" />
@@ -32,7 +42,11 @@ export default function ScheduleBox(props: ScheduleBoxProps) {
         <SelectDropdown
           data={tiemArray}
           onSelect={(selectedItem: string) => {
-            props.openScheduleChange(props.index, selectedItem);
+            openScheduleChange(
+              props.index,
+              selectedItem,
+              props.setScheduleValue
+            );
           }}
           defaultValueByIndex={0}
           disabled={
@@ -45,7 +59,11 @@ export default function ScheduleBox(props: ScheduleBoxProps) {
           defaultValueByIndex={0}
           data={tiemArray}
           onSelect={(selectedItem: string) => {
-            props.closedScheduleChange(props.index, selectedItem);
+            endScheduleChange(
+              props.index,
+              selectedItem,
+              props.setScheduleValue
+            );
           }}
           disabled={
             props.scheduleValue[props.index].type === "OPEN" ? false : true

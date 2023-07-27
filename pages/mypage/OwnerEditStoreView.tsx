@@ -26,34 +26,9 @@ export default function OwnerEditStoreView() {
   const [storeNumber, setStoreNumber] = useState(data.phone);
   const [adressValue, setAdressValue] = useState("");
 
-  const handleCheckboxChange = (index: number, checked: boolean) => {
-    setScheduleValue((prevCheckboxes) => {
-      const newCheckboxes = [...prevCheckboxes];
-      newCheckboxes[index].type = checked ? "OPEN" : "CLOSED";
-      return newCheckboxes;
-    });
-  };
-
   const toggleSwitch = () => {
     setIsEnabled((previousState) => !previousState);
   };
-
-  const openScheduleChange = (index: number, start: string) => {
-    setScheduleValue((preValue) => {
-      const newScheduleValue = [...preValue];
-      newScheduleValue[index].start = start;
-      return newScheduleValue;
-    });
-  };
-
-  const closedScheduleChange = (index: number, end: string) => {
-    setScheduleValue((preValue) => {
-      const newScheduleValue = [...preValue];
-      newScheduleValue[index].end = end;
-      return newScheduleValue;
-    });
-  };
-
   const dayOfTheWeek = getWeekArray();
   const emdInformation = emdNameArray().filter((el) => {
     return el.name !== "전체";
@@ -95,12 +70,10 @@ export default function OwnerEditStoreView() {
           {dayOfTheWeek.map((el, index) => {
             return (
               <ScheduleBox
-                openScheduleChange={openScheduleChange}
-                closedScheduleChange={closedScheduleChange}
+              setScheduleValue={setScheduleValue}
                 scheduleValue={scheduleValue}
                 day={el.day}
                 index={index}
-                handleCheckboxChange={handleCheckboxChange}
               />
             );
           })}
