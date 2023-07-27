@@ -12,6 +12,11 @@ import RatingStar from "../components/RatingStar";
 import Carousel from "../components/StoreDetailView/Carousel";
 import * as ImagePicker from "expo-image-picker";
 import Spinner from "../components/Spinner";
+import {
+  NavigationProp,
+  useLinkProps,
+  useNavigation,
+} from "@react-navigation/native";
 
 type ReviewPostRouteType = NativeStackScreenProps<
   RootStackParamList,
@@ -19,7 +24,8 @@ type ReviewPostRouteType = NativeStackScreenProps<
 >;
 
 export default function ReviewPostView({ route }: ReviewPostRouteType) {
-  const storeId = route.params.storeId;
+  const routeParams = route.params;
+  const navigate = useNavigation<NavigationProp<RootStackParamList>>();
   const [status, requestPermission] = ImagePicker.useMediaLibraryPermissions();
   const screenWidth = Math.round(Dimensions.get("window").width);
   const [images, setImages] = useState<Array<string>>([]);
@@ -67,16 +73,20 @@ export default function ReviewPostView({ route }: ReviewPostRouteType) {
 
   const handleSubmitReview = async () => {
     if (reviewText.length === 0) Alert.alert("리뷰를 입력해주세요!");
-    if (reviewText.length >= 100)
+    if (reviewText.length >= 150)
       Alert.alert("리뷰는 100자 이상 입력할 수 없습니다. 확인해주세요!");
     if (reviewText.length !== 0 && reviewText.length < 100) {
       const response = await postReview({
-        storeId: storeId,
+        storeId: routeParams.storeId,
         images: images,
         body: reviewText,
         rating: rating,
       });
       if (response === 200) {
+        navigate.navigate("StoreDetailView", {
+          storeId: routeParams.storeId,
+          name: route.params.name,
+        });
       }
     }
   };
@@ -87,6 +97,11 @@ export default function ReviewPostView({ route }: ReviewPostRouteType) {
         {uploadLoading ? <Spinner /> : null}
         <ScrollView>{renderImages()}</ScrollView>
         <View style={styles.imageUploardWrapper}>
+          <CustomText
+            children="사진은 여러장 등록 가능합니다"
+            color="#C3C3C3"
+            fontSize="14px"
+          />
           <TouchableOpacity
             onPress={uploadImage}
             style={styles.buttonContainer}
@@ -113,11 +128,14 @@ export default function ReviewPostView({ route }: ReviewPostRouteType) {
             backgroundColor={"white"}
             placeholder={"리뷰를 입력하세요"}
             border={"1px solid #56C38D"}
+            paddingTop={"8px"}
+            fontsize={"15px"}
+            multiline={true}
           />
           <View style={styles.textLengthBox}>
             <CustomText
-              children={`${reviewText.length}/100`}
-              color={"#C3C3C3"}
+              children={`${reviewText.length}/150`}
+              color={reviewText.length > 150 ? "red" : "#C3C3C3"}
             />
           </View>
         </View>
@@ -128,7 +146,7 @@ export default function ReviewPostView({ route }: ReviewPostRouteType) {
           >
             <CustomText
               children="작성하기"
-              color="white"
+              color={"white"}
               fontWeight="bold"
               fontSize="20"
             />
@@ -147,8 +165,8 @@ const styles = StyleSheet.create({
     height: 40,
     flexDirection: "row",
     alignItems: "center",
-    paddingLeft: 16,
-    paddingRight: 16,
+    paddingLeft: 15,
+    paddingRight: 15,
     justifyContent: "space-between",
   },
   textLengthBox: {
@@ -169,9 +187,11 @@ const styles = StyleSheet.create({
   imageUploardWrapper: {
     width: "100%",
     height: 50,
-    alignItems: "flex-end",
-    justifyContent: "center",
-    paddingRight: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingRight: 15,
+    paddingLeft: 15,
     borderBottomWidth: 1,
     borderBottomColor: "#C3C3C3",
   },

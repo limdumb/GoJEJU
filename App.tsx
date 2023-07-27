@@ -23,7 +23,7 @@ import ReviewEditView from "./pages/ReviewEditView";
 export type RootStackParamList = {
   MainView: undefined;
   StoreDetailView: {
-    id: number;
+    storeId: number;
     name: string;
   };
   LoginView: undefined;
@@ -41,8 +41,13 @@ export type RootStackParamList = {
   MyReview: undefined;
   OwnerEditStoreView: undefined;
   OwnerAddStoreView: undefined;
-  ReviewPostView: { storeId: number };
-  ReviewEditView: { storeId: number; reviewText: string; images: string[],rating:number };
+  ReviewPostView: { storeId: number, name: string };
+  ReviewEditView: {
+    storeId: number;
+    reviewText: string;
+    images: string[];
+    rating: number;
+  };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();

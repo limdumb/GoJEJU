@@ -28,6 +28,7 @@ export interface ReviewResponseType {
 interface Props extends ReviewResponseType {
   storeId: number;
   onEndCatched: () => void;
+  name: string;
 }
 
 export default function DetailReviewView(props: Props) {
@@ -57,7 +58,10 @@ export default function DetailReviewView(props: Props) {
         <TouchableOpacity
           onPress={() => {
             if (userId !== null) {
-              navigate.navigate("ReviewPostView", { storeId: props.storeId });
+              navigate.navigate("ReviewPostView", {
+                storeId: props.storeId,
+                name: props.name,
+              });
             } else {
               Alert.alert("로그인 이후 이용 가능한 기능입니다.");
             }
