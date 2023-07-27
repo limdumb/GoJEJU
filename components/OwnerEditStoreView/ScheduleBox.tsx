@@ -8,7 +8,7 @@ interface ScheduleBoxProps {
   day: string;
   handleCheckboxChange: (index: number) => void;
   index: number;
-  toggleCheckBox: boolean[];
+  toggleCheckBox: ("OPEN" | "CLOSED")[];
 }
 
 export default function ScheduleBox(props: ScheduleBoxProps) {
@@ -27,8 +27,7 @@ export default function ScheduleBox(props: ScheduleBoxProps) {
       <View style={styles.selectContainer}>
         <SelectDropdown
           data={tiemArray}
-          onSelect={(selectedItem: string, index: number) => {
-          }}
+          onSelect={(selectedItem: string, index: number) => {}}
           defaultValueByIndex={0}
           disabled={!props.toggleCheckBox[props.index]}
           buttonStyle={styles.selectButtonStyle}
@@ -37,9 +36,8 @@ export default function ScheduleBox(props: ScheduleBoxProps) {
         <SelectDropdown
           defaultValueByIndex={0}
           data={tiemArray}
-          onSelect={(selectedItem, index) => {
-          }}
-          disabled={!props.toggleCheckBox[props.index]}
+          onSelect={(selectedItem, index) => {}}
+          disabled={props.toggleCheckBox[props.index] === "OPEN" ? false : true}
           buttonStyle={styles.selectButtonStyle}
         />
       </View>

@@ -20,8 +20,8 @@ export default function OwnerEditStoreView() {
   const [scheduleValue, setScheduleValue] = useState<Array<ScheduleValue>>(
     data.storeSchedules
   );
-  const [toggleCheckBox, setToggleCheckBox] = useState<Array<boolean>>(
-    Array(7).fill(false, 0, 7)
+  const [toggleCheckBox, setToggleCheckBox] = useState<Array<"OPEN"|"CLOSED">>(
+    Array(7).fill("CLOSED", 0, 7)
   );
   const [snsValue, setSnsValue] = useState("");
   const [storeNumber, setStoreNumber] = useState("");
@@ -30,7 +30,7 @@ export default function OwnerEditStoreView() {
   const handleCheckboxChange = (index: number) => {
     setToggleCheckBox((prevCheckboxes) => {
       const newCheckboxes = [...prevCheckboxes];
-      newCheckboxes[index] = !newCheckboxes[index];
+      newCheckboxes[index] = newCheckboxes[index];
       return newCheckboxes;
     });
   };

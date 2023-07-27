@@ -13,9 +13,9 @@ import { getWeekArray } from "../../function/getWeekArray";
 export default function OwnerAddStoreView() {
   const dayOfTheWeek = getWeekArray();
   const [adressValue, setAdressValue] = useState("");
-  const [toggleCheckBox, setToggleCheckBox] = useState<Array<boolean>>(
-    Array(7).fill(false, 0, 7)
-  );
+  const [toggleCheckBox, setToggleCheckBox] = useState<
+    Array<"OPEN" | "CLOSED">
+  >(Array(7).fill("CLOSED", 0, 7));
   const [scheduleValue, setScheduleValue] =
     useState<Array<ScheduleValue>>(dayOfTheWeek);
   const [snsValue, setSnsValue] = useState("");
@@ -36,7 +36,7 @@ export default function OwnerAddStoreView() {
   const handleCheckboxChange = (index: number) => {
     setToggleCheckBox((prevCheckboxes) => {
       const newCheckboxes = [...prevCheckboxes];
-      newCheckboxes[index] = !newCheckboxes[index];
+      newCheckboxes[index] = newCheckboxes[index];
       return newCheckboxes;
     });
   };
