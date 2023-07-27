@@ -20,23 +20,37 @@ export default function OwnerEditStoreView() {
   const [scheduleValue, setScheduleValue] = useState<Array<ScheduleValue>>(
     data.storeSchedules
   );
-  const [toggleCheckBox, setToggleCheckBox] = useState<Array<"OPEN"|"CLOSED">>(
-    Array(7).fill("CLOSED", 0, 7)
-  );
+
   const [snsValue, setSnsValue] = useState("");
   const [storeNumber, setStoreNumber] = useState("");
   const [adressValue, setAdressValue] = useState("");
 
-  const handleCheckboxChange = (index: number) => {
-    setToggleCheckBox((prevCheckboxes) => {
+  const handleCheckboxChange = (index: number,checked:boolean) => {
+    setScheduleValue((prevCheckboxes) => {
       const newCheckboxes = [...prevCheckboxes];
-      newCheckboxes[index] = newCheckboxes[index];
+      newCheckboxes[index].type = checked ? "OPEN" : "CLOSED"
       return newCheckboxes;
     });
   };
 
   const toggleSwitch = () => {
     setIsEnabled((previousState) => !previousState);
+  };
+
+  const openScheduleChange = (index: number, start: string) => {
+    setScheduleValue((preValue) => {
+      const newScheduleValue = [...preValue];
+      newScheduleValue[index].start = start
+      return newScheduleValue;
+    });
+  };
+  
+  const closedScheduleChange = (index: number, end: string) => {
+    setScheduleValue((preValue) => {
+      const newScheduleValue = [...preValue];
+      newScheduleValue[index].end = end
+      return newScheduleValue;
+    });
   };
 
   const dayOfTheWeek = getWeekArray();
@@ -73,7 +87,9 @@ export default function OwnerEditStoreView() {
           {dayOfTheWeek.map((el, index) => {
             return (
               <ScheduleBox
-                toggleCheckBox={toggleCheckBox}
+              openScheduleChange={openScheduleChange}
+              closedScheduleChange={closedScheduleChange}
+                scheduleValue={scheduleValue}
                 day={el.day}
                 index={index}
                 handleCheckboxChange={handleCheckboxChange}

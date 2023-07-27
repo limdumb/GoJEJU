@@ -1,14 +1,17 @@
 import { StyleSheet, View } from "react-native";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import SelectDropdown from "react-native-select-dropdown";
+import { ScheduleValue } from "../../API/OwnerStore/ownerEditStore";
 import generateTimeArray from "../../function/generateTimeArray";
 import CustomText from "../CustomText";
 
 interface ScheduleBoxProps {
   day: string;
-  handleCheckboxChange: (index: number) => void;
+  openScheduleChange: (index: number, start: string) => void;
+  closedScheduleChange: (index: number, end: string) => void;
+  handleCheckboxChange: (index: number, checked: boolean) => void;
   index: number;
-  toggleCheckBox: ("OPEN" | "CLOSED")[];
+  scheduleValue: ScheduleValue[];
 }
 
 export default function ScheduleBox(props: ScheduleBoxProps) {
@@ -19,25 +22,34 @@ export default function ScheduleBox(props: ScheduleBoxProps) {
         size={25}
         fillColor="#00B828"
         innerIconStyle={{ borderWidth: 2 }}
-        onPress={() => {
-          props.handleCheckboxChange(props.index);
+        isChecked={false}
+        onPress={(preventValue) => {
+          props.handleCheckboxChange(props.index, preventValue);
         }}
       />
       <CustomText children={props.day} fontSize="17px" color="gray" />
       <View style={styles.selectContainer}>
         <SelectDropdown
           data={tiemArray}
-          onSelect={(selectedItem: string, index: number) => {}}
+          onSelect={(selectedItem: string) => {
+            props.openScheduleChange(props.index, selectedItem);
+          }}
           defaultValueByIndex={0}
-          disabled={!props.toggleCheckBox[props.index]}
+          disabled={
+            props.scheduleValue[props.index].type === "OPEN" ? false : true
+          }
           buttonStyle={styles.selectButtonStyle}
         />
         <CustomText children="~" marginLft="10px" />
         <SelectDropdown
           defaultValueByIndex={0}
           data={tiemArray}
-          onSelect={(selectedItem, index) => {}}
-          disabled={props.toggleCheckBox[props.index] === "OPEN" ? false : true}
+          onSelect={(selectedItem: string) => {
+            props.closedScheduleChange(props.index, selectedItem);
+          }}
+          disabled={
+            props.scheduleValue[props.index].type === "OPEN" ? false : true
+          }
           buttonStyle={styles.selectButtonStyle}
         />
       </View>

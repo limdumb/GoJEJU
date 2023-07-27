@@ -13,30 +13,31 @@ import { getWeekArray } from "../../function/getWeekArray";
 export default function OwnerAddStoreView() {
   const dayOfTheWeek = getWeekArray();
   const [adressValue, setAdressValue] = useState("");
-  const [toggleCheckBox, setToggleCheckBox] = useState<
-    Array<"OPEN" | "CLOSED">
-  >(Array(7).fill("CLOSED", 0, 7));
   const [scheduleValue, setScheduleValue] =
     useState<Array<ScheduleValue>>(dayOfTheWeek);
   const [snsValue, setSnsValue] = useState("");
   const [storeNumber, setStoreNumber] = useState("");
 
-  const handleScheduleChange = (index: number, start: string, end: string) => {
+  const openScheduleChange = (index: number, start: string) => {
     setScheduleValue((preValue) => {
       const newScheduleValue = [...preValue];
-      newScheduleValue[index] = {
-        ...newScheduleValue[index],
-        start: start,
-        end: end,
-      };
+      newScheduleValue[index].start = start;
       return newScheduleValue;
     });
   };
 
-  const handleCheckboxChange = (index: number) => {
-    setToggleCheckBox((prevCheckboxes) => {
+  const closedScheduleChange = (index: number, end: string) => {
+    setScheduleValue((preValue) => {
+      const newScheduleValue = [...preValue];
+      newScheduleValue[index].end = end;
+      return newScheduleValue;
+    });
+  };
+
+  const handleCheckboxChange = (index: number, checked: boolean) => {
+    setScheduleValue((prevCheckboxes) => {
       const newCheckboxes = [...prevCheckboxes];
-      newCheckboxes[index] = newCheckboxes[index];
+      newCheckboxes[index].type = checked ? "OPEN" : "CLOSED";
       return newCheckboxes;
     });
   };
@@ -65,9 +66,11 @@ export default function OwnerAddStoreView() {
           {scheduleValue.map((el, index) => {
             return (
               <ScheduleBox
-                toggleCheckBox={toggleCheckBox}
+                scheduleValue={scheduleValue}
                 day={el.day}
                 index={index}
+                openScheduleChange={openScheduleChange}
+                closedScheduleChange={closedScheduleChange}
                 handleCheckboxChange={handleCheckboxChange}
               />
             );

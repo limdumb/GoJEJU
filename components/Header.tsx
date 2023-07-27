@@ -48,7 +48,7 @@ export default function Header () {
                 <Text>로그인</Text>
               </TouchableOpacity>
               <Text>/</Text>
-              <TouchableOpacity onPress={() => { navigate.navigate('SignUpView') }}>
+              <TouchableOpacity onPress={() => { navigate.navigate("OwnerAddStoreView") }}>
                 <Text>회원가입</Text>
               </TouchableOpacity>
             </View>
