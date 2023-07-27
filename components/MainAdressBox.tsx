@@ -4,16 +4,13 @@ import CustomText from "./CustomText";
 interface AdressBoxProps {
   name: string;
   adress: string;
-  setJibunAdressValue: React.Dispatch<React.SetStateAction<string>>;
-  setRoadAdressValue: React.Dispatch<React.SetStateAction<string>>;
-  jibunAdressValue: string;
-  roadAdressValue: string;
+  setAdressValue: React.Dispatch<React.SetStateAction<string>>;
+  adressValue: string;
 }
 
-export default function AdressBox(props: AdressBoxProps) {
+export default function MainAdressBox(props: AdressBoxProps) {
   const onAdressClicked = () => {
-    props.setJibunAdressValue(props.adress);
-    props.setRoadAdressValue(props.adress);
+    props.setAdressValue(props.adress);
   };
   return (
     <TouchableOpacity style={styles.container} onPress={() => onAdressClicked()}>

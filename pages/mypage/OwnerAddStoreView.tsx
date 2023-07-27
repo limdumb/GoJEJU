@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
-import { ScheduleValue } from "../../API/OwnerStore/ownerEditStore";
+import { ScheduleValue, SNSValue } from "../../API/OwnerStore/ownerEditStore";
+import { AddStoreRequestType } from "../../API/OwnerStore/postOwnerAddStore";
 import AuthButton from "../../components/Auth/AuthButton";
 import CustomText from "../../components/CustomText";
 import AddAdressBox from "../../components/OwnerAddStoreView.tsx/AddAdressBox";
@@ -15,11 +16,25 @@ export default function OwnerAddStoreView() {
   const [storeName, setStoreName] = useState("");
   const [storeDescription, setStoreDescription] = useState("");
   const [storeNumber, setStoreNumber] = useState("");
-  const [adressValue, setAdressValue] = useState("");
+  const [jibunAddressValue, setJibunAdressValue] = useState("");
+  const [roadAdressValue, setRoadAdressValue] = useState("");
   const [scheduleValue, setScheduleValue] =
     useState<Array<ScheduleValue>>(dayOfTheWeek);
-  const [snsValue, setSnsValue] = useState("");
+  const [snsValue, setSnsValue] = useState<Array<SNSValue>>([
+    { type: "", url: "", nickName: "" },
+  ]);
+
   const emdInformation = emdNameArray();
+
+  const addRequestValue = {
+    name: storeName,
+    description: storeDescription,
+    jibunAddress: jibunAddressValue,
+    roadAddress: roadAdressValue,
+    storeSchedules: scheduleValue,
+    phone: storeNumber,
+    SNS: snsValue,
+  };
 
   return (
     <View style={styles.container}>
@@ -36,8 +51,10 @@ export default function OwnerAddStoreView() {
         </View>
         <View style={styles.AddAdressWrapper}>
           <AddAdressBox
-            adressValue={adressValue}
-            setAdressValue={setAdressValue}
+            roadAdressValue={roadAdressValue}
+            setRoadAdressValue={setRoadAdressValue}
+            jibunAdressValue={jibunAddressValue}
+            setJibunAdressValue={setJibunAdressValue}
             emdArr={emdInformation}
           />
         </View>
@@ -51,7 +68,7 @@ export default function OwnerAddStoreView() {
           {scheduleValue.map((el, index) => {
             return (
               <ScheduleBox
-              setScheduleValue={setScheduleValue}
+                setScheduleValue={setScheduleValue}
                 scheduleValue={scheduleValue}
                 day={el.day}
                 index={index}
@@ -84,7 +101,7 @@ const styles = StyleSheet.create({
   },
   AddAdressWrapper: {
     width: "100%",
-    height: 300,
+    height: 390,
   },
   dayCheckSection: {
     width: "100%",

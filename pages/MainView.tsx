@@ -8,12 +8,12 @@ import {
 import { type RootStackParamList } from "../App";
 import StoreCard, { StoreCardType } from "../components/MainView/StoreCard";
 import Header from "../components/Header";
-import { emdNameArray } from "../function/emdNameArray";
-import AdressBox from "../components/AdressBox";
+import { mainEmdArr } from "../function/emdNameArray";
 import useFetch from "../customHook/useFetch";
 import Spinner from "../components/Spinner";
 import CustomText from "../components/CustomText";
 import { isCloseToBottom } from "../function/isCloseToBottom";
+import MainAdressBox from "../components/MainAdressBox";
 
 export interface StoreListDataType {
   total: number;
@@ -34,7 +34,7 @@ export default function MainView() {
   const { data, isLoading, error } = useFetch<StoreListDataType>(
     `/api/store/list?emdName=${adressValue}&page=${pages}`
   );
-  const adressArr = emdNameArray();
+  const adressArr = mainEmdArr();
   const onEndCatched = () => {
     if (data.hasNext) {
       setPages(pages + 1);
@@ -56,7 +56,7 @@ export default function MainView() {
         <View style={styles.map}>
           {adressArr.map((el) => {
             return (
-              <AdressBox
+              <MainAdressBox
                 key={el.name}
                 name={el.name}
                 adress={el.adress}

@@ -1,11 +1,12 @@
 import { StyleSheet, View } from 'react-native'
+import { SNSValue } from '../../API/OwnerStore/ownerEditStore'
 import CommonInput from '../CommonInput'
 import CustomText from '../CustomText'
 
 interface EditContactBoxProps {
-  setSnsValue: React.Dispatch<React.SetStateAction<string>>
+  setSnsValue: React.Dispatch<React.SetStateAction<SNSValue[]>>
   setStoreNumber: React.Dispatch<React.SetStateAction<string>>
-  snsValue: string
+  snsValue: SNSValue[]
   storeNumber: string
 }
 
@@ -34,7 +35,7 @@ export default function EditContactBox (props: EditContactBoxProps) {
             width="80%"
             height="36px"
             changeFunc={props.setSnsValue}
-            value={props.snsValue}
+            value={props.snsValue[0].nickName}
             backgroundColor={'white'}
             placeholder={'인스타그램 ID를 입력해주세요'}
             border={'1px solid #CACACA'}

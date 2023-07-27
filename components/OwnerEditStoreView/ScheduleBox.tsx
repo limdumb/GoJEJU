@@ -13,9 +13,6 @@ import CustomText from "../CustomText";
 interface ScheduleBoxProps {
   day: string;
   setScheduleValue: React.Dispatch<React.SetStateAction<ScheduleValue[]>>;
-  // openScheduleChange: (index: number, start: string) => void;
-  // closedScheduleChange: (index: number, end: string) => void;
-  // handleCheckboxChange: (index: number, checked: boolean) => void;
   index: number;
   scheduleValue: ScheduleValue[];
 }

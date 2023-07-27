@@ -14,7 +14,6 @@ import * as ImagePicker from "expo-image-picker";
 import Spinner from "../components/Spinner";
 import {
   NavigationProp,
-  useLinkProps,
   useNavigation,
 } from "@react-navigation/native";
 

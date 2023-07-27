@@ -3,7 +3,9 @@ import { ScrollView, StyleSheet, View } from "react-native";
 import {
   OwnerEditType,
   ScheduleValue,
+  SNSValue,
 } from "../../API/OwnerStore/ownerEditStore";
+import { AddStoreRequestType } from "../../API/OwnerStore/postOwnerAddStore";
 import CustomText from "../../components/CustomText";
 import AddAdressBox from "../../components/OwnerAddStoreView.tsx/AddAdressBox";
 import EditContactBox from "../../components/OwnerEditStoreView/EditContactBox";
@@ -22,9 +24,12 @@ export default function OwnerEditStoreView() {
   );
   const [storeName, setStoreName] = useState(data.name);
   const [storeDescription, setStoreDescription] = useState(data.description);
-  const [snsValue, setSnsValue] = useState("");
+  const [snsValue, setSnsValue] = useState<Array<SNSValue>>([
+    { type: "", url: "", nickName: "" },
+  ]);
   const [storeNumber, setStoreNumber] = useState(data.phone);
-  const [adressValue, setAdressValue] = useState("");
+  const [jibunAddressValue, setJibunAdressValue] = useState("");
+  const [roadAdressValue, setRoadAdressValue] = useState("");
 
   const toggleSwitch = () => {
     setIsEnabled((previousState) => !previousState);
@@ -33,6 +38,16 @@ export default function OwnerEditStoreView() {
   const emdInformation = emdNameArray().filter((el) => {
     return el.name !== "전체";
   });
+
+  const EditRequestValue = {
+    name: storeName,
+    description: storeDescription,
+    jibunAddress: jibunAddressValue,
+    roadAddress: roadAdressValue,
+    storeSchedules: scheduleValue,
+    phone: storeNumber,
+    SNS: snsValue,
+  };
 
   return (
     <View style={styles.container}>
@@ -49,8 +64,10 @@ export default function OwnerEditStoreView() {
         </View>
         <View style={styles.AddAdressWrapper}>
           <AddAdressBox
-            adressValue={adressValue}
-            setAdressValue={setAdressValue}
+            roadAdressValue={roadAdressValue}
+            setRoadAdressValue={setRoadAdressValue}
+            jibunAdressValue={jibunAddressValue}
+            setJibunAdressValue={setJibunAdressValue}
             emdArr={emdInformation}
           />
         </View>
@@ -70,7 +87,7 @@ export default function OwnerEditStoreView() {
           {dayOfTheWeek.map((el, index) => {
             return (
               <ScheduleBox
-              setScheduleValue={setScheduleValue}
+                setScheduleValue={setScheduleValue}
                 scheduleValue={scheduleValue}
                 day={el.day}
                 index={index}
