@@ -21,8 +21,8 @@ export default async function loginLogic(props: LoginPropsType) {
       "/api/user/signin",
       request
     );
-    await AsyncStorage.setItem("userId", `${response.data.userId}`);
-    await AsyncStorage.setItem("userType", response.data.userType);
+    // await AsyncStorage.setItem("userId", `${response.data.userId}`);
+    // await AsyncStorage.setItem("userType", response.data.userType);
     await AsyncStorage.setItem("accessToken", response.data.accessToken);
 
     return response.status

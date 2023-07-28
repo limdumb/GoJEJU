@@ -27,7 +27,7 @@ export default function UserNormalSignUpView() {
           password: password,
         });
         if (signin === 200) {
-          Alert.alert("로그인이 완료되었습니다");
+          Alert.alert("회원가입이 완료되었습니다");
           navigate.navigate("MainView");
         } else {
           Alert.alert("정보가 잘못돼었습니다 다시 시도해주세요");
