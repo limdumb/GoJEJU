@@ -6,25 +6,25 @@ export interface ScheduleValue {
   end: string;
   type: "OPEN" | "CLOSED";
 }
-export interface SNSValue{
+export interface SNSValue {
   type: string;
   url: string;
   nickName: string;
 }
 
-export interface OwnerEditType {
-  storeState: "OPEN"|"CLOSED"
+export interface EditStoreRequestType {
   name: string;
   description: string;
   jibunAddress: string;
   roadAddress: string;
   storeSchedules: ScheduleValue[];
   phone: string;
-  SNS: SNSValue[]
+  SNS: SNSValue[];
+  openStatus: "OPEN" | "CLOSED";
 }
 
-export const ownerEditStore = async (props: OwnerEditType) => {
-  const request: OwnerEditType = {
+export const ownerEditStore = async (props: EditStoreRequestType) => {
+  const request: EditStoreRequestType = {
     name: props.name,
     description: props.description,
     jibunAddress: props.jibunAddress,
@@ -32,8 +32,9 @@ export const ownerEditStore = async (props: OwnerEditType) => {
     storeSchedules: props.storeSchedules,
     phone: props.phone,
     SNS: props.SNS,
-    storeState: props.storeState
+    openStatus: props.openStatus,
   };
+  
   try {
     const response = await baseInstance.put("", request);
     return response.status;

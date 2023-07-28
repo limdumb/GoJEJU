@@ -1,11 +1,14 @@
+import { useNavigation, NavigationProp } from "@react-navigation/native";
 import { useState } from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { Alert, ScrollView, StyleSheet, View } from "react-native";
 import {
-  OwnerEditType,
+  EditStoreRequestType,
+  ownerEditStore,
   ScheduleValue,
   SNSValue,
 } from "../../API/OwnerStore/ownerEditStore";
-import { AddStoreRequestType } from "../../API/OwnerStore/postOwnerAddStore";
+import { RootStackParamList } from "../../App";
+import AuthButton from "../../components/Auth/AuthButton";
 import CustomText from "../../components/CustomText";
 import AddAdressBox from "../../components/OwnerAddStoreView.tsx/AddAdressBox";
 import EditContactBox from "../../components/OwnerEditStoreView/EditContactBox";
@@ -17,7 +20,8 @@ import { emdNameArray } from "../../function/emdNameArray";
 import { getWeekArray } from "../../function/getWeekArray";
 
 export default function OwnerEditStoreView() {
-  const { data, isLoading, error } = useFetch<OwnerEditType>("");
+  const navigate = useNavigation<NavigationProp<RootStackParamList>>();
+  const { data, isLoading, error } = useFetch<EditStoreRequestType>("");
   const [isEnabled, setIsEnabled] = useState<boolean>(false);
   const [scheduleValue, setScheduleValue] = useState<Array<ScheduleValue>>(
     data.storeSchedules
@@ -25,8 +29,9 @@ export default function OwnerEditStoreView() {
   const [storeName, setStoreName] = useState(data.name);
   const [storeDescription, setStoreDescription] = useState(data.description);
   const [snsValue, setSnsValue] = useState<Array<SNSValue>>([
-    { type: "", url: "", nickName: "" },
+    { type: "instargram", url: "", nickName: "" },
   ]);
+
   const [storeNumber, setStoreNumber] = useState(data.phone);
   const [jibunAddressValue, setJibunAdressValue] = useState("");
   const [roadAdressValue, setRoadAdressValue] = useState("");
@@ -34,12 +39,20 @@ export default function OwnerEditStoreView() {
   const toggleSwitch = () => {
     setIsEnabled((previousState) => !previousState);
   };
+
   const dayOfTheWeek = getWeekArray();
   const emdInformation = emdNameArray().filter((el) => {
     return el.name !== "전체";
   });
 
-  const EditRequestValue = {
+  const changeNickName = (value: string) => {
+    const updatedSnsValue = [...snsValue];
+    updatedSnsValue[0].nickName = value;
+    updatedSnsValue[0].url = `https://www.instagram.com/${value}/`;
+    setSnsValue(updatedSnsValue);
+  };
+
+  const EditRequestValue: EditStoreRequestType = {
     name: storeName,
     description: storeDescription,
     jibunAddress: jibunAddressValue,
@@ -47,6 +60,7 @@ export default function OwnerEditStoreView() {
     storeSchedules: scheduleValue,
     phone: storeNumber,
     SNS: snsValue,
+    openStatus: isEnabled ? "OPEN" : "CLOSED",
   };
 
   return (
@@ -97,10 +111,22 @@ export default function OwnerEditStoreView() {
         </View>
         <View>
           <EditContactBox
-            setSnsValue={setSnsValue}
+            changeNickName={changeNickName}
             setStoreNumber={setStoreNumber}
             snsValue={snsValue}
             storeNumber={storeNumber}
+          />
+        </View>
+        <View style={styles.submitbuttonWrapper}>
+          <AuthButton
+            children="업체 등록하기"
+            pressFunction={async () => {
+              const addStoreResponse = await ownerEditStore(EditRequestValue);
+              if (addStoreResponse === 200) {
+                Alert.alert("수정이 완료 되었습니다.");
+                navigate.navigate("MainView");
+              }
+            }}
           />
         </View>
       </ScrollView>
@@ -130,5 +156,10 @@ const styles = StyleSheet.create({
   AddAdressWrapper: {
     width: "100%",
     height: 300,
+  },
+  submitbuttonWrapper: {
+    width: "100%",
+    height: 80,
+    justifyContent: "center",
   },
 });

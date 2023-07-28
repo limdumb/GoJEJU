@@ -46,11 +46,11 @@ export default function AddAdressBox(props: Props) {
         />
         <View style={styles.roadAdressContainer}>
           <CommonInput
-            changeFunc={props.setJibunAdressValue}
+            changeFunc={props.setRoadAdressValue}
             type={"text"}
             width={"100%"}
             height={"40px"}
-            value={props.jibunAdressValue}
+            value={props.roadAdressValue}
             backgroundColor={"white"}
             border={"1px solid #CACACACA"}
             placeholder={"주소를 입력해주세요"}

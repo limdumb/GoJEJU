@@ -1,7 +1,13 @@
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { useState } from "react";
+import { Alert } from "react-native";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { ScheduleValue, SNSValue } from "../../API/OwnerStore/ownerEditStore";
-import { AddStoreRequestType } from "../../API/OwnerStore/postOwnerAddStore";
+import {
+  AddStoreRequestType,
+  postOwnerAddStore,
+} from "../../API/OwnerStore/postOwnerAddStore";
+import { RootStackParamList } from "../../App";
 import AuthButton from "../../components/Auth/AuthButton";
 import CustomText from "../../components/CustomText";
 import AddAdressBox from "../../components/OwnerAddStoreView.tsx/AddAdressBox";
@@ -12,6 +18,7 @@ import { emdNameArray } from "../../function/emdNameArray";
 import { getWeekArray } from "../../function/getWeekArray";
 
 export default function OwnerAddStoreView() {
+  const navigate = useNavigation<NavigationProp<RootStackParamList>>();
   const dayOfTheWeek = getWeekArray();
   const [storeName, setStoreName] = useState("");
   const [storeDescription, setStoreDescription] = useState("");
@@ -21,12 +28,19 @@ export default function OwnerAddStoreView() {
   const [scheduleValue, setScheduleValue] =
     useState<Array<ScheduleValue>>(dayOfTheWeek);
   const [snsValue, setSnsValue] = useState<Array<SNSValue>>([
-    { type: "", url: "", nickName: "" },
+    { type: "instargram", url: "", nickName: "" },
   ]);
+
+  const changeNickName = (value: string) => {
+    const updatedSnsValue = [...snsValue];
+    updatedSnsValue[0].nickName = value;
+    updatedSnsValue[0].url = `https://www.instagram.com/${value}/`;
+    setSnsValue(updatedSnsValue);
+  };
 
   const emdInformation = emdNameArray();
 
-  const addRequestValue = {
+  const addRequestValue: AddStoreRequestType = {
     name: storeName,
     description: storeDescription,
     jibunAddress: jibunAddressValue,
@@ -77,13 +91,23 @@ export default function OwnerAddStoreView() {
           })}
         </View>
         <EditContactBox
-          setSnsValue={setSnsValue}
+          changeNickName={changeNickName}
           setStoreNumber={setStoreNumber}
           snsValue={snsValue}
           storeNumber={storeNumber}
         />
         <View style={styles.submitbuttonWrapper}>
-          <AuthButton children="업체 등록하기" pressFunction={() => {}} />
+          <AuthButton
+            children="업체 등록하기"
+            pressFunction={async () => {
+              const addStoreResponse = await postOwnerAddStore(addRequestValue);
+              console.log(addRequestValue);
+              if (addStoreResponse === 200) {
+                Alert.alert("등록이 완료 되었습니다");
+                navigate.navigate("MainView");
+              }
+            }}
+          />
         </View>
       </ScrollView>
     </View>
