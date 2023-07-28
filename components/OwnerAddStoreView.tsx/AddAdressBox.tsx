@@ -6,8 +6,10 @@ import CustomText from "../CustomText";
 
 interface Props {
   emdArr: EmdType[];
-  setAdressValue: React.Dispatch<React.SetStateAction<string>>;
-  adressValue: string;
+  setJibunAdressValue: React.Dispatch<React.SetStateAction<string>>;
+  setRoadAdressValue: React.Dispatch<React.SetStateAction<string>>;
+  jibunAdressValue: string;
+  roadAdressValue: string;
 }
 
 export default function AddAdressBox(props: Props) {
@@ -22,24 +24,39 @@ export default function AddAdressBox(props: Props) {
             <AdressBox
               name={el.name}
               adress={el.adress}
-              adressValue={props.adressValue}
-              setAdressValue={props.setAdressValue}
+              jibunAdressValue={props.jibunAdressValue}
+              setJibunAdressValue={props.setJibunAdressValue}
+              roadAdressValue={props.roadAdressValue}
+              setRoadAdressValue={props.setRoadAdressValue}
             />
           );
         })}
       </View>
       <View style={styles.adressInputContainer}>
         <CommonInput
-          changeFunc={props.setAdressValue}
+          changeFunc={props.setJibunAdressValue}
           type={"text"}
           width={"100%"}
           height={"40px"}
-          value={props.adressValue}
+          value={props.jibunAdressValue}
           backgroundColor={"white"}
           border={"1px solid #CACACACA"}
           placeholder={"주소를 입력해주세요"}
-          label={"상세주소를 입력해주세요"}
+          label={"지번주소를 입력해주세요"}
         />
+        <View style={styles.roadAdressContainer}>
+          <CommonInput
+            changeFunc={props.setRoadAdressValue}
+            type={"text"}
+            width={"100%"}
+            height={"40px"}
+            value={props.roadAdressValue}
+            backgroundColor={"white"}
+            border={"1px solid #CACACACA"}
+            placeholder={"주소를 입력해주세요"}
+            label={"도로명 주소를 입력해주세요"}
+          />
+        </View>
       </View>
     </View>
   );
@@ -54,7 +71,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     alignItems: "center",
   },
-  titleSection:{alignItems:"flex-start",width:"100%"},
+  titleSection: { alignItems: "flex-start", width: "100%" },
   adressBoxContainer: {
     marginTop: 10,
     width: "100%",
@@ -66,5 +83,8 @@ const styles = StyleSheet.create({
   adressInputContainer: {
     marginTop: 20,
     width: "90%",
+  },
+  roadAdressContainer: {
+    marginTop: 15,
   },
 });

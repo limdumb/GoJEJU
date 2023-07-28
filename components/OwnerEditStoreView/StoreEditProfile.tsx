@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Image, Platform, StyleSheet, View } from 'react-native'
 import CommonInput from '../CommonInput'
 import CustomText from '../CustomText'
@@ -6,14 +5,15 @@ import CustomText from '../CustomText'
 interface ProfilePropsType {
   imageUrl: string
   name: string
+  storeName: string
+  setStoreName: React.Dispatch<React.SetStateAction<string>>
   storeDescription: string
+  setStoreDescription: React.Dispatch<React.SetStateAction<string>>
+  
 }
 
 export default function StoreProfile (props: ProfilePropsType) {
-  const [storeName, setStoreName] = useState(props.name)
-  const [storeDescription, setStoreDescription] = useState(
-    props.storeDescription
-  )
+
   return (
     <View style={styles.profileContainer}>
       <View style={styles.imageContainer}>
@@ -26,22 +26,22 @@ export default function StoreProfile (props: ProfilePropsType) {
       </View>
       <View style={styles.storeInputContainer}>
         <CommonInput
-          changeFunc={setStoreName}
+          changeFunc={props.setStoreName}
           type={'text'}
           width={'200px'}
           height={'41px'}
-          value={storeName}
+          value={props.storeName}
           backgroundColor={'white'}
           placeholder={'업체명을 입력해주세요'}
           border={'1px solid #CACACA'}
         />
         <View>
           <CommonInput
-            changeFunc={setStoreDescription}
+            changeFunc={props.setStoreDescription}
             type={'text'}
             width={'200px'}
             height={'41px'}
-            value={storeDescription}
+            value={props.storeDescription}
             backgroundColor={'white'}
             border={'1px solid #CACACA'}
             placeholder={'업체 소개를 입력해주세요'}

@@ -1,37 +1,28 @@
 import { baseInstance } from "../instance";
-// 7월 21일(금) Store Post 타입은 BackEnd확인 후 타입 재조정 예정
-interface AddStoreRequestType {
-  name: string
-  description:string;
+import { ScheduleValue, SNSValue } from "./ownerEditStore";
+
+export interface AddStoreRequestType {
+  name: string;
+  description: string;
   jibunAddress: string;
   roadAddress: string;
-  storeSchedules: [
-    {
-      day: string;
-      start: string;
-      end: string;
-      type: string;
-    }
-  ];
+  storeSchedules: ScheduleValue[];
   phone: string;
-  SNS: [
-    {
-      type: string;
-      url: string;
-      nickName: string;
-    }
-  ];
+  SNS: SNSValue[];
 }
 
-interface AddStorePropsType {
-  
-}
-
-export const postOwnerAddStore = async () => {
+export const postOwnerAddStore = async (props: AddStoreRequestType) => {
   const request = {
-
+    name: props.name,
+    description: props.description,
+    jibunAddress: props.jibunAddress,
+    roadAddress: props.roadAddress,
+    storeSchedules: props.storeSchedules,
+    phone: props.phone,
+    SNS: props.SNS,
   };
   try {
     const response = await baseInstance.post("api/store/new");
+    return response.status;
   } catch (err) {}
 };

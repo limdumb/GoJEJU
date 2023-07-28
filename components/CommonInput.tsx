@@ -12,7 +12,7 @@ interface InputProps {
   multiline?: boolean;
   paddingTop?: string;
   paddingBtm?: string;
-  fontsize?:string
+  fontsize?: string;
 }
 
 interface CommonInputProps extends InputProps {

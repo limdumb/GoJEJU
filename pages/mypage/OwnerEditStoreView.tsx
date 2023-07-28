@@ -1,6 +1,14 @@
+import { useNavigation, NavigationProp } from "@react-navigation/native";
 import { useState } from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
-import { OwnerEditType } from "../../API/OwnerStore/ownerEditStore";
+import { Alert, ScrollView, StyleSheet, View } from "react-native";
+import {
+  EditStoreRequestType,
+  ownerEditStore,
+  ScheduleValue,
+  SNSValue,
+} from "../../API/OwnerStore/ownerEditStore";
+import { RootStackParamList } from "../../App";
+import AuthButton from "../../components/Auth/AuthButton";
 import CustomText from "../../components/CustomText";
 import AddAdressBox from "../../components/OwnerAddStoreView.tsx/AddAdressBox";
 import EditContactBox from "../../components/OwnerEditStoreView/EditContactBox";
@@ -12,22 +20,21 @@ import { emdNameArray } from "../../function/emdNameArray";
 import { getWeekArray } from "../../function/getWeekArray";
 
 export default function OwnerEditStoreView() {
-  const { data, isLoading, error } = useFetch<OwnerEditType>("");
-  const [isEnabled, setIsEnabled] = useState(false);
-  const [toggleCheckBox, setToggleCheckBox] = useState(
-    data.storeSchedules.map((el) => el.type)
+  const navigate = useNavigation<NavigationProp<RootStackParamList>>();
+  const { data, isLoading, error } = useFetch<EditStoreRequestType>("");
+  const [isEnabled, setIsEnabled] = useState<boolean>(false);
+  const [scheduleValue, setScheduleValue] = useState<Array<ScheduleValue>>(
+    data.storeSchedules
   );
-  const [snsValue, setSnsValue] = useState("");
-  const [storeNumber, setStoreNumber] = useState("");
-  const [adressValue, setAdressValue] = useState("");
+  const [storeName, setStoreName] = useState(data.name);
+  const [storeDescription, setStoreDescription] = useState(data.description);
+  const [snsValue, setSnsValue] = useState<Array<SNSValue>>([
+    { type: "instargram", url: "", nickName: "" },
+  ]);
 
-  const handleCheckboxChange = (index: number) => {
-    setToggleCheckBox((prevCheckboxes) => {
-      const newCheckboxes = [...prevCheckboxes];
-      newCheckboxes[index] = !newCheckboxes[index];
-      return newCheckboxes;
-    });
-  };
+  const [storeNumber, setStoreNumber] = useState(data.phone);
+  const [jibunAddressValue, setJibunAdressValue] = useState("");
+  const [roadAdressValue, setRoadAdressValue] = useState("");
 
   const toggleSwitch = () => {
     setIsEnabled((previousState) => !previousState);
@@ -38,16 +45,43 @@ export default function OwnerEditStoreView() {
     return el.name !== "전체";
   });
 
+  const changeNickName = (value: string) => {
+    const updatedSnsValue = [...snsValue];
+    updatedSnsValue[0].nickName = value;
+    updatedSnsValue[0].url = `https://www.instagram.com/${value}/`;
+    setSnsValue(updatedSnsValue);
+  };
+
+  const EditRequestValue: EditStoreRequestType = {
+    name: storeName,
+    description: storeDescription,
+    jibunAddress: jibunAddressValue,
+    roadAddress: roadAdressValue,
+    storeSchedules: scheduleValue,
+    phone: storeNumber,
+    SNS: snsValue,
+    openStatus: isEnabled ? "OPEN" : "CLOSED",
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollViewContainer}>
         <View style={styles.profileContainer}>
-          <StoreProfile imageUrl={""} name={""} storeDescription={""} />
+          <StoreProfile
+            setStoreDescription={setStoreDescription}
+            storeName={storeName}
+            setStoreName={setStoreName}
+            storeDescription={storeDescription}
+            imageUrl={""}
+            name={""}
+          />
         </View>
         <View style={styles.AddAdressWrapper}>
           <AddAdressBox
-            adressValue={adressValue}
-            setAdressValue={setAdressValue}
+            roadAdressValue={roadAdressValue}
+            setRoadAdressValue={setRoadAdressValue}
+            jibunAdressValue={jibunAddressValue}
+            setJibunAdressValue={setJibunAdressValue}
             emdArr={emdInformation}
           />
         </View>
@@ -67,20 +101,32 @@ export default function OwnerEditStoreView() {
           {dayOfTheWeek.map((el, index) => {
             return (
               <ScheduleBox
-                toggleCheckBox={toggleCheckBox}
-                day={el}
+                setScheduleValue={setScheduleValue}
+                scheduleValue={scheduleValue}
+                day={el.day}
                 index={index}
-                handleCheckboxChange={handleCheckboxChange}
               />
             );
           })}
         </View>
         <View>
           <EditContactBox
-            setSnsValue={setSnsValue}
+            changeNickName={changeNickName}
             setStoreNumber={setStoreNumber}
             snsValue={snsValue}
             storeNumber={storeNumber}
+          />
+        </View>
+        <View style={styles.submitbuttonWrapper}>
+          <AuthButton
+            children="업체 등록하기"
+            pressFunction={async () => {
+              const addStoreResponse = await ownerEditStore(EditRequestValue);
+              if (addStoreResponse === 200) {
+                Alert.alert("수정이 완료 되었습니다.");
+                navigate.navigate("MainView");
+              }
+            }}
           />
         </View>
       </ScrollView>
@@ -110,5 +156,10 @@ const styles = StyleSheet.create({
   AddAdressWrapper: {
     width: "100%",
     height: 300,
+  },
+  submitbuttonWrapper: {
+    width: "100%",
+    height: 80,
+    justifyContent: "center",
   },
 });
