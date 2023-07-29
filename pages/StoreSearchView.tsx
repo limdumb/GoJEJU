@@ -87,6 +87,8 @@ export default function StoreSearchView() {
                         name={el.name}
                         storeDescription={el.storeDescription}
                         rating={el.rating}
+                        id={el.id}
+                        reviewCount={el.reviewCount}
                       />
                     );
                   })}
