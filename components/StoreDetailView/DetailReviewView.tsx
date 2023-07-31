@@ -29,11 +29,15 @@ interface Props extends ReviewResponseType {
   storeId: number;
   onEndCatched: () => void;
   name: string;
+  setReviewFilter: React.Dispatch<React.SetStateAction<"최신순" | "추천순">>;
 }
 
 export default function DetailReviewView(props: Props) {
   const userId = useUserId();
-  const tabArr = [{ tabName: "최신순" }, { tabName: "추천순" }];
+  const tabArr: { tabName: "최신순" | "추천순" }[] = [
+    { tabName: "최신순" },
+    { tabName: "추천순" },
+  ];
   const navigate = useNavigation<NavigationProp<RootStackParamList>>();
   const renderReviews = (item: ReviewDataType) => {
     return (
@@ -74,7 +78,13 @@ export default function DetailReviewView(props: Props) {
         </TouchableOpacity>
         <View style={styles.filterTabContainer}>
           {tabArr.map((el) => {
-            return <CustomText children={el.tabName} />;
+            return (
+              <TouchableOpacity
+                onPress={() => props.setReviewFilter(el.tabName)}
+              >
+                <CustomText key={el.tabName} children={el.tabName} />
+              </TouchableOpacity>
+            );
           })}
         </View>
       </View>

@@ -34,7 +34,7 @@ interface StoreSchedulesType {
   type: "OPEN" | "CLOSED";
 }
 
-interface StoreDetailType {
+export interface StoreDetailType {
   id: number;
   images: string[];
   name: string;
@@ -64,7 +64,7 @@ interface ReviewResponseType {
 }
 
 export default function StoreDetailView({ route }: StoreDetailProps) {
-  const storeId = route.params.id;
+  const storeId = route.params.storeId;
   const userId = useUserId();
   const [reviewFilter, setReviewFilter] = useState<"최신순" | "추천순">(
     "최신순"
@@ -155,6 +155,7 @@ export default function StoreDetailView({ route }: StoreDetailProps) {
               />
             ) : (
               <DetailReviewView
+                setReviewFilter={setReviewFilter}
                 name={data.name}
                 onEndCatched={onEndCatched}
                 storeId={storeId}
