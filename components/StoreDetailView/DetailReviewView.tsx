@@ -74,7 +74,7 @@ export default function DetailReviewView(props: Props) {
         </TouchableOpacity>
         <View style={styles.filterTabContainer}>
           {tabArr.map((el) => {
-            return <CustomText children={el.tabName} />;
+            return <CustomText key={el.tabName} children={el.tabName} />;
           })}
         </View>
       </View>

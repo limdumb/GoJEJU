@@ -24,7 +24,7 @@ export default function StoreCard (props: StoreCardProps) {
       onPress={() => {
         props.navigate.navigate('StoreDetailView', {
           name: props.name,
-          id: props.id
+          storeId: props.id
         })
       }}
     >
