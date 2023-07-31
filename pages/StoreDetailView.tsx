@@ -155,7 +155,7 @@ export default function StoreDetailView({ route }: StoreDetailProps) {
               />
             ) : (
               <DetailReviewView
-              setReviewFilter={setReviewFilter}
+                setReviewFilter={setReviewFilter}
                 name={data.name}
                 onEndCatched={onEndCatched}
                 storeId={storeId}

@@ -34,7 +34,10 @@ interface Props extends ReviewResponseType {
 
 export default function DetailReviewView(props: Props) {
   const userId = useUserId();
-  const tabArr = [{ tabName: "최신순" }, { tabName: "추천순" }];
+  const tabArr: { tabName: "최신순" | "추천순" }[] = [
+    { tabName: "최신순" },
+    { tabName: "추천순" },
+  ];
   const navigate = useNavigation<NavigationProp<RootStackParamList>>();
   const renderReviews = (item: ReviewDataType) => {
     return (
