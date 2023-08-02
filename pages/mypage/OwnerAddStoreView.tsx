@@ -29,7 +29,7 @@ export default function OwnerAddStoreView() {
     useState<Array<ScheduleValue>>(dayOfTheWeek);
   const [snsValue, setSnsValue] = useState<Array<SNSValue>>([
     { type: "instargram", url: "", nickName: "" },
-  ])
+  ]);
 
   const changeNickName = (value: string) => {
     const updatedSnsValue = [...snsValue];
