@@ -80,6 +80,7 @@ export default function DetailReviewView(props: Props) {
           {tabArr.map((el) => {
             return (
               <TouchableOpacity
+                key={el.tabName}
                 onPress={() => props.setReviewFilter(el.tabName)}
               >
                 <CustomText key={el.tabName} children={el.tabName} />
