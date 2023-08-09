@@ -20,7 +20,7 @@ interface SuggestCardType {
   name: string;
   rating: number;
   storeDescription: string;
-  reviewCount:number
+  reviewCount: number;
 }
 
 interface SuggestDataType {
@@ -28,7 +28,6 @@ interface SuggestDataType {
   stores: SuggestCardType[];
   total: number;
 }
-
 
 export default function StoreSuggestView() {
   const navigate = useNavigation<StoreSuggestNavigationProps>();
@@ -71,6 +70,8 @@ export default function StoreSuggestView() {
                         name={el.name}
                         storeDescription={el.storeDescription}
                         rating={el.rating}
+                        id={el.id}
+                        reviewCount={el.reviewCount}
                       />
                     );
                   })}
